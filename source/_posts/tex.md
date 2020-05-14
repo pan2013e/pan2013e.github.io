@@ -4,15 +4,16 @@ hide_copyright: true
 tags: LaTeX
 ---
 
-<script src="//i.upmath.me/latex.js"></script>
+{% raw %}
+<script src="https://i.upmath.me/latex.js"></script>
+{% endraw %}
 
 # Upmath: Math Online Editor
 ### _Create web articles and&nbsp;blog posts with&nbsp;equations and&nbsp;diagrams_
 
 Upmath extremely simplifies this task by using Markdown and LaTeX. It converts the Markdown syntax extended with LaTeX equations support into HTML code you can publish anywhere on the web.
 
-![Paper written in LaTeX](/i/latex.jpg)
-
+<!--more-->
 ## Markdown
 
 Definition from [Wikipedia](https://en.wikipedia.org/wiki/Markdown):

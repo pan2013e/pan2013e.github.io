@@ -5,7 +5,9 @@ permalink: about.html
 mathjax: true
 ---
 
-<script src="//i.upmath.me/latex.js"></script>
+{% raw %}
+<script src="https://i.upmath.me/latex.js"></script>
+{% endraw %}
 
 ## math tests
 $$\sin x + \varphi$$
