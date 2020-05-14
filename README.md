@@ -5,7 +5,9 @@
 ## Site URL
 * Site hosted on GitHub: [pan2013e.github.io](https://pan2013e.github.io)
 * Alias domain: [zypan.ltd](https://zypan.ltd)
-* Mirror site No.1 : [mirror1.zypan.ltd](https://mirror1.zypan.ltd) (Hosted on [Netlify](https://www.netlify.com/) CDN)
+* Mirror site : [mirror1.zypan.ltd](https://mirror1.zypan.ltd)
+
+  In general, it syncs with this GitHub repository automatically.
 
 ## Deployment of this blog
 * Blog: Powered by Hexo
