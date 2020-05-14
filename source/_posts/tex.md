@@ -9,7 +9,7 @@ tags: LaTeX
 {% endraw %}
 
 # Upmath: Math Online Editor
-### _Create web articles and&nbsp;blog posts with&nbsp;equations and&nbsp;diagrams_
+### _Create web articles and blog posts with equations and diagrams_
 
 Upmath extremely simplifies this task by using Markdown and LaTeX. It converts the Markdown syntax extended with LaTeX equations support into HTML code you can publish anywhere on the web.
 
@@ -20,7 +20,7 @@ Definition from [Wikipedia](https://en.wikipedia.org/wiki/Markdown):
 
 > Markdown is a lightweight markup language with plain text formatting syntax designed so that it can be converted to HTML and many other formats using a tool by the same name. Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
 
-The main idea of Markdown is to use a simple plain text markup. It's ~~hard~~ easy to __make__ **bold** _or_ *italic* text. Simple equations can be formatted with subscripts and superscripts: *E*~0~=*mc*^2^. I have added the LaTeX support: $$E_0=mc^2$$.
+The main idea of Markdown is to use a simple plain text markup. It's ~~hard~~ easy to __make__ **bold** _or_ *italic* text. Simple equations can be formatted with subscripts and superscripts: *E*~0~=*mc*^2^. I have added the LaTeX support: {% raw %} $$ E_0=mc^2 $$ {% endraw %} .
 
 Among Markdown features are:
 
@@ -36,32 +36,32 @@ Also the editor supports typographic replacements: (c) (r) (tm) (p) +- !!!!!! ??
 
 ## LaTeX
 
-The editor converts LaTeX equations in double-dollars `$$`: $$ax^2+bx+c=0$$. All equations are rendered as block equations. If you need inline ones, you can add the prefix `\inline`: $$\inline p={1\over q}$$. But it is a good practice to place big equations on separate lines:
+The editor converts LaTeX equations in double-dollars `$$`: {% raw %} $$ ax^2+bx+c=0 $$ {% endraw %} . All equations are rendered as block equations. If you need inline ones, you can add the prefix `\inline`:{% raw %} $$ \inline p={1\over q} $$ {% endraw %} . But it is a good practice to place big equations on separate lines:
 
-$$x_{1,2} = {-b\pm\sqrt{b^2 - 4ac} \over 2a}.$$
+{% raw %} $$ x_{1,2} = {-b\pm\sqrt{b^2 - 4ac} \over 2a}. $$ {% endraw %} 
 
 In this case the LaTeX syntax will be highlighted in the source code. You can even add equation numbers (unfortunately there is no automatic numbering and refs support):
 
-$$|\vec{A}|=\sqrt{A_x^2 + A_y^2 + A_z^2}.$$(1)
+{% raw %} $$ |\vec{A}|=\sqrt{A_x^2 + A_y^2 + A_z^2}. $$  {% endraw %} 
 
-It is possible to write Cyrillic symbols in `\text` command: $$Q_\text{плавления}>0$$.
+It is possible to write Cyrillic symbols in `\text` command: {% raw %} $$ Q_\text{плавления}>0 $$ {% endraw %} .
 
 One can use matrices:
 
-$$T^{\mu\nu}=\begin{pmatrix}
+{% raw %} $$ T^{\mu\nu}=\begin{pmatrix}
 \varepsilon&0&0&0\\
 0&\varepsilon/3&0&0\\
 0&0&\varepsilon/3&0\\
 0&0&0&\varepsilon/3
-\end{pmatrix},$$
+\end{pmatrix}, $$ {% endraw %} 
 
 integrals:
 
-$$P_\omega={n_\omega\over 2}\hbar\omega\,{1+R\over 1-v^2}\int\limits_{-1}^{1}dx\,(x-v)|x-v|,$$
+{% raw %} $$ P_\omega={n_\omega\over 2}\hbar\omega\,{1+R\over 1-v^2}\int\limits_{-1}^{1}dx\,(x-v)|x-v|, $$ {% endraw %} 
 
 cool tikz-pictures:
-
-$$\usetikzlibrary{decorations.pathmorphing}
+{% raw %}$$ 
+\usetikzlibrary{decorations.pathmorphing}
 \begin{tikzpicture}[line width=0.2mm,scale=1.0545]\small
 \tikzset{>=stealth}
 \tikzset{snake it/.style={->,semithick,
@@ -88,10 +88,12 @@ decoration={snake,amplitude=.3mm,segment length=2.5mm,post length=0.9mm},decorat
 \draw[thin](\r,0) arc (0:atan2(\p,\w):\r) node[midway,right,yshift=0.06cm] {$\theta$};
 \draw[opacity=0](-0.40,-0.14)-- ++(0,5.06);
 \end{tikzpicture}$$
+{% endraw %}
 
 plots:
 
-$$\begin{tikzpicture}[scale=1.0544]\small
+{% raw %}$$
+\begin{tikzpicture}[scale=1.0544]\small
 \begin{axis}[axis line style=gray,
 	samples=120,
 	width=9.0cm,height=6.4cm,
@@ -111,6 +113,7 @@ $$\begin{tikzpicture}[scale=1.0544]\small
 \path (axis cs:0,0) node [anchor=north west,yshift=-0.07cm] {0};
 \end{axis}
 \end{tikzpicture}$$
+{% endraw %}
 
 and [the rest of LaTeX features](https://en.wikibooks.org/wiki/LaTeX/Mathematics).
 
