@@ -23,4 +23,4 @@ TTL约5min
 
 [mirror2.zypan.ltd](https://mirror2.zypan.ltd)
 
-暂时还没设置好网络钩子，看心情同步吧
+暂时还没设置好网络钩子，是手动同步的，看心情更新吧
