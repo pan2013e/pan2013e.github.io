@@ -29,16 +29,16 @@ cdn: # 这里可以修改站点使用的库的CDN
   copy: https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js
 
 menu:
-  回到首页: 
+  首页: 
     - /
     - icon-home
-  文章归档: 
+  归档: 
     - /archives
     - icon-container
-  关于博客:
+  关于我:
     - /about.html
     - icon-info-circle
-  我的朋友: 
+  友链: 
     - /PY.html
 
 widgets:
