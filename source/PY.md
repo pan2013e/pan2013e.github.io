@@ -1,5 +1,5 @@
 ---
-title: links
+title: 友链
 layout: py
 permalink: PY.html
 ---

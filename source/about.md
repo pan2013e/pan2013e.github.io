@@ -1,5 +1,5 @@
 ---
-title: links
+title: 关于
 layout: py
 permalink: about.html
 mathjax: true
@@ -7,12 +7,6 @@ mathjax: true
 
 <script type="text/javascript"src="https://i.upmath.me/latex.js"></script>
 
-## math tests
-test 1
-{% raw %}
-$$\sin x + \varphi$$
-{% endraw %}
+## 关于我
 
-test 2
-{% raw %} $$ \cdot x + \varphi$$ {% endraw %} 
 
