@@ -4,13 +4,20 @@
 
 ## Site URL
 * Site hosted on GitHub: [pan2013e.github.io](https://pan2013e.github.io)
-* Alias domain: [zypan.ltd](https://zypan.ltd)
-* Mirror site : [mirror1.zypan.ltd](https://mirror1.zypan.ltd)
 
-  In general, it syncs with this GitHub repository automatically.
+  Redirected to the alias domain: [zypan.ltd](https://zypan.ltd)
+  
+* Mirror site 1: [mirror1.zypan.ltd](https://mirror1.zypan.ltd)
+
+  It syncs with the main site automatically. Recommended for users outside mainland China.
+  
+  Mirror site 2: [mirror2.zypan.ltd](https://mirror2.zypan.ltd)
+  
+  There exists latency in synchronization. Recommended for users in mainland China。
 
 ## Deployment of this blog
 * Blog: Powered by Hexo
+
 * Deployment: GitHub Actions
 
   Check out my GitHub CI/CD configuration in [CI.yml](.github/workflows/CI.yml)
