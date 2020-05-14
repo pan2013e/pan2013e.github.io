@@ -1,7 +1,10 @@
 ---
 title: 镜像站点
-comment: false
+layout: py
+permalink: mirrors.html
+comments: false
 ---
+
 # 可用镜像
 ## 主站
 * [zypan.ltd](https://zypan.ltd)
