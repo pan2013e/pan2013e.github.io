@@ -35,7 +35,7 @@ GitHub Actions是GitHub官方的持续集成工具，我原本打算用Travis-CI
 
 之前我想要做的是，本地环境中不渲染网页，将所有源代码push到repo后，网页部署自动完成。那么我的`.github/workflows/CI.yml`设置如下
 
-```yaml
+```bash
 name: Hexo Auto-Deploy
 on: [push]
 
