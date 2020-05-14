@@ -15,7 +15,11 @@ tags: LaTeX
 
 # 使用效果
 
-The editor converts LaTeX equations in double-dollars `$$`: {% raw %} $$ ax^2+bx+c=0 $$ {% endraw %} . All equations are rendered as block equations. If you need inline ones, you can add the prefix `\inline`:{% raw %} $$ \inline p={1\over q} $$ {% endraw %} . But it is a good practice to place big equations on separate lines:
+The editor converts LaTeX equations in double-dollars `$$`: 
+
+{% raw %} $$ ax^2+bx+c=0 $$ {% endraw %} .
+
+ All equations are rendered as block equations. If you need inline ones, you can add the prefix `\inline`:{% raw %} $$ \inline p={1\over q} $$ {% endraw %} . But it is a good practice to place big equations on separate lines:
 
 {% raw %} $$ x_{1,2} = {-b\pm\sqrt{b^2 - 4ac} \over 2a}. $$ {% endraw %} 
 
