@@ -1,6 +1,6 @@
 ---
 title: LaTeX在Hexo中的实现
-date: 2020-05-15
+tags: LaTeX
 ---
 
 <script type="text/javascript"src="https://i.upmath.me/latex.js "></script>
