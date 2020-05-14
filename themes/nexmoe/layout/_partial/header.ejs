@@ -21,8 +21,15 @@
     </div>
     <%- partial('_partial/sidebar') %>
     <div class="nexmoe-copyright">
-        &copy; <%= date(new Date(), 'YYYY') %> <%= config.author || config.title %>
-        <%= __('Powered by') %> <a href="http://hexo.io/" target="_blank">Hexo</a>
-        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+        &copy; <%= date(new Date(), 'YYYY') %> <%= config.author || config.title %><br />
+        <%= __('浙ICP备20003563号') %>
     </div>
 </div><!-- .nexmoe-drawer -->
+
+<!--
+<div class="nexmoe-copyright">
+    &copy; <%= date(new Date(), 'YYYY') %> <%= config.author || config.title %>
+    <%= __('Powered by') %> <a href="http://hexo.io/" target="_blank">Hexo</a>
+    & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+</div>
+-->
