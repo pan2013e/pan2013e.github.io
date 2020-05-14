@@ -2,6 +2,9 @@
 title: LaTeX在Hexo中的实现
 date: 2020-05-15
 ---
+
+<script type="text/javascript"src="https://i.upmath.me/latex.js "></script>
+
 为了支持更多的LaTeX功能，我更换了Hexo自带的Mathjax组件，使用`latex.js`。
 <!--more-->
 # latex.js
