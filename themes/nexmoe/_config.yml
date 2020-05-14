@@ -1,4 +1,4 @@
-avatar: https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png # 网站 Logo
+avatar: https://wp-1300750006.cos.ap-shanghai.myqcloud.com/img/20200514153227_ebfbe949e3af4dad841772857ea7ec14.gif # 网站 Logo
 background: # 既是博客的背景，又是文章默认头图
   path: https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg
   width: 1440
