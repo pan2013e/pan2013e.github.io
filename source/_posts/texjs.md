@@ -7,15 +7,14 @@ tags: LaTeX
 
 为了支持更多的LaTeX功能，我更换了Hexo自带的Mathjax组件，使用`latex.js`。
 <!--more-->
-# latex.js
+## latex.js
 
 原理和源代码可查看这个GitHub repo：[upmath.me](https://github.com/parpalak/upmath.me)
 
 作者：Roman Parpalak
 
-# 使用效果
-
-The editor converts LaTeX equations in double-dollars `$$`: 
+## 使用效果
+The editor converts LaTeX equations in double-dollars: 
 
 {% raw %} $$ ax^2+bx+c=0 $$ {% endraw %} .
 
