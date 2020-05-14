@@ -10,4 +10,7 @@ mathjax: true
 {% endraw %}
 
 ## math tests
+
+{% raw %}
 $$\sin x + \varphi$$
+{% endraw %}
