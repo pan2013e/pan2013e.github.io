@@ -14,4 +14,5 @@ $$\sin x + \varphi$$
 {% endraw %}
 
 test 2
-$$\sin x + \varphi$$
+{% raw %} $$ \cdot x + \varphi$$ {% endraw %} 
+
