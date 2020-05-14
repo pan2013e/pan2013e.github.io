@@ -7,5 +7,7 @@
 * Or access an alias domain: [zypan.ltd](https://zypan.ltd)
 * Mirror site: [mirror1.zypan.ltd](https://mirror1.zypan.ltd)
 
+## Deployment of this blog
+
 ## License
 CC BY-NC-SA 3.0 CN
