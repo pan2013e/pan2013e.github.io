@@ -34,4 +34,7 @@ jobs:
         git config --global user.email "zy_pan@zju.edu.cn"
         git config --global core.quotepath false
         
+        echo "zypan.ltd" > source/CNAME
         hexo d
+        
+        
