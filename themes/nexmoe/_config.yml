@@ -42,11 +42,11 @@ menu:
     - /PY.html
 
 widgets:
-- search
+#- search
 - social
 - category
 - tagcloud
-- archive
+# - archive
 # - recent_posts
 
 maxTagcloud: 0  # 0 表示不限制
