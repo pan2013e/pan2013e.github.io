@@ -32,6 +32,8 @@ menu:
   首页: 
     - /
     - icon-home
+  镜像:
+    - /mirrors.html
   归档: 
     - /archives
     - icon-container
@@ -43,7 +45,7 @@ menu:
 
 widgets:
 #- search
-- social
+#- social
 - category
 - tagcloud
 # - archive
