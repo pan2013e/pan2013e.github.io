@@ -11,16 +11,16 @@ comments: false
 
 [zypan.ltd](https://zypan.ltd)
 
-TTL约5min
+推送源代码后，网页由持续集成工具自动生成。
 
 ## 国外镜像
 
 [mirror1.zypan.ltd](https://mirror1.zypan.ltd)
 
-自动与主站同步
+自动与主站仓库同步,国内可能较慢。
   
 ## 国内镜像
 
 [mirror2.zypan.ltd](https://mirror2.zypan.ltd)
 
-暂时还没设置好网络钩子，是手动同步的，看心情更新吧
+服务器位于上海市。定时更新，TTL为1h，国内较快。
