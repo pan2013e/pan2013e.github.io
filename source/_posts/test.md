@@ -1,6 +1,6 @@
 ---
 title: test
-date: 2020/5/20 17:00:00
+date: 2020/05/20 17:00:00
 ---
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
