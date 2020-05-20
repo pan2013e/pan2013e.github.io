@@ -1,5 +1,6 @@
 ---
 title: GitHub CI/CD在本博客中的实践
+date: 2020/5/14 17:00:00
 tags: 
  - GitHub
 category: CS
@@ -35,6 +36,8 @@ GitHub Actions是GitHub官方的持续集成工具，我原本打算用Travis-CI
 
 之前我想要做的是，本地环境中不渲染网页，将所有源代码push到repo后，网页部署自动完成。那么我的`.github/workflows/CI.yml`设置如下
 
+> 2020.5.20 更新： 可能是ubuntu版本更新的原因，使用`npm`安装依赖项时要添加`sudo`来提高权限
+
 ```bash
 name: Hexo Auto-Deploy
 on: [push]
@@ -53,8 +56,8 @@ jobs:
     
     - name: 3. install hexo...
       run: |
-        npm install hexo-cli -g
-        npm install
+        sudo npm install hexo-cli -g
+        sudo npm install
         
     - name: 4. hexo generate public files...
       run: |
