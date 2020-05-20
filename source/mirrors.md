@@ -9,7 +9,7 @@ comments: false
 
 ## 国内镜像
 
-[mirror2.zypan.ltd](https://mirror2.zypan.ltd)
+[zypan.ltd](https://zypan.ltd)
 
 服务器位于上海市。定时与源仓库同步，TTL为1h，国内较快。
 
