@@ -11,7 +11,11 @@
 
   It syncs with the main site automatically. Recommended for users outside mainland China.
   
-  Mirror site 2: [zypan.ltd](https://zypan.ltd)
+  Mirror site 2: 
+  
+  In maintainence: [zypan.ltd](https://zypan.ltd)
+  
+  Available: [blog.zypan.ltd](https://blog.zypan.ltd)
   
   There exists 1h of latency in synchronization. Recommended for users in mainland China。
 
