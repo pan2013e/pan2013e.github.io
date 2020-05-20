@@ -7,20 +7,22 @@ comments: false
 
 # 可用镜像
 
-## 主站
+## 国内镜像
 
-[zypan.ltd](https://zypan.ltd)
+[mirror2.zypan.ltd](https://mirror2.zypan.ltd)
 
-推送源代码后，网页由持续集成工具自动生成。
+服务器位于上海市。定时与源仓库同步，TTL为1h，国内较快。
 
 ## 国外镜像
 
 [mirror1.zypan.ltd](https://mirror1.zypan.ltd)
 
-自动与主站仓库同步,国内可能较慢。
-  
-## 国内镜像
+Netlify CDN.
+
+自动与源仓库同步,国内可能较慢。
 
 [mirror2.zypan.ltd](https://mirror2.zypan.ltd)
 
-服务器位于上海市。定时更新，TTL为1h，国内较快。
+GitHub Pages.
+
+网页源文件由CI工具生成后托管于此,访问速度可能取决于具体位置和ISP.
