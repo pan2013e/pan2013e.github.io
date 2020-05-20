@@ -24,4 +24,9 @@ date: 2020-5-20 17:00:00
 
 <script defer src="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
 
-$\sin x$
+Katex inline math $`\sin x`$
+
+Display math
+```math
+\sin x
+```
