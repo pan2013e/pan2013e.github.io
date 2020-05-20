@@ -1,6 +1,7 @@
 ---
 title: LaTeX在Hexo中的实现
 date: 2020-5-14 19:00:00
+updated: 2020-5-20 17:39:00
 tags: LaTeX
 ---
 
@@ -17,7 +18,7 @@ tags: LaTeX
 ## 使用效果
 The editor converts LaTeX equations in double-dollars: 
 
-{% raw %} $$ ax^2+bx+c=0 $$ {% endraw %} .
+{% raw %} $$<center> ax^2+bx+c=0 $$ <center/>{% endraw %} .
 
  All equations are rendered as block equations. If you need inline ones, you can add the prefix `\inline`:{% raw %} $$ \inline p={1\over q} $$ {% endraw %} . But it is a good practice to place big equations on separate lines:
 
