@@ -18,7 +18,7 @@ tags: LaTeX
 ## 使用效果
 The editor converts LaTeX equations in double-dollars: 
 
-{% raw %} $$<center> ax^2+bx+c=0 $$ <center/>{% endraw %} .
+{% raw %} <center> $$ ax^2+bx+c=0 $$ <center/>{% endraw %} .
 
  All equations are rendered as block equations. If you need inline ones, you can add the prefix `\inline`:{% raw %} $$ \inline p={1\over q} $$ {% endraw %} . But it is a good practice to place big equations on separate lines:
 
