@@ -15,8 +15,8 @@ jobs:
     
     - name: 3. install hexo...
       run: |
-        npm install hexo-cli -g
-        npm install
+        sudo npm install hexo-cli -g
+        sudo npm install
         
     - name: 4. hexo generate public files...
       run: |
