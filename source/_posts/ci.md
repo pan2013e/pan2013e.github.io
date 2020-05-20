@@ -1,6 +1,6 @@
 ---
 title: GitHub CI/CD在本博客中的实践
-date: 2020/05/14 17:00:00
+date: 2020-5-14 17:00:00
 tags: 
  - GitHub
 category: CS
