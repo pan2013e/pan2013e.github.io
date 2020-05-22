@@ -7,8 +7,6 @@ category: CS
 
 <script type="text/javascript"src="https://i.upmath.me/latex.js "></script>
 
-## 引入
-
 根据维基百科的定义：
 
 **插入排序**是迭代算法，逐一获得输入数据，逐步产生有序的输出序列。每步迭代中，算法从输入序列中取出一元素，将之插入有序序列中正确的位置。如此迭代直到全部元素有序。
