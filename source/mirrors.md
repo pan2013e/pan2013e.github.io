@@ -9,9 +9,9 @@ comments: false
 
 ## 国内镜像
 
-### 维护中：*[zypan.ltd](https://zypan.ltd)*
+### [zypan.ltd](https://zypan.ltd)
 
-### 可用：[blog.zypan.ltd](https://blog.zypan.ltd)
+### [blog.zypan.ltd](https://blog.zypan.ltd)
 
 服务器位于上海市。定时与源仓库同步，TTL为1h，国内较快。
 
