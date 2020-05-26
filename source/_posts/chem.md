@@ -31,20 +31,11 @@ message: 密码为pzy，设置密码只是为了防止机器人访问此页。
 </script>
 
 {% raw %}
-<div class="main_page">
-
-<object data="http://docs.cdn.zypan.ltd/docs/chemnotes.pdf" type="application/pdf" width="100%" height="100%">
- 
-<iframe src="http://docs.cdn.zypan.ltd/docs/chemnotes.pdf" style="min-height:600px;width:100%;height:100%;" id="main" name="main" frameborder="0">
- 
-PDF preview is temporarily unavailable. Please download the PDF to view it: <a href="http://docs.cdn.zypan.ltd/docs/chemnotes.pdf">Download PDF</a>
- 
-</iframe>
- 
-</object>
-
-</div> 
 <!-- <div class="main_page">
-	 <iframe scrolling="no"   src="http://docs.cdn.zypan.ltd/docs/chemnotes.pdf" ></iframe>
+	 <iframe scrolling="no" id="main" name="main" frameborder="0"  src="https://onedrive.live.com/embed?cid=10F462EA2A75DD72&resid=10F462EA2A75DD72%213264&authkey=AE5qRN-fbSJwoIQ&em=2" style="min-height:600px;width:100%;height:100%;"></iframe>
 </div> -->
+<div class="main_page">
+	 <iframe scrolling="no" id="main" name="main" frameborder="0"  src="http://docs.cdn.zypan.ltd/docs/chemnotes.pdf" style="min-height:600px;width:100%;height:100%;"></iframe>
+</div>
+
 {% endraw %}
