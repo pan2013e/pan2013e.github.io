@@ -30,10 +30,8 @@ message: 密码为pzy，设置密码只是为了防止机器人访问此页。
   }
 </script>
 
-OneDrive 很大概率被墙...
-
 {% raw %}
 <div class="main_page">
-	 <iframe scrolling="no" id="main" name="main" frameborder="0"  src="https://onedrive.live.com/embed?cid=10F462EA2A75DD72&resid=10F462EA2A75DD72%213264&authkey=AE5qRN-fbSJwoIQ&em=2" style="min-height:600px;width:100%;height:100%;"></iframe>
+	 <iframe scrolling="no" id="main" name="main" frameborder="0"  src="http://docs.cdn.zypan.ltd/docs/chemnotes.pdf" style="min-height:600px;width:100%;height:100%;"></iframe>
 </div>
 {% endraw %}
