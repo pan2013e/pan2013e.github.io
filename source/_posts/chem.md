@@ -28,6 +28,8 @@ date: 2020-5-26 23:15:00
   }
 </script>
 
+OneDrive 很大概率被墙...
+
 {% raw %}
 <div class="main_page">
 	 <iframe scrolling="no" id="main" name="main" frameborder="0"  src="https://onedrive.live.com/embed?cid=10F462EA2A75DD72&resid=10F462EA2A75DD72%213264&authkey=AE5qRN-fbSJwoIQ&em=2" style="min-height:600px;width:100%;height:100%;"></iframe>
