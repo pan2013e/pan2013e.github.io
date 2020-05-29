@@ -1,6 +1,7 @@
 # Zhiyuan Pan's Blog
 
 ![Hexo Auto-Deploy](https://github.com/pan2013e/pan2013e.github.io/workflows/Hexo%20Auto-Deploy/badge.svg)
+[![time tracker](https://wakatime.com/badge/github/pan2013e/pan2013e.github.io.svg)](https://wakatime.com/badge/github/pan2013e/pan2013e.github.io)
 
 ## Site URL
 * Site hosted on GitHub: [pan2013e.github.io](https://pan2013e.github.io)
