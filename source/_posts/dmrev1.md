@@ -83,7 +83,7 @@ $$\binom{m+n}{r}=\sum^r_{k=0}\binom{m}{r-k}\binom{n}{k}.$$
 
 $n>0,n\in \mathbb{N}.$ Then $\displaystyle\binom{2n}{n}=\sum^n_{k=0}\binom{n}{k}^2.$
 
-$Theorem 4.$
+**Theorem 4.**
 
 $n,r>0,n,r\in \mathbb{N}.r\le n.$ Then $\displaystyle\binom{n+1}{r+1}=\sum^n_{j=r}\binom{j}{r}.$
 
