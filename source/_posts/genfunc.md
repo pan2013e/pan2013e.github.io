@@ -11,7 +11,7 @@ tags: discrete
 
 ## 生成函数（母函数）
 
-对于数列 ${a_n}$，生成函数为$\displaystyle G(x)=\sum^\infty_{k=0} a_k x^k.$
+对于数列{% raw %} ${a_n}$ {% endraw %}，生成函数为 {% raw %} $\displaystyle G(x)=\sum^\infty_{k=0} a_k x^k.$ {% endraw %} 
 
 ## 生成函数的性质
 
