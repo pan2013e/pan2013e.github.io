@@ -7,13 +7,6 @@ mathjax: true
 
 <script type="text/javascript"src="https://i.upmath.me/latex.js"></script>
 
-## 关于本站
-
-目前已知的几个问题：
-
-Windows 系统下，IE 无法正确打开网页，Chromium 内核浏览器无法正确显示一些组件的边框。
-
-部分`markdown`符号无法正确解析
 
 ## 关于我
 
@@ -21,3 +14,8 @@ Windows 系统下，IE 无法正确打开网页，Chromium 内核浏览器无法
 
 联系我: [zy_pan@zju.edu.cn](mailto:zy_pan@zju.edu.cn)
 
+## Coding Status
+
+<figure><embed src="https://wakatime.com/share/@pan2013e/8106f53b-2cb8-461d-af9e-4fe09ce2126e.svg"></embed></figure>
+
+<figure><embed src="https://wakatime.com/share/@pan2013e/9eb9ceee-dcdf-4066-9d29-8c6ee98f215e.svg"></embed></figure>

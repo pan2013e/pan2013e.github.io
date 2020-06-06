@@ -5,7 +5,7 @@ tags: C
 category: CS
 ---
 
-<script type="text/javascript"src="https://i.upmath.me/latex.js "></script>
+<script type="text/javascript" src="https://i.upmath.me/latex.js "></script>
 
 根据维基百科的定义：
 
