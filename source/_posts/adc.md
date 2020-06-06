@@ -6,6 +6,7 @@ date: 2020-6-7 12:00:00
 <script type="text/javascript" src="/js/config.js" defer></script>
 <script id="Mathjax-script" type="text/javascript" defer src="/js/mathjax/tex-svg.js"></script>
 
+<!--more-->
 # 第一次课：Structure 结构
 
 ## 引入 
