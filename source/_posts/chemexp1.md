@@ -74,6 +74,8 @@ $0.1 \mathrm{mol/L} \ce{NaF}$,TISAB溶液，市售茶叶
 
 $\text{茶叶中氟含量}=\dfrac{C\cdot V \times 19}{\text{试样质量}\times \frac{25}{50}}\times 1000 (\mathrm{mg/kg})$
 
+其中$c$即浓度,$V$即体积。
+
 ## 数据记录与处理 
 
 ### 列表参考：
@@ -85,5 +87,24 @@ $\text{茶叶中氟含量}=\dfrac{C\cdot V \times 19}{\text{试样质量}\times 
 * 标准系列法： 根据$E_x$和$pF$作图，然后求线性回归方程（最后一个点如果偏差太大则舍去）
 
 * 标准加入法：
+  
+Eq1: $\displaystyle \boldsymbol{E}_{\boldsymbol{x}}=\boldsymbol{E}_{0}-\boldsymbol{S} \lg \boldsymbol{c}_{\boldsymbol{x}}$
 
-![img/20200612211104_cf4299d6c66add5460da2c316adba47c.png](https://api.zypan.ltd/img/20200612211104_cf4299d6c66add5460da2c316adba47c.png)
+Eq2: $\displaystyle E_{x}^{\prime}=E_{0}-S \lg \frac{50 c_{x}+0.5 \mathrm{mL} \times 0.1 \mathrm{mol} / \mathrm{L}}{50+0.5}$
+
+
+如果将第二个式子改写成$\displaystyle E_{x}^{\prime}=E_{0}-S \lg \frac{c_{x} V_{x}+c_{s} V_{s}}{V_{x}+V_{s}}$
+
+那么可得
+
+$\displaystyle c_{x}=\frac{10^{\frac{E_{x^{\prime}}-E_{x}}{S}} \cdot c_{s} \cdot V_{s}}{\left(V_{x}+V_{s}\right)-V_{x} \cdot 10^{\frac{E_{x^{\prime}}-E_{x}}{S}}}$
+
+或
+
+$\displaystyle c_{x}=\frac{c_{s}} \cdot V_{s}}{\left(V_{x}+V_{s}\right) \cdot 10^{\frac{E_{x}-E_{x}^{\prime}}{S}}-V_{x}}$
+
+经过一番化简后得到，
+
+$\displaystyle c_{x}=\frac{10^{\frac{E_{x}^{\prime}-E_{x}}{S}} \cdot c_{s} \cdot V_{s}}{\left(50+V_{s}\right)-50 \times 10^{\frac{E_{x}^{\prime}-E_{x}}{S}}}$
+
+$\displaystyle \boldsymbol{c}_{\boldsymbol{x}}=\frac{\boldsymbol{c}_{s} \cdot \boldsymbol{V}_{s}}{\left(\boldsymbol{5} \boldsymbol{0}+\boldsymbol{V}_{s}\right) \cdot 10^{\frac{\boldsymbol{E}_{x}-E_{x}^{\prime}}{S}}-50}$
