@@ -14,16 +14,17 @@ tags: 实验课
 1. 掌握电位法测定物质浓度的原理
 2. 了解$\ce{F-}$选择性电极的工作原理
 3. 学习标准曲线法、标准加入法测定物质浓度
-4. 掌握酸度计（电位计）、磁力搅拌器、$\ce{F-}$选择电极的使用方法等
+4. 掌握酸度计（电位计）、磁力搅拌器、 $\ce{F-}$ 选择电极的使用方法等
 
 ## 实验原理
 
 
-实验装置： （-） $\ce{Hg2Cl2}$(甘汞)电极 || 试样 | $\ce{F-}选择电极(+)
+实验装置： （-） $\ce{Hg2Cl2}$(甘汞)电极 || 试样 | $\ce{F-}$ 选择电极(+)
 
 ![img/20200612201007_304ba6dc44ae65cabe8d6921f7bc5a9a.png](http://api.zypan.ltd/img/20200612201007_304ba6dc44ae65cabe8d6921f7bc5a9a.png)
 
-由Nernst方程，有 $$ E_x=E_0 - 0.059 \lg \alpha (F^-) \approx E_0 - k \lg c(F^-) $$
+由Nernst方程，有
+$$ E_x=E_0 - 0.059 \lg \alpha (F^-) \approx E_0 - k \lg c(F^-) $$
 其中，$\alpha = \gamma\cdot c$, $\alpha$为活度，可以理解为有效浓度，$\gamma$为活度系数，稀溶液中用浓度近似表示活度。
 
 可见电池电动势$E_x$与$pF (c(F^-)=10^{-pF})$成线性关系，因此测得电动势即可求得氟离子的浓度。
@@ -50,12 +51,23 @@ $0.1 \mathrm{mol/L} \ce{NaF}$,TISAB溶液，市售茶叶
 
 2. 配置系列标准溶液（定容至$50\mathrm{mL}$，逐级稀释）
 
-| Series | $\ce{NaF}$ Solution |    TISAB    |             $c(F^-)$             |
-| ------ | :-----------------: | :---------: | :------------------------------: |
-| 1#     |   5mL $0.1\mathrm{mol/L} \  \ce{F-}$   |  5mL TISAB  | $10^{-2} \mathrm{mol/L} \ \ce{F-}$ |
-| 2#     |       5mL 1#        | 4.5mL TISAB | $10^{-3} \mathrm{mol/L} \ \ce{F-}$ |
-| 3#     |       5mL 2#        | 4.5mL TISAB | $10^{-4} \mathrm{mol/L} \ \ce{F-}$ |
-| 4#     |       5mL 3#        | 4.5mL TISAB | $10^{-5} \mathrm{mol/L} \ \ce{F-}$ |
-| 5#     |       5mL 4#        | 4.5mL TISAB | $10^{-6} \mathrm{mol/L} \ \ce{F-}$   |
-| 另：   |     45mL Water      |  5mL TISAB  |                \                 |
+| Series |        $\ce{NaF}$ Solution         |    TISAB    |              $c(F^-)$              |
+| ------ | :--------------------------------: | :---------: | :--------------------------------: |
+| 1#     | 5mL $0.1\mathrm{mol/L} \  \ce{F-}$ |  5mL TISAB  | $10^{-2} \mathrm{mol/L} \ \ce{F-}$ |
+| 2#     |               5mL 1#               | 4.5mL TISAB | $10^{-3} \mathrm{mol/L} \ \ce{F-}$ |
+| 3#     |               5mL 2#               | 4.5mL TISAB | $10^{-4} \mathrm{mol/L} \ \ce{F-}$ |
+| 4#     |               5mL 3#               | 4.5mL TISAB | $10^{-5} \mathrm{mol/L} \ \ce{F-}$ |
+| 5#     |               5mL 4#               | 4.5mL TISAB | $10^{-6} \mathrm{mol/L} \ \ce{F-}$ |
+| 另：   |             45mL Water             |  5mL TISAB  |                 \                  |
 
+3. 测量
+
+用去离子水，将氟离子选择电极（与甘汞电极组成复合电极）洗至$370 \mathrm{mV}$以上。
+
+测量顺序：由稀至浓依次测定。
+
+![img/20200612205126_01184956f73b9b276727f6346a2c6c2c.png](http://api.zypan.ltd/img/20200612205126_01184956f73b9b276727f6346a2c6c2c.png)
+
+4. 计算
+
+$$\text{茶叶中氟含量}=\dfrac{C\cdot V \times 19}{\text{试样质量}\times \frac{25}{50}}\times 1000 (\mathrm{mg/kg})$$
