@@ -73,3 +73,17 @@ $0.1 \mathrm{mol/L} \ce{NaF}$,TISAB溶液，市售茶叶
 ### 计算
 
 $\text{茶叶中氟含量}=\dfrac{C\cdot V \times 19}{\text{试样质量}\times \frac{25}{50}}\times 1000 (\mathrm{mg/kg})$
+
+## 数据记录与处理 
+
+### 列表参考：
+
+![img/20200612210722_8e223b13f199b30c55d5ad4fe4fe81b5.png](http://api.zypan.ltd/img/20200612210722_8e223b13f199b30c55d5ad4fe4fe81b5.png)
+
+### 计算方法
+
+* 标准系列法： 根据$E_x$和$pF$作图，然后求线性回归方程（最后一个点如果偏差太大则舍去）
+
+* 标准加入法：
+
+![img/20200612211104_cf4299d6c66add5460da2c316adba47c.png](https://api.zypan.ltd/img/20200612211104_cf4299d6c66add5460da2c316adba47c.png)
