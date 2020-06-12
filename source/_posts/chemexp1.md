@@ -88,23 +88,26 @@ $\text{茶叶中氟含量}=\dfrac{C\cdot V \times 19}{\text{试样质量}\times 
 
 * 标准加入法：
   
-Eq1: $E_x=E_0-S \lg c_{x}$
+Eq1: {% raw %}$E_x=E_0-S \lg c_{x}${% endraw %}
 
-Eq2: $E_{x}^{\prime}=E_{0}-S \lg \frac{50 c_{x}+0.5 \mathrm{mL} \times 0.1 \mathrm{mol} / \mathrm{L}}{50+0.5}$
+Eq2: {% raw %}$E_{x}^{\prime}=E_{0}-S \lg \dfrac{50 c_{x}+0.5 \mathrm{mL} \times 0.1 \mathrm{mol} / \mathrm{L}}{50+0.5}${% endraw %}
 
 
-如果将第二个式子改写成$E_{x}^{\prime}=E_{0}-S \lg \frac{c_{x} V_{x}+c_{s} V_{s}}{V_{x}+V_{s}}$
+如果将第二个式子改写成{% raw %}$E_{x}^{\prime}=E_{0}-S \lg \frac{c_{x} V_{x}+c_{s} V_{s}}{V_{x}+V_{s}}${% endraw %}
 
 那么可得
-
-$c_{x}=\dfrac{10^{\frac{E_{x^{\prime}}-E_{x}}{S}} \cdot c_{s} \cdot V_{s}}{\left(V_{x}+V_{s}\right)-V_{x} \cdot 10^{\frac{E_{x^{\prime}}-E_{x}}{S}}}$
-
+{% raw %}
+$$c_{x}=\dfrac{10^{\frac{E_{x^{\prime}}-E_{x}}{S}} \cdot c_{s} \cdot V_{s}}{\left(V_{x}+V_{s}\right)-V_{x} \cdot 10^{\frac{E_{x^{\prime}}-E_{x}}{S}}}$$
+{% endraw %}
 或
-
-$c_{x}=\dfrac{c_{s} \cdot V_{s}}{\left(V_{x}+V_{s}\right) \cdot 10^{\frac{E_{x}-E_{x}^{\prime}}{S}}-V_{x}}$
-
+{% raw %}
+$$c_{x}=\dfrac{c_{s} \cdot V_{s}}{\left(V_{x}+V_{s}\right) \cdot 10^{\frac{E_{x}-E_{x}^{\prime}}{S}}-V_{x}}$$
+{% endraw %}
 经过一番化简后得到，
+{% raw %}
+$$c_{x}=\dfrac{10^{\frac{E_{x}^{\prime}-E_{x}}{S}} \cdot c_{s} \cdot V_{s}}{\left(50+V_{s}\right)-50 \times 10^{\frac{E_{x}^{\prime}-E_{x}}{S}}}$$
+{% endraw %}
 
-$c_{x}=\dfrac{10^{\frac{E_{x}^{\prime}-E_{x}}{S}} \cdot c_{s} \cdot V_{s}}{\left(50+V_{s}\right)-50 \times 10^{\frac{E_{x}^{\prime}-E_{x}}{S}}}$
-
-$c_{x}=\dfrac{c_{s} \cdot V_{s}}{\left(50+V_{s}\right) \cdot 10^{\frac{E_{x}-E_{x}^{\prime}}{S}}-50}$
+{% raw %}
+$$c_{x}=\dfrac{c_{s} \cdot V_{s}}{\left(50+V_{s}\right) \cdot 10^{\frac{E_{x}-E_{x}^{\prime}}{S}}-50}$$
+{% endraw %}
