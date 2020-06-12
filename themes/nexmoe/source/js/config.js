@@ -1,7 +1,10 @@
 window.MathJax = {
+  loader: {
+    load: ['[tex]/mhchem']
+  },
   tex: {
     inlineMath: [['$', '$'], ['\\(', '\\)']],
-    extensions: ["mhchem.js"]
+    packages: { '[+]': ['mhchem'] }
   },
   svg: {
     fontCache: 'global'
