@@ -7,8 +7,18 @@ tags: 实验课
 
 <script type="text/javascript" src="/js/config.js" defer></script>
 <script id="Mathjax-script" type="text/javascript" defer src="/js/mathjax/tex-svg.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/javascript" src="/js/pdfobject.min.js"></script>
 
 <!--more-->
+
+## 实验报告
+{% raw %}
+<div id="report"></div>
+<script>PDFObject.embed("http://api.zypan.ltd/docs/chemreport1.pdf", "#report");</script>
+<style>
+.pdfobject-container { height: 60rem; border: 1rem solid rgba(0,0,0,.1); }
+</style>
+{% endraw %}
 
 ## 实验目的
 1. 掌握电位法测定物质浓度的原理
