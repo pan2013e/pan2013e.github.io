@@ -1,6 +1,7 @@
 # Zhiyuan Pan's Blog
 
 ![Hexo Auto-Deploy](https://github.com/pan2013e/pan2013e.github.io/workflows/Hexo%20Auto-Deploy/badge.svg)
+![Gitee repos mirror periodic sync job](https://github.com/pan2013e/pan2013e.github.io/workflows/Gitee%20repos%20mirror%20periodic%20sync%20job/badge.svg?branch=blog-source)
 [![time tracker](https://wakatime.com/badge/github/pan2013e/pan2013e.github.io.svg)](https://wakatime.com/badge/github/pan2013e/pan2013e.github.io)
 
 ## Site URL
