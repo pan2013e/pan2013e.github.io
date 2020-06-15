@@ -10,14 +10,13 @@ jobs:
 
     steps:
     - name: Cache pan_zy src repos
-      # 引用发行版的主要版本
       uses: actions/cache@v1
       with:
-        path: /home/runner/work/phpdragon/phpdragon-cache
-        key: ${{ runner.os }}-phpdragon-repos-cache
+        path: /home/runner/work/pan2013e/pan2013e-cache
+        key: ${{ runner.os }}-pan2013e-repos-cache
 
     - name: Mirror the Github organization repos to Gitee.
-      uses: phpdragon/hub-mirror-action@master
+      uses: pan2013e/hub-mirror-action@master
       with:
         src: github/pan2013e
         dst: gitee/pan_zy
