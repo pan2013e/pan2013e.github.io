@@ -12,15 +12,19 @@ tags: 实验课
 <!--more-->
 
 ## 实验报告
+
+如果无法预览，[单击此处](http://api.zypan.ltd/docs/chemreport1.pdf)
+
 {% raw %}
 <div id="report"></div>
-<script>PDFObject.embed("http://api.zypan.ltd/docs/chemreport1.pdf", "#report");</script>
+<script>PDFObject.embed("/docs/chemreport1.min.pdf", "#report");</script>
 <style>
-.pdfobject-container { height: 60rem; border: 1rem solid rgba(0,0,0,.1); }
+.pdfobject-container { height: 50rem; border: 1rem solid rgba(0,0,0,.1); }
 </style>
 {% endraw %}
 
 ## 实验目的
+
 1. 掌握电位法测定物质浓度的原理
 2. 了解$\ce{F-}$选择性电极的工作原理
 3. 学习标准曲线法、标准加入法测定物质浓度
