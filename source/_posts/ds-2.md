@@ -12,7 +12,6 @@ tags: DS
 <script type="text/javascript" src="/js/config.js" defer></script>
 <script id="Mathjax-script" type="text/javascript" defer src="/js/mathjax/tex-svg.js?config=TeX-MML-AM_CHTML"></script>
 
-# DS-2
 ## Trie树（字典树）
 
 ![img/20200617005539_7687d9838b30f5a458179b62e4373654.png](http://api.zypan.ltd/img/20200617005539_7687d9838b30f5a458179b62e4373654.png)
@@ -66,11 +65,11 @@ Q ab
 #include <iostream>
 using namespace std;
 const int N = 100010;
-int son[N][26],cnt[N],idx;//下标为0的点，既是根结点，又是空结点
+int son[N][26],cnt[N],idx;//下标为0的点，既是根结点，又是空结点,idx给结点编号
 char str[N];
 
 void insert(char str[]){
-    int p=0; //标记单词的末尾字母
+    int p=0; 
     for(int i=0;str[i];i++){
         int u = str[i] - 'a'; //a-z映射为0-25
         if(!son[p][u]) son[p][u] = ++idx;
@@ -100,4 +99,57 @@ int main(){
     }
     return 0;
 }
+```
+
+## 并查集
+
+* 将两个集合合并
+* 询问两个元素是否在一个集合中
+
+### 基本原理
+
+用树来维护集合，用根结点代表整个集合，根结点的编号即当前集合的编号。对于每个点，存储他的父结点，用`p[x]`表示。
+
+**如何判断树根：**  `p[x]==x`
+
+**如何求`x`的集合编号：**  `while(p[x]!=x) x=p[x];`
+
+**如何合并两个集合：** 把其中一棵树连到另一棵树上，成为其子树。
+
+### 优化：路径压缩
+
+对于集合中的某元素`x`，当它完成迭代找到根结点后，则将路径中的所有点都指向根结点。
+
+### 示例代码
+
+
+```cpp
+#include <iostream>
+using namespace std;
+
+const int N = 100010;
+int n,m;
+int p[N];//存储父节点
+
+int find(int x){ //返回x的祖宗节点 + 路径压缩
+    if(p[x]!=x) p[x]=find(p[x]);
+    return p[x];
+}
+int main(){
+    cin>>n>>m;
+    for(int i=1;i<n;i++) p[i]=i;//一开始每个元素单独一个集合，都是头结点
+    while(m--){
+        char op[2];
+        int a,b;
+        scanf("%s",op);
+        cin>>a>>b;
+        if(op[0]=='M') p[find(a)]=find(b); //让a的祖宗节点成为b的儿子，合并两集合
+        else{
+            if(find(a)==find(b)) puts("Yes");
+            else puts("No");
+        }
+    }
+    return 0;
+}
+
 ```
