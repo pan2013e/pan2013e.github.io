@@ -1,15 +1,23 @@
 ---
-title: 创业启程复习：书中图表
+title: 创业启程复习
 date: 2020-6-23 22:18:00
 ---
 
-《创业管理学》图表汇总。
+《创业管理学》图表汇总和复习笔记。
 
 <!--more-->
 
 <script type="text/javascript" src="/js/pdf.js"></script>
 
 OneDrive无法访问时，[单击此处.](http://api.zypan.ltd/docs/cyqc.min.pdf)
+
+[19-20回忆试题](http://api.zypan.ltd/docs/cyqc19-20.pdf)
+
+[创业管理学笔记](http://api.zypan.ltd/docs/cyqcnote.pdf)
+
+[创业管理学提纲](http://api.zypan.ltd/docs/cyqcoutline.pdf)
+
+[创业启程复习](http://api.zypan.ltd/docs/cyqcrev.pdf)
 
 {% raw %}
 
