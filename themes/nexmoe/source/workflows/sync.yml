@@ -1,0 +1,29 @@
+name: Gitee repos mirror periodic sync job
+
+on:
+  push:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Cache pan_zy src repos
+      uses: actions/cache@v1
+      with:
+        path: /home/runner/work/pan2013e/pan2013e-cache
+        key: ${{ runner.os }}-pan2013e-repos-cache
+
+    - name: Mirror the Github organization repos to Gitee.
+      uses: pan2013e/hub-mirror-action@master
+      with:
+        src: github/pan2013e
+        dst: gitee/pan_zy
+        dst_key: ${{ secrets.WIN_PRIVATE_KEY }}
+        dst_token: ${{ secrets.GITEE_TOKEN }}
+        account_type: user
+        cache_path: /github/workspace/pan2013e-cache
+        white_list: "pan2013e.github.io"
+        force_update: true
+        clone_style: "ssh"
