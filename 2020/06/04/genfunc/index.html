@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+  
+  <title>生成函数解组合数学题 - 潘致远的主页</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
+  <meta property="og:type" content="article">
+<meta property="og:title" content="生成函数解组合数学题">
+<meta property="og:url" content="https://zypan.ltd/2020/06/04/genfunc/index.html">
+<meta property="og:site_name" content="潘致远的主页">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-04T12:40:00.000Z">
+<meta property="article:modified_time" content="2020-08-08T00:23:22.247Z">
+<meta property="article:author" content="潘致远">
+<meta property="article:tag" content="discrete">
+<meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
+  
+  <!--<link rel="stylesheet" href="/css/style.css?v=1596846222232">-->
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="潘致远" class="mdui-btn mdui-btn-icon"><img src="https://i.loli.net/2020/05/20/WRDFXA6Gd7UJx2y.png" alt="潘致远"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="潘致远">
+            <img src="https://i.loli.net/2020/05/20/WRDFXA6Gd7UJx2y.png" alt="潘致远" alt="潘致远">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>13</div>
+        <div><span>标签</span>7</div>
+        <div><span>分类</span>3</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/mirrors.html" title="镜像">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                镜像
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/archives" title="归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="友链">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                友链
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/CS/">CS</a>
+          <span class="category-list-count">4</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/化学/">化学</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/数学/">数学</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">标签云</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/ADS/" style="font-size: 10px;">ADS</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/LaTeX/" style="font-size: 10px;">LaTeX</a> <a href="/tags/discrete/" style="font-size: 20px;">discrete</a> <a href="/tags/posix/" style="font-size: 10px;">posix</a> <a href="/tags/%E5%AE%9E%E9%AA%8C%E8%AF%BE/" style="font-size: 10px;">实验课</a>
+    </div>
+    
+  </div>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2020 潘致远<br />
+        浙ICP备20003563号
+    </div>
+</div><!-- .nexmoe-drawer -->
+
+<!--
+<div class="nexmoe-copyright">
+    &copy; 2020 潘致远
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+</div>
+-->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+  
+      <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
+          <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="生成函数解组合数学题" class="lazyload">
+          <h1>生成函数解组合数学题</h1>
+      </div>
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年06月04日</a>
+    <a><i class="nexmoefont icon-areachart"></i>647 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i> 3 分钟</a>
+</div>
+
+  <div class="nexmoe-post-right">
+    
+      <div class="nexmoe-fixed">
+        <div class="nexmoe-valign">
+            <div class="nexmoe-toc">
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#生成函数（母函数）"><span class="toc-number">1.</span> <span class="toc-text">生成函数（母函数）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#生成函数的性质"><span class="toc-number">2.</span> <span class="toc-text">生成函数的性质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#计数问题"><span class="toc-number">3.</span> <span class="toc-text">计数问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ex-1-不定方程解的个数"><span class="toc-number">3.1.</span> <span class="toc-text">Ex.1 不定方程解的个数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ex-2-排列组合问题"><span class="toc-number">3.2.</span> <span class="toc-text">Ex.2 排列组合问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ex-3-解递推方程"><span class="toc-number">3.3.</span> <span class="toc-text">Ex.3 解递推方程</span></a></li></ol></li></ol>
+            </div>
+        </div>
+      </div>
+    
+  </div>
+
+  <article>
+    <p><script type="text/javascript" src="/js/config.js" defer></script></p>
+<p><script id="Mathjax-script" type="text/javascript" defer src="/js/mathjax/tex-svg.js?config=TeX-MML-AM_CHTML"></script><br><a id="more"></a></p>
+<h2 id="生成函数（母函数）"><a href="#生成函数（母函数）" class="headerlink" title="生成函数（母函数）"></a>生成函数（母函数）</h2><p>对于数列 $\{a_n\}$ ，生成函数为  $\displaystyle G(x)=\sum^\infty_{k=0} a_k x^k.$  </p>
+<h2 id="生成函数的性质"><a href="#生成函数的性质" class="headerlink" title="生成函数的性质"></a>生成函数的性质</h2><p>在离散数学的研究中不考虑幂级数的收敛问题。生成函数是幂级数的和函数，自然满足幂级数的相关性质。</p>
+<p>一些重要的性质有:</p>
+ $\displaystyle\sum_{k=0}^{\infty}ka_kx^k=x\sum^\infty_{k=0}a_k(x^k)'=x(\sum^{\infty}_{k=0}a_kx^k)':=xf'(x) $  
+<p>柯西乘积:<br> $\displaystyle (\sum_{k=0}^{\infty}b_kx^k(\sum^{\infty}_{k=0}a_kx^k):=f(x)g(x)=\sum^{\infty}_{k=0}(\sum^{k}_{j=0}a_jb_{k-j})x^k$  </p>
+<h2 id="计数问题"><a href="#计数问题" class="headerlink" title="计数问题"></a>计数问题</h2><h3 id="Ex-1-不定方程解的个数"><a href="#Ex-1-不定方程解的个数" class="headerlink" title="Ex.1 不定方程解的个数"></a>Ex.1 不定方程解的个数</h3><p><strong>$e_1,e_2,e_3\in \mathbb{N}, 2\le e_1\le 5,3\le e_2\le 6,4\le e_3\le 7.$求不定方程$e_1+e_2+e_3=17$的解的的个数.</strong></p>
+<p>可以利用隔板法求解，也可以利用生成函数.$G(x)=(x^2+\cdots +x^5)(x^3+\cdots +x^6)(x^4+\cdots +x^7).$其中第$i$个括号表示$e_i$的可选情况，求上述方程解的个数，就相当于寻找展开式中$x^{17}$的系数。</p>
+<h3 id="Ex-2-排列组合问题"><a href="#Ex-2-排列组合问题" class="headerlink" title="Ex.2 排列组合问题"></a>Ex.2 排列组合问题</h3><p><strong>寻找从$n$个元素中选出$r$个元素（允许重复）的种类个数。</strong></p>
+<p>这个问题相当于从$n$类<strong>充分供应</strong>的对象中选出$r$个。由于允许重复，即每一个元素可被选择任意次，那么生成函数可写为<br>$\displaystyle G(x)=(1+x+x^2+\cdots)^n=\dfrac{1}{(1-x)^n}=\sum^\infty_{k=0}\binom{k}{n+k-1}x^k. $<br>答案应为$x^r$前系数$\displaystyle\binom{r}{n+r-1}.$</p>
+<p>如果不允许重复，那么每个元素只有被选和不被选之分，生成函数为$G(x)=(1+x)^n.$</p>
+<p><strong>在红球，蓝球，白球各$2r$个的集合中，选择$3r$个球的种类个数</strong></p>
+<p>生成函数: $G(x)=(1+x+x^2+\cdots+x^{2r})^3$</p>
+<p>类似地，还有<strong>给定一些面值的硬币，凑到指定数目的种类个数</strong>，不过要注意的是,在这样的问题中，$x$的指数不一定按$1$递增。</p>
+<h3 id="Ex-3-解递推方程"><a href="#Ex-3-解递推方程" class="headerlink" title="Ex.3 解递推方程"></a>Ex.3 解递推方程</h3> $\displaystyle a_n=2a_{n-1}+3a_{n-2}+4^n+6,a_0=20,a_1=60.$  
+<p>首先两边同乘$x^n$,然后作和，注意求和时变量的起始值不能让数列的下标越界，有</p>
+ $$\sum^\infty_{n=2}a_nx^n=2\sum^\infty_{n=2}a_{n-1}x^n+3\sum^\infty_{n=2}a_{n-2}x^n+\sum^\infty_{n=2}4^nx^n+6\sum^\infty_{n=2}x^n $$  
+<p>然后对各项求和，凑出包含$G(x)$的式子。根据$\displaystyle G(x)=\sum^\infty_{n=0}a_nx^n$倒推出$a_n$就完成了解答。</p>
+
+  </article>
+
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -link" href="/tags/discrete/" rel="tag">discrete</a>
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    
+      
+  <div class="nexmoe-post-copyright">
+    <strong>本文作者：</strong>潘致远<br>
+    <strong>本文链接：</strong><a href="https://zypan.ltd/2020/06/04/genfunc/" title="https:&#x2F;&#x2F;zypan.ltd&#x2F;2020&#x2F;06&#x2F;04&#x2F;genfunc&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;zypan.ltd&#x2F;2020&#x2F;06&#x2F;04&#x2F;genfunc&#x2F;</a><br>
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
+
+    
+    <section class="nexmoe-comment">
+    <div class="valine"></div>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.9/dist/Valine.min.js'></script>
+<script>
+    // 使用方法 https://valine.js.org/quickstart.html
+    new Valine({
+        el: '.valine',
+        appId: 'V5jarHMdRC627LPvfBO06cUN-gzGzoHsz',
+        appKey: 'u0eGXAQU0MaJlOLEbbj210fY'
+    })
+</script>
+</section>
+  </div>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!--<script src="/js/app.js?v=1596846222233"></script>-->
+
+
+    <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+
+
+  
+
+
+
+
+
+</body>
+
+</html>
