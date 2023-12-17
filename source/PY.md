@@ -1,7 +1,7 @@
 ---
 title: 友链
 layout: py
-permalink: PY.html
+permalink: /PY/
 ---
 
 ## 友情链接

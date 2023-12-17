@@ -30,24 +30,17 @@ cdn: # 这里可以修改站点使用的库的CDN
   copy: https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js
 
 menu:
-  首页: 
+  Home: 
     - /
     - icon-home
-  镜像:
-    - /mirrors.html
-  归档: 
-    - /archives
-    - icon-container
-  关于:
-    - /about.html
-    - icon-info-circle
-  友链: 
-    - /PY.html
+  Blogs:
+    - /posts
+    - icon-i-catalog
 
 widgets:
-#- search
-#- social
-- category
+# - search
+- social
+# - category
 - tagcloud
 # - archive
 # - recent_posts
@@ -125,7 +118,7 @@ DiscussBot:
   icons: 0 # 图标主题
   diff: 0 # 每位用户name不同颜色
 
-copyright: '<strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可'
+copyright: '<strong>Copyright:</strong> Licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> agreement.'
 
 mathjax:
   enabled: false

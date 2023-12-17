@@ -1,7 +1,7 @@
 ---
 title: 镜像站点
 layout: py
-permalink: mirrors.html
+permalink: /mirrors/
 comments: false
 ---
 

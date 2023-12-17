@@ -1,7 +1,7 @@
 ---
 title: 关于
 layout: py
-permalink: about.html
+permalink: /
 mathjax: true
 ---
 
