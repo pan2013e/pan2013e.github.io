@@ -1,4 +1,4 @@
-<div class="nexmoe-drawer mdui-drawer" id="drawer">
+<div class="nexmoe-drawer mdui-drawer" id="drawer" style="left: 0;">
     <div class="nexmoe-avatar mdui-ripple">
         <a href="<%- url_for() %>" title="<%= config.author || config.title %>">
             <img src="<%= theme.avatar %>" alt="<%= config.author || config.title %>" alt="<%= config.author || config.title %>">
@@ -22,7 +22,6 @@
     <%- partial('_partial/sidebar') %>
     <div class="nexmoe-copyright">
         &copy; <%= date(new Date(), 'YYYY') %> <%= config.author || config.title %><br />
-        <%= __('浙ICP备20003563号') %>
     </div>
 </div><!-- .nexmoe-drawer -->
 
