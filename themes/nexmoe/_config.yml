@@ -1,11 +1,11 @@
 
 avatar: https://i.loli.net/2020/05/20/WRDFXA6Gd7UJx2y.png # 网站 Logo
 background: # 既是博客的背景，又是文章默认头图
-  path: https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg
+  path: null # https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg
   width: 1440
   height: 960
 favicon:
-  href: /favicon.ico # 网站图标
+  href: https://s2.loli.net/2023/12/17/6inQ3lWbw9fT4GI.png # 网站图标
   type: image/png # 图标类型，可能的值有(image/png, image/vnd.microsoft.icon, image/x-icon, image/gif)
 
 function: # 功能开关，可选值（true,false）
