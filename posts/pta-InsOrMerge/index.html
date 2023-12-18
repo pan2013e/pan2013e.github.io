@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  
+  <title>PTA--插入排序还是归并排序 - Zhiyuan Pan</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+  <link rel="shortcut icon" href="https://s2.loli.net/2023/12/17/6inQ3lWbw9fT4GI.png" type="image/png" />
+  <meta name="description" content="根据维基百科的定义： 插入排序是迭代算法，逐一获得输入数据，逐步产生有序的输出序列。每步迭代中，算法从输入序列中取出一元素，将之插入有序序列中正确的位置。如此迭代直到全部元素有序。 归并排序进行如下迭代操作：首先将原始序列看成 N 个只包含 1 个元素的有序子序列，然后每次迭代归并两个相邻的有序子序列，直到最后只剩下 1 个有序的序列。 现给定原始序列和由某排序算法产生的中间序列，请你判断该算">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PTA--插入排序还是归并排序">
+<meta property="og:url" content="https://pan2013e.github.io/posts/pta-InsOrMerge/">
+<meta property="og:site_name" content="Zhiyuan Pan">
+<meta property="og:description" content="根据维基百科的定义： 插入排序是迭代算法，逐一获得输入数据，逐步产生有序的输出序列。每步迭代中，算法从输入序列中取出一元素，将之插入有序序列中正确的位置。如此迭代直到全部元素有序。 归并排序进行如下迭代操作：首先将原始序列看成 N 个只包含 1 个元素的有序子序列，然后每次迭代归并两个相邻的有序子序列，直到最后只剩下 1 个有序的序列。 现给定原始序列和由某排序算法产生的中间序列，请你判断该算">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-05-22T16:48:00.000Z">
+<meta property="article:modified_time" content="2023-12-18T08:38:14.907Z">
+<meta property="article:author" content="Zhiyuan Pan">
+<meta property="article:tag" content="C">
+<meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
+  
+  <!--<link rel="stylesheet" href="/css/style.css?v=1702888716316">-->
+
+  
+  <style>
+    @media screen and (min-width:1024px) { 
+      #nexmoe-content {
+        position: absolute;
+        margin-right: 40px;
+        right: 0;
+        width: calc(100% - 300px);
+      }
+    }
+  </style>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url()"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="Zhiyuan Pan" class="mdui-btn mdui-btn-icon"><img src="https://i.loli.net/2020/05/20/WRDFXA6Gd7UJx2y.png" alt="Zhiyuan Pan"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer" style="left: 0;">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Zhiyuan Pan">
+            <img src="https://i.loli.net/2020/05/20/WRDFXA6Gd7UJx2y.png" alt="Zhiyuan Pan" alt="Zhiyuan Pan">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>8</div>
+        <div><span>Tags</span>6</div>
+        <div><span>Categories</span>3</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="Home">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                Home
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/posts" title="Blogs">
+            <i class="mdui-list-item-icon nexmoefont icon-rss"></i>
+            <div class="mdui-list-item-content">
+                Blogs
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/albums" title="Albums">
+            <i class="mdui-list-item-icon nexmoefont icon-appstore-fill"></i>
+            <div class="mdui-list-item-content">
+                Albums
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title" style="padding-top: 12px;padding-bottom: 0px;">Contact</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://github.com/pan2013e/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a><a class="mdui-ripple" href="mailto:zy_pan@zju.edu.cn" target="_blank" mdui-tooltip="{content: 'E-mail'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-mail-fill"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title" style="padding-top: 12px;padding-bottom: 0px;">Tags</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/ADS/" style="font-size: 10px;">ADS</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/LaTeX/" style="font-size: 10px;">LaTeX</a> <a href="/tags/discrete/" style="font-size: 20px;">discrete</a> <a href="/tags/%E5%AE%9E%E9%AA%8C%E8%AF%BE/" style="font-size: 10px;">实验课</a>
+    </div>
+    
+  </div>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2023 Zhiyuan Pan<br />
+    </div>
+</div><!-- .nexmoe-drawer -->
+
+<!--
+<div class="nexmoe-copyright">
+    &copy; 2023 Zhiyuan Pan
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+</div>
+-->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+  <!-- 
+      <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
+          <img data-src="" data-sizes="auto" alt="PTA--插入排序还是归并排序" class="lazyload"> -->
+          <h1>PTA--插入排序还是归并排序</h1>
+      <!-- </div> -->
+  <!--  -->
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a style="padding: 8px 10px;"><i class="nexmoefont icon-calendar-fill"></i>2020-5-23</a>
+    <a style="padding: 8px 10px;"><i class="nexmoefont icon-areachart"></i>1.1k words</a>
+    <!-- <a><i class="nexmoefont icon-time-circle-fill"></i> 5 分钟</a> -->
+</div>
+
+  <div class="nexmoe-post-right">
+    
+      <div class="nexmoe-fixed">
+        <div class="nexmoe-valign">
+            <div class="nexmoe-toc">
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#输入格式"><span class="toc-number">1.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出格式"><span class="toc-number">2.</span> <span class="toc-text">输出格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入样例-1"><span class="toc-number">3.</span> <span class="toc-text">输入样例 1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出样例-1"><span class="toc-number">4.</span> <span class="toc-text">输出样例 1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入样例-2"><span class="toc-number">5.</span> <span class="toc-text">输入样例 2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出样例-2"><span class="toc-number">6.</span> <span class="toc-text">输出样例 2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考代码-C"><span class="toc-number">7.</span> <span class="toc-text">参考代码(C)</span></a></li></ol>
+            </div>
+        </div>
+      </div>
+    
+  </div>
+
+  <article>
+    <script type="text/javascript" src="https://i.upmath.me/latex.js "></script>
+
+<p>根据维基百科的定义：</p>
+<p><strong>插入排序</strong>是迭代算法，逐一获得输入数据，逐步产生有序的输出序列。每步迭代中，算法从输入序列中取出一元素，将之插入有序序列中正确的位置。如此迭代直到全部元素有序。</p>
+<p><strong>归并排序</strong>进行如下迭代操作：首先将原始序列看成 N 个只包含 1 个元素的有序子序列，然后每次迭代归并两个相邻的有序子序列，直到最后只剩下 1 个有序的序列。</p>
+<p>现给定原始序列和由某排序算法产生的中间序列，请你判断该算法究竟是哪种排序算法？</p>
+<a id="more"></a>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入在第一行给出正整数  $$ N(N\le 100) $$  ；随后一行给出原始序列的  $$ N $$  个整数；最后一行给出由某排序算法产生的中间序列。这里假设排序的目标序列是升序。数字间以空格分隔。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>首先在第 1 行中输出<code>Insertion Sort</code>表示插入排序、或<code>Merge Sort</code>表示归并排序；然后在第 2 行中输出用该排序算法再迭代一轮的结果序列。题目保证每组测试的结果是唯一的。数字间以空格分隔，且行首尾不得有多余空格。</p>
+<h2 id="输入样例-1"><a href="#输入样例-1" class="headerlink" title="输入样例 1"></a>输入样例 1</h2><pre><code>10
+3 1 2 8 7 5 9 4 6 0
+1 2 3 7 8 5 9 4 6 0
+</code></pre><h2 id="输出样例-1"><a href="#输出样例-1" class="headerlink" title="输出样例 1"></a>输出样例 1</h2><pre><code>Insertion Sort
+1 2 3 5 7 8 9 4 6 0
+</code></pre><h2 id="输入样例-2"><a href="#输入样例-2" class="headerlink" title="输入样例 2"></a>输入样例 2</h2><pre><code>10
+3 1 2 8 7 5 9 4 0 6
+1 3 2 8 5 7 4 9 0 6
+</code></pre><h2 id="输出样例-2"><a href="#输出样例-2" class="headerlink" title="输出样例 2"></a>输出样例 2</h2><pre><code>Merge Sort
+1 2 3 8 4 5 7 9 0 6
+</code></pre><h2 id="参考代码-C"><a href="#参考代码-C" class="headerlink" title="参考代码(C)"></a>参考代码(C)</h2><pre><code class="lang-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int t[110],a[110],b[110];
+int N;
+
+//归并排序中的merge操作，双指针算法
+//合并两个上升子序列 [l...mid] 和 [mid+1...r]
+void merge(int m_arr[],int l,int r,int mid){
+    int tmp[110]={0};
+    int k = 0, i = l, j = mid + 1;
+    while (i &lt;= mid &amp;&amp; j &lt;= r)
+        if (m_arr[i] &lt;= m_arr[j]) tmp[k ++ ] = m_arr[i ++ ];
+        else tmp[k ++ ] = m_arr[j ++ ];
+    while (i &lt;= mid) tmp[k ++ ] = m_arr[i ++ ];
+    while (j &lt;= r) tmp[k ++ ] = m_arr[j ++ ];
+    for (i = l, j = 0; i &lt;= r; i ++, j ++ ) m_arr[i] = tmp[j];
+}
+
+//判断当前结果是否与模板序列匹配
+int isMatch(int mode){
+    switch(mode){
+        case 1: 
+            for(int i=0;i&lt;N;i++){
+                if(a[i]!=t[i]) return 0;
+            }
+            return 1;break;
+        case 2:
+            for(int i=0;i&lt;N;i++){
+                if(b[i]!=t[i]) return 0;
+            }
+            return 1;break;
+    }
+    return 0;
+}
+int main(){
+    int flag=0;
+    scanf(&quot;%d&quot;,&amp;N);
+    for(int i=0;i&lt;N;i++){
+        scanf(&quot;%d&quot;,&amp;a[i]);
+        b[i]=a[i];
+    }
+    for(int i=0;i&lt;N;i++){
+        scanf(&quot;%d&quot;,&amp;t[i]);  //模板序列
+    }
+    // 常规插入排序，注意i从1开始，否则与题意不符
+    for(int i=1;i&lt;N;i++){
+        int temp=a[i];
+        int j=i-1;
+        while(j&gt;=0 &amp;&amp; a[j]&gt;temp){
+            a[j+1] = a[j];
+            j--;
+        }
+        a[j+1]=temp;
+        if(flag) break;
+        //完成一次遍历之后进行比较
+        //匹配成功则进行标记，然后再进行一轮排序，之后跳出循环
+        if(isMatch(1)){
+            flag=1;
+            printf(&quot;Insertion Sort\n&quot;);
+        }
+    }
+    if(flag){
+        for(int i=0;i&lt;N;i++) {
+            printf(&quot;%d&quot;,a[i]);
+            if(i!=N-1) printf(&quot; &quot;);        
+        }
+        printf(&quot;\n&quot;);
+        return 0;
+    }  
+    // 自底向上的归并排序
+    // k代表当前子序列个数，len代表前面等长子序列的长度
+    // sup代表当前合并范围的最右端
+    int k=N,len=1,sup=0; 
+    // 合并为一个序列时完成排序
+    while(k&gt;1){
+        // 每两个子区间进行合并
+        for(int i=0;i&lt;=k/2;i++){
+            sup=2*len*(i+1)-1; 
+            // 需要考虑的特殊情况：
+            // 计算出的区间右端点如果越界，说明这是此前的奇数位子序列
+            // 将合并右端点修正为整个数组右端点
+            if(2*len*(i+1)-1 &gt; N-1 ) sup=N-1;
+            // 注意到l和mid的计算与sup是否越界无关，因此不需要分类讨论
+            merge(b,2*i*len,sup,((4*i+2)*len-1)/2); 
+        }
+        // 考虑到奇数个子序列的情况，注意k/2之后向上取整
+        // 子序列个数折半之后，被合并的等长子序列长度加倍
+        k=(k+1)/2;len=len*2;
+
+        if(flag) break;
+        if(isMatch(2)){
+            printf(&quot;Merge Sort\n&quot;);
+            flag=1;
+        }
+    }
+    if(flag){
+        for(int i=0;i&lt;N;i++) {
+            printf(&quot;%d&quot;,b[i]);
+            if(i!=N-1) printf(&quot; &quot;);
+        }
+        printf(&quot;\n&quot;);
+        return 0;
+    }  
+}
+</code></pre>
+
+  </article>
+
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/CS/">CS</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -link" href="/tags/C/" rel="tag">C</a>
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    
+      
+  <div class="nexmoe-post-copyright">
+    <strong>Author：</strong>Zhiyuan Pan<br>
+    <strong>Link：</strong><a href="https://pan2013e.github.io/posts/pta-InsOrMerge/" title="https:&#x2F;&#x2F;pan2013e.github.io&#x2F;posts&#x2F;pta-InsOrMerge&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;pan2013e.github.io&#x2F;posts&#x2F;pta-InsOrMerge&#x2F;</a><br>
+    
+      <strong>Copyright:</strong> Licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> agreement.
+    
+  </div>
+
+
+    
+    <!-- <section class="nexmoe-comment">
+    <div class="valine"></div>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.9/dist/Valine.min.js'></script>
+<script>
+    // 使用方法 https://valine.js.org/quickstart.html
+    new Valine({
+        el: '.valine',
+        appId: '',
+        appKey: ''
+    })
+</script>
+</section> -->
+  </div>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!--<script src="/js/app.js?v=1702888716317"></script>-->
+
+
+    <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+
+
+  
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  
+  <title>C程序设计专题笔记 - Zhiyuan Pan</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+  <link rel="shortcut icon" href="https://s2.loli.net/2023/12/17/6inQ3lWbw9fT4GI.png" type="image/png" />
+  <meta property="og:type" content="article">
+<meta property="og:title" content="C程序设计专题笔记">
+<meta property="og:url" content="https://pan2013e.github.io/posts/adc/">
+<meta property="og:site_name" content="Zhiyuan Pan">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://pan2013e.github.io/posts/adc/nm.jpg">
+<meta property="og:image" content="https://pan2013e.github.io/posts/adc/ln.png">
+<meta property="article:published_time" content="2020-06-07T04:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-18T08:38:14.907Z">
+<meta property="article:author" content="Zhiyuan Pan">
+<meta property="article:tag" content="CS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pan2013e.github.io/posts/adc/nm.jpg">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
+  
+  <!--<link rel="stylesheet" href="/css/style.css?v=1702888716312">-->
+
+  
+  <style>
+    @media screen and (min-width:1024px) { 
+      #nexmoe-content {
+        position: absolute;
+        margin-right: 40px;
+        right: 0;
+        width: calc(100% - 300px);
+      }
+    }
+  </style>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url()"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="Zhiyuan Pan" class="mdui-btn mdui-btn-icon"><img src="https://i.loli.net/2020/05/20/WRDFXA6Gd7UJx2y.png" alt="Zhiyuan Pan"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer" style="left: 0;">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Zhiyuan Pan">
+            <img src="https://i.loli.net/2020/05/20/WRDFXA6Gd7UJx2y.png" alt="Zhiyuan Pan" alt="Zhiyuan Pan">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>8</div>
+        <div><span>Tags</span>6</div>
+        <div><span>Categories</span>3</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="Home">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                Home
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/posts" title="Blogs">
+            <i class="mdui-list-item-icon nexmoefont icon-rss"></i>
+            <div class="mdui-list-item-content">
+                Blogs
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/albums" title="Albums">
+            <i class="mdui-list-item-icon nexmoefont icon-appstore-fill"></i>
+            <div class="mdui-list-item-content">
+                Albums
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title" style="padding-top: 12px;padding-bottom: 0px;">Contact</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://github.com/pan2013e/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a><a class="mdui-ripple" href="mailto:zy_pan@zju.edu.cn" target="_blank" mdui-tooltip="{content: 'E-mail'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-mail-fill"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title" style="padding-top: 12px;padding-bottom: 0px;">Tags</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/ADS/" style="font-size: 10px;">ADS</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/LaTeX/" style="font-size: 10px;">LaTeX</a> <a href="/tags/discrete/" style="font-size: 20px;">discrete</a> <a href="/tags/%E5%AE%9E%E9%AA%8C%E8%AF%BE/" style="font-size: 10px;">实验课</a>
+    </div>
+    
+  </div>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2023 Zhiyuan Pan<br />
+    </div>
+</div><!-- .nexmoe-drawer -->
+
+<!--
+<div class="nexmoe-copyright">
+    &copy; 2023 Zhiyuan Pan
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+</div>
+-->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+  <!-- 
+      <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
+          <img data-src="" data-sizes="auto" alt="C程序设计专题笔记" class="lazyload"> -->
+          <h1>C程序设计专题笔记</h1>
+      <!-- </div> -->
+  <!--  -->
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a style="padding: 8px 10px;"><i class="nexmoefont icon-calendar-fill"></i>2020-6-7</a>
+    <a style="padding: 8px 10px;"><i class="nexmoefont icon-areachart"></i>6.4k words</a>
+    <!-- <a><i class="nexmoefont icon-time-circle-fill"></i> 35 分钟</a> -->
+</div>
+
+  <div class="nexmoe-post-right">
+    
+      <div class="nexmoe-fixed">
+        <div class="nexmoe-valign">
+            <div class="nexmoe-toc">
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#第一次课：Structure-结构"><span class="toc-number">1.</span> <span class="toc-text">第一次课：Structure 结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引入"><span class="toc-number">1.1.</span> <span class="toc-text">引入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#声明（“declare”）一个结构体（struct）"><span class="toc-number">1.2.</span> <span class="toc-text">声明（“declare”）一个结构体（struct）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#多种声明方法"><span class="toc-number">1.2.1.</span> <span class="toc-text">多种声明方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结构体变量"><span class="toc-number">1.3.</span> <span class="toc-text">结构体变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#结构体变量的初始化"><span class="toc-number">1.3.1.</span> <span class="toc-text">结构体变量的初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结构体的成员-member"><span class="toc-number">1.3.2.</span> <span class="toc-text">结构体的成员(member)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#赋值"><span class="toc-number">1.3.3.</span> <span class="toc-text">赋值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#指向结构体的指针"><span class="toc-number">1.3.4.</span> <span class="toc-text">指向结构体的指针</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#struct-和-函数"><span class="toc-number">1.4.</span> <span class="toc-text">struct 和 函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#将struct作为参数"><span class="toc-number">1.4.1.</span> <span class="toc-text">将struct作为参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将指向struct的指针作为参数"><span class="toc-number">1.4.2.</span> <span class="toc-text">将指向struct的指针作为参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#struct作为数组元素"><span class="toc-number">1.4.3.</span> <span class="toc-text">struct作为数组元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#struct中的struct"><span class="toc-number">1.4.4.</span> <span class="toc-text">struct中的struct</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复合：”Array-of-struct-of-struct”"><span class="toc-number">1.4.5.</span> <span class="toc-text">复合：”Array of struct of struct”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数-struct-Date-tomorrow"><span class="toc-number">1.4.6.</span> <span class="toc-text">函数 struct Date tomorrow</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#typedef"><span class="toc-number">1.5.</span> <span class="toc-text">typedef</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#typedef-array"><span class="toc-number">1.5.1.</span> <span class="toc-text">typedef array</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#struct的大小"><span class="toc-number">1.5.2.</span> <span class="toc-text">struct的大小</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#课堂练习"><span class="toc-number">1.6.</span> <span class="toc-text">课堂练习</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第二次课-Linked-List-链表"><span class="toc-number">2.</span> <span class="toc-text">第二次课 Linked List 链表</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Basic-Idea"><span class="toc-number">2.1.</span> <span class="toc-text">Basic Idea</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Implementation"><span class="toc-number">2.1.1.</span> <span class="toc-text">Implementation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Basic-Operation"><span class="toc-number">2.2.</span> <span class="toc-text">Basic Operation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#insert-head"><span class="toc-number">2.2.1.</span> <span class="toc-text">insert head</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#function-insert-head"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">function insert_head ?</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#iterate-amp-search"><span class="toc-number">2.2.2.</span> <span class="toc-text">iterate &amp; search</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#append-tail"><span class="toc-number">2.2.3.</span> <span class="toc-text">append tail</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#remove"><span class="toc-number">2.2.4.</span> <span class="toc-text">remove</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#clear-all"><span class="toc-number">2.2.5.</span> <span class="toc-text">clear all</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sentinel-node"><span class="toc-number">2.3.</span> <span class="toc-text">Sentinel node</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#More-lists"><span class="toc-number">2.4.</span> <span class="toc-text">More lists</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第三次课"><span class="toc-number">3.</span> <span class="toc-text">第三次课</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#全局变量"><span class="toc-number">3.1.</span> <span class="toc-text">全局变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#特性"><span class="toc-number">3.1.1.</span> <span class="toc-text">特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化"><span class="toc-number">3.1.2.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数内与全局变量同名的变量"><span class="toc-number">3.1.3.</span> <span class="toc-text">函数内与全局变量同名的变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#static类型：静态本地变量"><span class="toc-number">3.1.4.</span> <span class="toc-text">static类型：静态本地变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译和链接的过程"><span class="toc-number">3.1.5.</span> <span class="toc-text">编译和链接的过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译单元-Compile-Unit"><span class="toc-number">3.1.6.</span> <span class="toc-text">编译单元 Compile Unit</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#头文件-Header-Files"><span class="toc-number">3.2.</span> <span class="toc-text">头文件 Header Files</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数原型"><span class="toc-number">3.2.1.</span> <span class="toc-text">函数原型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一种编译预处理指令-include"><span class="toc-number">3.2.2.</span> <span class="toc-text">一种编译预处理指令 #include</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不对外公开的函数"><span class="toc-number">3.2.3.</span> <span class="toc-text">不对外公开的函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变量的声明"><span class="toc-number">3.2.4.</span> <span class="toc-text">变量的声明</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#声明：不产生代码"><span class="toc-number">3.2.4.1.</span> <span class="toc-text">声明：不产生代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定义：产生代码"><span class="toc-number">3.2.4.2.</span> <span class="toc-text">定义：产生代码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标准头文件结构"><span class="toc-number">3.2.5.</span> <span class="toc-text">标准头文件结构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ifndef-HEADER-H"><span class="toc-number">4.</span> <span class="toc-text">ifndef HEADER_H</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#define-HEADER-H"><span class="toc-number">5.</span> <span class="toc-text">define HEADER_H</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#endif"><span class="toc-number">6.</span> <span class="toc-text">endif</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#前向声明"><span class="toc-number">6.0.0.1.</span> <span class="toc-text">前向声明</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第四次课-交互图形程序"><span class="toc-number">7.</span> <span class="toc-text">第四次课 交互图形程序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#函数指针"><span class="toc-number">7.1.</span> <span class="toc-text">函数指针</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义函数指针"><span class="toc-number">7.1.1.</span> <span class="toc-text">定义函数指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数指针的赋值"><span class="toc-number">7.1.2.</span> <span class="toc-text">函数指针的赋值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用函数指针调用函数"><span class="toc-number">7.1.3.</span> <span class="toc-text">使用函数指针调用函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将函数指针作为参数传给函数"><span class="toc-number">7.1.4.</span> <span class="toc-text">将函数指针作为参数传给函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数指针作为返回类型"><span class="toc-number">7.1.5.</span> <span class="toc-text">函数指针作为返回类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数指针数组"><span class="toc-number">7.1.6.</span> <span class="toc-text">函数指针数组</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#回调函数"><span class="toc-number">7.2.</span> <span class="toc-text">回调函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MVC设计模式"><span class="toc-number">7.3.</span> <span class="toc-text">MVC设计模式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第五次课-递归"><span class="toc-number">8.</span> <span class="toc-text">第五次课 递归</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Characteristics"><span class="toc-number">8.1.</span> <span class="toc-text">Characteristics</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Principles"><span class="toc-number">8.2.</span> <span class="toc-text">Principles</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Recursive-functions-in-programming"><span class="toc-number">8.2.1.</span> <span class="toc-text">Recursive functions in programming:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Recursively-defined-functions-in-mathematics"><span class="toc-number">8.2.2.</span> <span class="toc-text">Recursively defined functions in mathematics:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Examples"><span class="toc-number">8.3.</span> <span class="toc-text">Examples</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Factorial"><span class="toc-number">8.3.1.</span> <span class="toc-text">Factorial</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fibonacci-numbers"><span class="toc-number">8.3.2.</span> <span class="toc-text">Fibonacci numbers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Euclidean-algorithm"><span class="toc-number">8.3.3.</span> <span class="toc-text">Euclidean algorithm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Newton’s-method"><span class="toc-number">8.3.4.</span> <span class="toc-text">Newton’s method</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Towers-of-Hanoi"><span class="toc-number">8.3.5.</span> <span class="toc-text">Towers of Hanoi</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Number-of-steps"><span class="toc-number">8.3.5.1.</span> <span class="toc-text">Number of steps</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Explicit-steps"><span class="toc-number">8.3.5.2.</span> <span class="toc-text">Explicit steps</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Recursive-data-structure"><span class="toc-number">8.3.6.</span> <span class="toc-text">Recursive data structure</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Linked-list"><span class="toc-number">8.3.6.1.</span> <span class="toc-text">Linked list</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Types"><span class="toc-number">8.4.</span> <span class="toc-text">Types</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Tail-recursive-functions"><span class="toc-number">8.4.1.</span> <span class="toc-text">Tail recursive functions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linear-recursive-functions-and-tree-recursive-functions"><span class="toc-number">8.4.2.</span> <span class="toc-text">Linear recursive functions and tree recursive functions</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Linear"><span class="toc-number">8.4.2.1.</span> <span class="toc-text">Linear</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Tree"><span class="toc-number">8.4.2.2.</span> <span class="toc-text">Tree</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Other-important-things-about-recursion"><span class="toc-number">8.5.</span> <span class="toc-text">Other important things about recursion</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Order"><span class="toc-number">8.5.1.</span> <span class="toc-text">Order</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Recursion-versus-Iteration"><span class="toc-number">8.5.2.</span> <span class="toc-text">Recursion versus Iteration</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第六次课"><span class="toc-number">9.</span> <span class="toc-text">第六次课</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Two-important-operations-on-a-list"><span class="toc-number">9.1.</span> <span class="toc-text">Two important operations on a list</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Searching"><span class="toc-number">9.2.</span> <span class="toc-text">Searching</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linear-Search"><span class="toc-number">9.2.1.</span> <span class="toc-text">Linear Search</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Binary-Search"><span class="toc-number">9.2.2.</span> <span class="toc-text">Binary Search</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Optimization"><span class="toc-number">9.2.3.</span> <span class="toc-text">Optimization</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Refining-segmentation"><span class="toc-number">9.2.3.1.</span> <span class="toc-text">Refining segmentation</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sorting"><span class="toc-number">9.3.</span> <span class="toc-text">Sorting</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bubble-Sort"><span class="toc-number">9.3.1.</span> <span class="toc-text">Bubble Sort</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Key-point"><span class="toc-number">9.3.1.1.</span> <span class="toc-text">Key point</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Selection-Sort"><span class="toc-number">9.3.2.</span> <span class="toc-text">Selection Sort</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Key-point-1"><span class="toc-number">9.3.2.1.</span> <span class="toc-text">Key point</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Complexity"><span class="toc-number">9.3.3.</span> <span class="toc-text">Complexity</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Optimization-1"><span class="toc-number">9.4.</span> <span class="toc-text">Optimization</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bubble-Sort-1"><span class="toc-number">9.4.1.</span> <span class="toc-text">Bubble Sort</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Break-earlier"><span class="toc-number">9.4.1.1.</span> <span class="toc-text">Break earlier</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Reduce-iteration-times"><span class="toc-number">9.4.1.2.</span> <span class="toc-text">Reduce iteration times</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Two-way-Bubble-Sort"><span class="toc-number">9.4.1.3.</span> <span class="toc-text">Two-way Bubble Sort</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Selection-Sort-1"><span class="toc-number">9.4.2.</span> <span class="toc-text">Selection Sort</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Two-way-Selection-Sort"><span class="toc-number">9.4.2.1.</span> <span class="toc-text">Two-way Selection Sort</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第七次课"><span class="toc-number">10.</span> <span class="toc-text">第七次课</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Insertion-Sort"><span class="toc-number">10.1.</span> <span class="toc-text">Insertion Sort</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic-Idea-1"><span class="toc-number">10.1.1.</span> <span class="toc-text">Basic Idea</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Optimization-Binary-Insertion-Sort"><span class="toc-number">10.1.2.</span> <span class="toc-text">Optimization: Binary Insertion Sort</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Question-Merge-two-sorted-arrays"><span class="toc-number">10.2.</span> <span class="toc-text">Question: Merge two sorted arrays</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Merge-Sort"><span class="toc-number">10.3.</span> <span class="toc-text">Merge Sort</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic-Idea-2"><span class="toc-number">10.3.1.</span> <span class="toc-text">Basic Idea</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Top-down"><span class="toc-number">10.4.</span> <span class="toc-text">Top down</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bottom-up"><span class="toc-number">10.4.1.</span> <span class="toc-text">Bottom up</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Sort"><span class="toc-number">10.5.</span> <span class="toc-text">Quick Sort</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic-Idea-3"><span class="toc-number">10.5.1.</span> <span class="toc-text">Basic Idea</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Partition"><span class="toc-number">10.5.2.</span> <span class="toc-text">Partition</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#How-to-choice-a-better-pivot"><span class="toc-number">10.5.3.</span> <span class="toc-text">How to choice a better pivot</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Model"><span class="toc-number">10.5.4.</span> <span class="toc-text">Model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Use-qsort-in-stdlib-h"><span class="toc-number">10.5.5.</span> <span class="toc-text">Use qsort in stdlib.h</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#比较排序算法的速度"><span class="toc-number">10.6.</span> <span class="toc-text">比较排序算法的速度</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第八次课"><span class="toc-number">11.</span> <span class="toc-text">第八次课</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#算法分析"><span class="toc-number">11.1.</span> <span class="toc-text">算法分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#复杂度"><span class="toc-number">11.1.1.</span> <span class="toc-text">复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Big-O-Notation"><span class="toc-number">11.1.2.</span> <span class="toc-text">Big-O Notation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测量程序运行时间"><span class="toc-number">11.2.</span> <span class="toc-text">测量程序运行时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#早期程序"><span class="toc-number">11.3.</span> <span class="toc-text">早期程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结构化程序设计"><span class="toc-number">11.4.</span> <span class="toc-text">结构化程序设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#表达式和语句的区别"><span class="toc-number">11.4.1.</span> <span class="toc-text">表达式和语句的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存分配方式"><span class="toc-number">11.5.</span> <span class="toc-text">内存分配方式</span></a></li></ol></li></ol>
+            </div>
+        </div>
+      </div>
+    
+  </div>
+
+  <article>
+    <script type="text/javascript" src="/js/config.js" defer></script>
+<script id="Mathjax-script" type="text/javascript" defer src="/js/mathjax/tex-svg.js"></script>
+
+<a id="more"></a>
+<h1 id="第一次课：Structure-结构"><a href="#第一次课：Structure-结构" class="headerlink" title="第一次课：Structure 结构"></a>第一次课：Structure 结构</h1><h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><blockquote>
+<p>一个C程序如何存储时间数据？ </p>
+</blockquote>
+<p>一个自然的想法：</p>
+<p><code>int y,m,d</code> &amp;&amp; <code>scanf(...)</code></p>
+<p><strong>问题</strong>: 如何将<code>y</code>,<code>m</code>,<code>d</code>合并到一个变量？</p>
+<h2 id="声明（“declare”）一个结构体（struct）"><a href="#声明（“declare”）一个结构体（struct）" class="headerlink" title="声明（“declare”）一个结构体（struct）"></a>声明（“declare”）一个结构体（struct）</h2><pre><code class="lang-c">struct Date{
+    int year;
+    int month;
+    int day;
+}; //do not miss &#39;;&#39; after &#39;}&#39;
+
+struct Date today;//repeat &#39;struct&#39; when defining a new struct variable
+</code></pre>
+<p><strong>注意:</strong> <code>Date today;</code>在此处是不正确的，须使用<code>struct Date today</code>.</p>
+<pre><code class="lang-c">//assign values to the members in &#39;today&#39;
+today.year=2020;
+today.month=2;
+today.day=24;
+
+//output
+printf(&quot;%d-%02d-%-02d\n&quot;,today.year,today.month,today.day);
+</code></pre>
+<h3 id="多种声明方法"><a href="#多种声明方法" class="headerlink" title="多种声明方法"></a>多种声明方法</h3><pre><code class="lang-c">struct point{
+    /* code */
+};
+struct point p1,p2;`
+</code></pre>
+<pre><code class="lang-c">struct{
+    /* code */
+}p1,p2;
+</code></pre>
+<pre><code class="lang-c">struct point{
+    /* code */
+}p1,p2;
+</code></pre>
+<h2 id="结构体变量"><a href="#结构体变量" class="headerlink" title="结构体变量"></a>结构体变量</h2><p><strong>Note :</strong> declaration $\neq$ definition</p>
+<p><strong>注意：</strong> 声明与定义的区别</p>
+<h3 id="结构体变量的初始化"><a href="#结构体变量的初始化" class="headerlink" title="结构体变量的初始化"></a>结构体变量的初始化</h3><ul>
+<li><p><code>struct Date today={2020,2,24};</code></p>
+</li>
+<li><p>和初始化数组的一种方法是类似的，如<br><code>int a[]={2020,2,24};</code></p>
+</li>
+<li><p>但是又更加灵活，如<code>struct Date today={2020,.month=2;.day=24};</code></p>
+</li>
+</ul>
+<h3 id="结构体的成员-member"><a href="#结构体的成员-member" class="headerlink" title="结构体的成员(member)"></a>结构体的成员(member)</h3><ul>
+<li>关注 <code>struct</code> &amp; 数组之间的异同</li>
+<li>op <code>[]</code> $\leftrightarrow$ 数组</li>
+<li>op <code>.</code> $\leftrightarrow$ <code>struct</code></li>
+</ul>
+<h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><p><strong>注意：</strong> 一个结构体变量可以直接用另一个结构体变量赋值（数组不行！），或者被取地址，或者作为参数被传入一个函数。</p>
+<pre><code class="lang-c">struct Date today={2020,2,24};
+struct Date tmw=today;
+</code></pre>
+<p>也可以这样做，</p>
+<pre><code class="lang-c">tmw=(struct Date){2020,2,24};
+</code></pre>
+<h3 id="指向结构体的指针"><a href="#指向结构体的指针" class="headerlink" title="指向结构体的指针"></a>指向结构体的指针</h3><p><strong>注意：</strong> 与数组不同的是，一个<code>struct</code>的名字并不是它的地址！</p>
+<pre><code class="lang-c">struct Date *p = &amp;today;
+</code></pre>
+<ul>
+<li>如何访问其中的成员:</li>
+</ul>
+<p><code>(*p).year</code> || <code>p-&gt;year</code>(p指向的结构体中的<code>year</code>变量)</p>
+<h2 id="struct-和-函数"><a href="#struct-和-函数" class="headerlink" title="struct 和 函数"></a>struct 和 函数</h2><h3 id="将struct作为参数"><a href="#将struct作为参数" class="headerlink" title="将struct作为参数"></a>将struct作为参数</h3><pre><code class="lang-c">int numOfDays(struct date d)
+</code></pre>
+<ul>
+<li>一个 <code>struct</code> 变量可以作为函数的参数。</li>
+<li>与数组不同的是, 一个 <strong>新的</strong> <code>struct</code> 会被创建在<strong>函数内部</strong>，然后参数值会被<strong>复制</strong>过去。</li>
+<li>函数可以返回 <code>struct</code> 类型。</li>
+</ul>
+<pre><code class="lang-c">void readDate(struct Date d){
+    scanf(&quot;%d-%d-%d&quot;,&amp;d.year,&amp;d.month,&amp;d.day);
+}
+void prtDate(struct Date d){
+    printf(&quot;%d-%d-%d&quot;,d.year,d.month,d.day);
+}
+</code></pre>
+<p><strong>问题: 上述代码中的 <code>readDate</code> 函数起作用吗？</strong></p>
+<p>修正：可以让函数返回结构体</p>
+<pre><code class="lang-c">struct Date readDate(){
+    struct Date d;
+    scanf(...);
+    return d;
+}
+
+int main(){
+    struct Date today;
+    today = readDate();
+    //...
+}
+</code></pre>
+<h3 id="将指向struct的指针作为参数"><a href="#将指向struct的指针作为参数" class="headerlink" title="将指向struct的指针作为参数"></a>将指向struct的指针作为参数</h3><blockquote>
+<p>If a large structure is to be passed to a function, it is generally more efficient to pass a pointer than to copy the whole structure.</p>
+<p>by K&amp;R</p>
+<pre><code class="lang-c">struct point* inputPoint(struct point *p){
+    scanf(...);
+    return p; //the function receives &#39;struct point *p&#39; and passes it back
+}
+</code></pre>
+<p>如下代码段是错误的,</p>
+<pre><code class="lang-c">struct Date *d;
+d-&gt;year=year;
+d-&gt;month=month;
+d-&gt;day=day;
+</code></pre>
+<p>d并没有指向任何存在的<code>struct Date</code>，该错误类似于</p>
+</blockquote>
+<pre><code class="lang-c">int *p;
+p=123;
+</code></pre>
+<h3 id="struct作为数组元素"><a href="#struct作为数组元素" class="headerlink" title="struct作为数组元素"></a>struct作为数组元素</h3><pre><code class="lang-c"> struct date dates[100];
+ struct date dates[]={
+     {24,2,2020},
+     {25,2,2020},
+ };
+</code></pre>
+<h3 id="struct中的struct"><a href="#struct中的struct" class="headerlink" title="struct中的struct"></a>struct中的struct</h3><pre><code class="lang-c"> struct rect{
+     struct point pt1;
+     struct point pt2;
+ };
+</code></pre>
+<h3 id="复合：”Array-of-struct-of-struct”"><a href="#复合：”Array-of-struct-of-struct”" class="headerlink" title="复合：”Array of struct of struct”"></a>复合：”Array of struct of struct”</h3><h3 id="函数-struct-Date-tomorrow"><a href="#函数-struct-Date-tomorrow" class="headerlink" title="函数 struct Date tomorrow"></a>函数 struct Date tomorrow</h3><ul>
+<li><p>实现返回当前日期的下一天的日期。</p>
+<pre><code class="lang-c">int isleap(struct Date d){
+  int ret=0;
+  //...
+  return ret;
+}
+int lastDay(struct Date d){
+  int ret=0;
+  static int days[]={31,28,31,30,31,30,31,31,30,31,30,31};
+  if(d.month==2){
+      if(isleap(d)){
+          ret= d.day==29;
+      }else{
+          ret= d.day==28;
+      }
+  }else{
+      if(days[d.month-1]==d.day){
+          ret=1;
+      }
+  }
+  return ret;
+}
+
+struct Date tomorrow(struct Date d){
+  if (lastDay(d)){
+      d.month++;
+      d.day=1;
+  }else{
+      d.day++;
+  }
+}
+</code></pre>
+<h2 id="typedef"><a href="#typedef" class="headerlink" title="typedef"></a>typedef</h2></li>
+</ul>
+<pre><code class="lang-c">typedef struct _Date{
+    /* code */
+} Date;
+
+Date d;
+</code></pre>
+<ul>
+<li><code>typedef</code>:创建新变量名称的一种方法</li>
+<li>新的名称是一种<strong>别名</strong>,如：我们用<code>Date</code>代替<code>struct _Date</code></li>
+</ul>
+<h3 id="typedef-array"><a href="#typedef-array" class="headerlink" title="typedef array"></a>typedef array</h3><pre><code class="lang-c">typedef char Line[80];
+
+Line s;//&#39;s&#39; is an array of `char`
+</code></pre>
+<p><code>typedef char[80] Line</code> 是错误的！<code>[80]</code>要放在后面。</p>
+<h3 id="struct的大小"><a href="#struct的大小" class="headerlink" title="struct的大小"></a>struct的大小</h3><ul>
+<li>对齐（alignment）</li>
+</ul>
+<h2 id="课堂练习"><a href="#课堂练习" class="headerlink" title="课堂练习"></a>课堂练习</h2><p>下面代码的执行输出是：<strong><em>__</em></strong>.</p>
+<pre><code class="lang-c">#include &lt;stdio.h&gt;
+struct Date{
+    int year,month,day;
+};
+void f(struct Date a[]){
+    a[0].year++;
+}
+int main(){
+    struct Date d[2]={{2020,2,24},{2020,2,25}};
+    f(d);
+    printf(&quot;%d\n&quot;,d[0].year);
+    return 0;
+}
+</code></pre>
+<p><strong>解答：</strong> 2021</p>
+<p><code>struct Date d[2]</code>是一个数组，数组的元素是<code>struct Date</code>类型.向函数<code>f</code>传入的参数是<code>d</code>数组的首地址，也就是<code>struct Date d[0]</code>的地址，因此经过函数作用之后<code>d[0].year</code>$+1$.</p>
+<h1 id="第二次课-Linked-List-链表"><a href="#第二次课-Linked-List-链表" class="headerlink" title="第二次课 Linked List 链表"></a>第二次课 Linked List 链表</h1><h2 id="Basic-Idea"><a href="#Basic-Idea" class="headerlink" title="Basic Idea"></a>Basic Idea</h2><p><code>node</code> : payload &amp; link</p>
+<pre><code class="lang-sequence">participant head
+participant node2
+participant ...
+participant tail
+note left of head: linked_list
+head-&gt;node2: link
+node2-&gt;...:
+...-&gt;tail:
+</code></pre>
+<h3 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h3><pre><code class="lang-c">typedef struct _Node {
+    int val;
+    struct _Node *next;
+} Node;
+
+/* The following code fragment is incorrect:
+ * typedef struct {
+ *     int val;
+ *     Node *next;
+ * } Node;
+ */
+
+int main(){
+    Node *head=NULL;
+}
+</code></pre>
+<h2 id="Basic-Operation"><a href="#Basic-Operation" class="headerlink" title="Basic Operation"></a>Basic Operation</h2><h3 id="insert-head"><a href="#insert-head" class="headerlink" title="insert head"></a>insert head</h3><pre><code class="lang-c">Node *new=(Node *)malloc(sizeof(Node));
+n-&gt;val=x;
+n-&gt;next=head;
+head=n;
+</code></pre>
+<pre><code class="lang-sequence">title: Insert Head Logic
+participant new_head
+participant prev_head
+participant node2
+
+new_head-&gt;prev_head:
+prev_head-&gt;node2:
+note over new_head:head=new_head
+</code></pre>
+<h4 id="function-insert-head"><a href="#function-insert-head" class="headerlink" title="function insert_head ?"></a>function <code>insert_head</code> ?</h4><pre><code class="lang-c">typedef struct{
+    Node *head;
+}List;
+
+// List: hide Node in function main
+
+void insert_head(List *list, int x){
+    Node *n=(Node *)malloc(sizeof(Node));
+    n-&gt;val=x;
+    n-&gt;next=list-&gt;head;
+    list-&gt;head=n;
+}
+</code></pre>
+<p><code>List</code> : <strong>Low <a href="https://en.wikipedia.org/wiki/Coupling_(computer_programming" target="_blank" rel="noopener">coupling</a>) degree!</strong></p>
+<h3 id="iterate-amp-search"><a href="#iterate-amp-search" class="headerlink" title="iterate &amp; search"></a>iterate &amp; search</h3><pre><code class="lang-c">for(Node *p=head;p;p=p-&gt;next){
+    printf(&quot;%d\n&quot;,p-&gt;val);
+}
+</code></pre>
+<pre><code class="lang-c">int search(List* list,int x){
+    int ret=0;
+    for(Node *p=list-&gt;head;p;p=p-&gt;next){
+        if(p-&gt;value==x){
+            ret=1;
+            break;
+        }
+    }
+    return ret;
+}
+</code></pre>
+<h3 id="append-tail"><a href="#append-tail" class="headerlink" title="append tail"></a>append tail</h3><p><strong>Note:</strong> Pay attention to edge cases.<br>For example, <code>p-&gt;var</code>. Check if <code>p == NULL</code> in some cases.</p>
+<pre><code class="lang-sequence">title: Append Logic
+participant ...
+participant tail
+participant new_node
+participant NULL
+
+note left of ... : when the list is not empty
+note over new_node: 1.new_node-&gt;val = x
+...-&gt;tail:
+new_node-&gt;NULL:2. new_node-&gt;next\n=NULL
+tail-&gt;new_node:3. tail-&gt;next=new_node
+tail-&gt;NULL: X
+</code></pre>
+<pre><code class="lang-sequence">participant new_node
+participant NULL
+new_node-&gt;NULL:new_node-&gt;next=NULL;
+note over new_node:head=new_node;
+note left of new_node: when the list is empty
+</code></pre>
+<h3 id="remove"><a href="#remove" class="headerlink" title="remove"></a>remove</h3><pre><code class="lang-sequence">title: Remove Logic
+participant prev_node
+participant current_node
+participant next_node
+
+prev_node -&gt; next_node:1. prev_node-&gt;next=current_node-&gt;next
+note over current_node: 2. free(current_node)
+note left of prev_node: when prev_node != NULL\n i.e. current_node != head
+</code></pre>
+<pre><code class="lang-sequence">participant head
+participant node2
+participant ...
+head-&gt;node2:
+node2-&gt;...:
+note left of head: when current_node == head
+note over head:1. free(head)
+note over node2: 2. head=node2
+</code></pre>
+<h3 id="clear-all"><a href="#clear-all" class="headerlink" title="clear all"></a>clear all</h3><pre><code class="lang-c">void clear_list(List *list){
+    for(Node *q= NULL, *p=list-&gt;head;p;p=q){
+        q=p-&gt;next;
+        free(p);
+    }
+}
+</code></pre>
+<pre><code class="lang-sequence">title:Clear Logic
+participant head
+participant node1
+participant ...
+
+note right of ...: 过河拆桥
+note left of head: 0. q=NULL
+head-&gt;node1:
+node1-&gt;...:
+note over head: 1. p=list-&gt;head
+note over node1: 2.q=p-&gt;next
+note over head: 3. free(p),p=q &amp; loop...
+</code></pre>
+<h2 id="Sentinel-node"><a href="#Sentinel-node" class="headerlink" title="Sentinel node"></a>Sentinel node</h2><ul>
+<li>A dummy head/tail (no payload) to make code smooth</li>
+</ul>
+<h2 id="More-lists"><a href="#More-lists" class="headerlink" title="More lists"></a>More lists</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">List</th>
+<th style="text-align:center">Single</th>
+<th style="text-align:center">Double</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Head</td>
+<td style="text-align:center">Single</td>
+<td style="text-align:center">Double</td>
+</tr>
+<tr>
+<td style="text-align:center">Sentinel</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">N</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="第三次课"><a href="#第三次课" class="headerlink" title="第三次课"></a>第三次课</h1><h2 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h2><h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><ul>
+<li>定义在函数外面，与函数无关</li>
+<li>生存期：全局</li>
+<li>作用域：全局</li>
+</ul>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><pre><code class="lang-c">...
+int g; //默认初始化为0
+int t = c; 
+//c必须是编译时的字面量（compile-time constant),函数的返回值就不能赋值给t
+
+void f(){
+    int k;
+    //k未初始化，值是不确定的
+}
+...
+</code></pre>
+<h3 id="函数内与全局变量同名的变量"><a href="#函数内与全局变量同名的变量" class="headerlink" title="函数内与全局变量同名的变量"></a>函数内与全局变量同名的变量</h3><pre><code class="lang-C">int g = 10;
+void f(){
+    int g = 12;
+    printf(g); //12
+    g+=10;  //22
+}
+int main(){
+    printf(g); //10
+    f();
+    printf(g); //10 
+}
+</code></pre>
+<h3 id="static类型：静态本地变量"><a href="#static类型：静态本地变量" class="headerlink" title="static类型：静态本地变量"></a><code>static</code>类型：静态本地变量</h3><ul>
+<li>存储是全局的</li>
+<li>访问是局部的（可以通过函数传回其指针，然后进行修改）<br>$\longrightarrow$作用域限制在函数内部的全局变量<br>```C<br>int g = 10;</li>
+</ul>
+<p>void f(){<br>    int k;<br>    static int gg = 12;<br>    printf(gg,k);<br>    printf(&amp;g,&amp;gg,&amp;k);<br>    //可以发现，在内存中，gg和g存储在同一区域<br>    gg += 10;<br>    k += 10;<br>}</p>
+<pre><code>注意： **使用全局变量和静态本地变量的函数是线程不安全的**
+不要使用全局变量来在函数间传递参数和结果；尽量避免使用全局变量
+
+## 多个`.c`文件
+
+* `main()`代码太长--&gt;分成几个函数
+* 源代码太长--&gt;分成几个文件
+
+```shell
+cd $SRC
+# 只编译，不链接，得到a.o,b.o
+gcc -c a.c b.c
+# 链接*.o文件，得到可执行文件out
+gcc a.o b.o -o out
+</code></pre><h3 id="编译和链接的过程"><a href="#编译和链接的过程" class="headerlink" title="编译和链接的过程"></a>编译和链接的过程</h3><p><code>IDE</code>中的“构建”：</p>
+<ul>
+<li>编译预处理</li>
+<li>编译成汇编代码</li>
+<li>汇编成目标代码</li>
+<li>链接成可执行程序</li>
+</ul>
+<pre><code class="lang-bash">cd $SRC
+# 查看编译中间过程的文件
+gcc --save-temps a.c
+</code></pre>
+<p><code>a.c</code>—&gt;<code>a.i</code>—&gt;<code>a.s</code>—&gt;<code>a.o</code>—&gt;<code>a.out</code></p>
+<h3 id="编译单元-Compile-Unit"><a href="#编译单元-Compile-Unit" class="headerlink" title="编译单元 Compile Unit"></a>编译单元 Compile Unit</h3><ul>
+<li>一个<code>.c</code>是一个编译单元</li>
+<li>每次编译<strong>只处理一个编译单元</strong>，不会打开其他文件来参考/检查</li>
+</ul>
+<h2 id="头文件-Header-Files"><a href="#头文件-Header-Files" class="headerlink" title="头文件 Header Files"></a>头文件 Header Files</h2><h3 id="函数原型"><a href="#函数原型" class="headerlink" title="函数原型"></a>函数原型</h3><ul>
+<li>如果不给函数原型：编译器猜测返回<code>int</code>（可能有warning）。即便实际函数并非如此，编译也不会报错，但执行时很可能出现问题。</li>
+<li>在头文件中存放函数原型</li>
+</ul>
+<h3 id="一种编译预处理指令-include"><a href="#一种编译预处理指令-include" class="headerlink" title="一种编译预处理指令 #include"></a>一种编译预处理指令 <code>#include</code></h3><ul>
+<li>在编译之前就处理</li>
+<li>将对应文件插入到原位置.(可观察<code>*.i</code>文件)</li>
+<li><code>#include &lt;header.h&gt;</code>：编译器在指定目录中寻找</li>
+<li><code>#include &quot;header.h&quot;</code>：编译器先在当前目录寻找，如果没有再到指定目录寻找</li>
+<li>环境变量和编译器命令行参数可以指定寻找头文件的目录</li>
+<li>并不是用来引入库</li>
+</ul>
+<p>注意：<strong>一个<code>*.h</code>有一个对应的<code>*.c</code>；定义函数和使用函数的地方都要<code>#include</code>，以检查类型是否冲突</strong></p>
+<h3 id="不对外公开的函数"><a href="#不对外公开的函数" class="headerlink" title="不对外公开的函数"></a>不对外公开的函数</h3><ul>
+<li>函数前加<code>static</code>,只能在所在的编译单元中被使用</li>
+</ul>
+<h3 id="变量的声明"><a href="#变量的声明" class="headerlink" title="变量的声明"></a>变量的声明</h3><pre><code class="lang-c">int i; //变量的定义
+
+extern int g; //变量的声明
+</code></pre>
+<h4 id="声明：不产生代码"><a href="#声明：不产生代码" class="headerlink" title="声明：不产生代码"></a>声明：不产生代码</h4><ul>
+<li>函数原型  <code>... f(...);</code></li>
+<li>变量声明  <code>extern  ... ...;</code></li>
+<li>结构声明  <code>struct ... { ... };</code></li>
+<li>宏声明    <code>#define ... ...</code> （范围：当前编译单元）</li>
+<li>枚举声明  <code>enum ... { ... };</code></li>
+<li>类型声明  <code>typedef ... ...;</code></li>
+<li><code>inline</code>函数<h4 id="定义：产生代码"><a href="#定义：产生代码" class="headerlink" title="定义：产生代码"></a>定义：产生代码</h4></li>
+<li>函数  <code>... f(...){...}</code></li>
+<li>变量  <code>int ...;</code></li>
+</ul>
+<p>注意：<strong>只有声明可以被放在头文件中</strong>（规则），否则会造成一个项目中多个编译单元有重名的实体。</p>
+<h3 id="标准头文件结构"><a href="#标准头文件结构" class="headerlink" title="标准头文件结构"></a>标准头文件结构</h3><ul>
+<li>保证在一个在一个编译单元中只被<code>#include</code>一次<br>```c <h1 id="ifndef-HEADER-H"><a href="#ifndef-HEADER-H" class="headerlink" title="ifndef HEADER_H"></a>ifndef <em>HEADER_H</em></h1><h1 id="define-HEADER-H"><a href="#define-HEADER-H" class="headerlink" title="define HEADER_H"></a>define <em>HEADER_H</em></h1></li>
+</ul>
+<p>…</p>
+<h1 id="endif"><a href="#endif" class="headerlink" title="endif"></a>endif</h1><pre><code>注意：**不要在一个头文件中`#include`其他头文件**
+```c
+#ifndef _LIST_H
+#define _LIST_H
+
+#include &quot;node.h&quot;  //这样就暴露了Node的接口，修改了Node就可能要修改main，要重复编译
+
+typedef struct _list{
+    struct Node* head;
+    struct Node* tail;
+}List;
+</code></pre><h4 id="前向声明"><a href="#前向声明" class="headerlink" title="前向声明"></a>前向声明</h4><pre><code class="lang-c">#ifndef _LIST_H
+#define _LIST_H
+
+struct Node; //这里不需要知道Node是怎样的，只需要告诉编译器Node是一个结构。main函数与Node无关
+
+typedef struct _list{
+    struct Node* head;
+    struct Node* tail;
+}List;
+
+#endif
+</code></pre>
+<h1 id="第四次课-交互图形程序"><a href="#第四次课-交互图形程序" class="headerlink" title="第四次课 交互图形程序"></a>第四次课 交互图形程序</h1><h2 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h2><ul>
+<li>每个函数都有一个相应的地址。<pre><code class="lang-c">int main(){
+  printf(&quot;%p\n&quot;,main);
+  return 0;
+}
+</code></pre>
+<h3 id="定义函数指针"><a href="#定义函数指针" class="headerlink" title="定义函数指针"></a>定义函数指针</h3><pre><code class="lang-c">/* 方法1 */
+void (*p_func)(int, int) = NULL;
+/* 方法2 */
+typedef void (*tp_func)(int, int);
+tp_func p_func = NULL;
+</code></pre>
+<h3 id="函数指针的赋值"><a href="#函数指针的赋值" class="headerlink" title="函数指针的赋值"></a>函数指针的赋值</h3><pre><code class="lang-c">void (*p_func)(int, int) = NULL;
+p_func = &amp;func1;
+p_func = func2;
+</code></pre>
+第二种方式也是合法的，编译器会将<code>void ()(int,int)</code>类型转换成<code>void (*)(int,int)</code>类型<h3 id="使用函数指针调用函数"><a href="#使用函数指针调用函数" class="headerlink" title="使用函数指针调用函数"></a>使用函数指针调用函数</h3><pre><code class="lang-c">/* 方法1 */
+int val1 = p_func(1,2);
+/* 方法2 */
+int val2 = (*p_func)(1,2);
+</code></pre>
+<h3 id="将函数指针作为参数传给函数"><a href="#将函数指针作为参数传给函数" class="headerlink" title="将函数指针作为参数传给函数"></a>将函数指针作为参数传给函数</h3><pre><code class="lang-c">int plus(int a,int b){
+  return a+b;
+}
+int minus(int a,int b){
+  return a-b;
+}
+void calc(int a,int b,int (*func)(int,int)){
+  printf(&quot;%d&quot;,(*func)(a,b));
+}
+int main(){
+  calc(1,2,plus);
+  calc(1,2,minus);
+  return 0;
+}
+</code></pre>
+<h3 id="函数指针作为返回类型"><a href="#函数指针作为返回类型" class="headerlink" title="函数指针作为返回类型"></a>函数指针作为返回类型</h3><pre><code class="lang-c">void (* func3(int, int, double ))(int, int)
+{
+  ...
+}
+</code></pre>
+这里的<code>func3</code>以<code>(int,int,double)</code>为参数，返回类型为<code>void (*)(int,int)</code>.</li>
+</ul>
+<h3 id="函数指针数组"><a href="#函数指针数组" class="headerlink" title="函数指针数组"></a>函数指针数组</h3><pre><code class="lang-c">/* 方法1 */
+void (*func_array_1[5])(int, int, double);
+
+/* 方法2 */
+typedef void (*p_func_array)(int, int, double);
+
+p_func_array func_array_2[5];
+</code></pre>
+<h2 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h2><p>回调函数就是一个通过函数指针调用的函数，回调函数不是由该函数的实现方直接调用，而是在特定的事件或条件发生时由另外的一方调用的，用于对该事件或条件进行响应。</p>
+<blockquote>
+<p>Wikipedia:<br>In computer programming, a callback is any executable code that is passed as an argument to other code, which is expected to call back (execute) the argument at a given time. This execution may be immediate as in a synchronous callback, or it might happen at a later time as in an asynchronous callback.<br>Stack Overflow:<br>A “callback” is any function that is called by another function which takes the first function as a parameter.</p>
+</blockquote>
+<p>下面以四则运算为例实现一个简单的回调函数实例。<br>首先创建一个函数指针结构体</p>
+<pre><code class="lang-c">typedef struct _OP {
+    double (*p_add)(double, double); 
+    double (*p_sub)(double, double); 
+    double (*p_mul)(double, double); 
+    double (*p_div)(double, double); 
+} OP;
+</code></pre>
+<p>然后初始化函数指针，</p>
+<pre><code class="lang-c">/* 四则运算函数略 */
+
+void init(OP *q){
+    q-&gt;p_add=ADD;
+    q-&gt;p_sub=SUB;
+    q-&gt;p_mul=MUL;
+    q-&gt;p_div=DIV;
+}
+</code></pre>
+<p>接着创建库函数，</p>
+<pre><code class="lang-c">//需要a，b这两个参数保存回调函数的参数值
+double calc(double a,double b,double (*op_func)(double,double)){
+    return (*op_func)(a,b);
+}
+</code></pre>
+<p>之后就可以利用<code>calc</code>来调用回调函数</p>
+<pre><code class="lang-c">OP *op = (OP *)malloc(sizeof(OP));
+init(op);
+printf(&quot;...&quot;,1.0,2.0,op-&gt;p_add);
+...
+</code></pre>
+<p>在回调中，主程序把回调函数像参数一样传入库函数。这样一来，只要我们改变传进库函数的参数，就可以实现不同的功能，而且不需要修改库函数。回调函数可以用来降低耦合度。</p>
+<h2 id="MVC设计模式"><a href="#MVC设计模式" class="headerlink" title="MVC设计模式"></a>MVC设计模式</h2><div align=center>
+Zhiyuan Pan, Zhejiang University
+</div>
+
+<h1 id="第五次课-递归"><a href="#第五次课-递归" class="headerlink" title="第五次课 递归"></a>第五次课 递归</h1><h2 id="Characteristics"><a href="#Characteristics" class="headerlink" title="Characteristics"></a>Characteristics</h2><ul>
+<li>Recursive: of, relating to, or constituting a procedure that can repeat itself indefinitely</li>
+<li>Recursion: a repeated application of a recursive procedure or definition.(‘recursion’,from late Latin word ‘recurrere’ which means ‘<strong>run back</strong>‘)</li>
+<li>Tactic: divide a problem into sub-problems of the same type as the original (Divide-and-Conquer Method)</li>
+</ul>
+<h2 id="Principles"><a href="#Principles" class="headerlink" title="Principles"></a>Principles</h2><h3 id="Recursive-functions-in-programming"><a href="#Recursive-functions-in-programming" class="headerlink" title="Recursive functions in programming:"></a>Recursive functions in programming:</h3><ul>
+<li>Base case: There must be one or more base cases in recursive functions. In base case, the function produces a result trivially.</li>
+<li>Make progress: The program recurs to get solutions to smaller instances of the same problem. In a well-defined function, the base case must be reached eventually.</li>
+<li>Always believe: Always assume the recursive call works.</li>
+<li>Compound interest rule: Never duplicate work by solving the same instance of a problem in separate recursive calls.</li>
+</ul>
+<h3 id="Recursively-defined-functions-in-mathematics"><a href="#Recursively-defined-functions-in-mathematics" class="headerlink" title="Recursively defined functions in mathematics:"></a>Recursively defined functions in mathematics:</h3><ul>
+<li>Basis step: Specify the value of the function at zero.</li>
+<li>Recursive step: Give the rules for finding its value at an integer from its value at smaller integers.</li>
+</ul>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><h3 id="Factorial"><a href="#Factorial" class="headerlink" title="Factorial"></a>Factorial</h3><p>We can write down function definition or recurrence relationship for this:</p>
+<script type="math/tex; mode=display">n!=\prod_{k=1}^{n}k=n\times (n-1)!</script><script type="math/tex; mode=display">
+f(n)=\begin{cases}
+1 & n=0, \\
+n\times f(n-1) & n>0,n\in\mathbb{N}.
+\end{cases}</script><ul>
+<li>Base case: $0!=1$</li>
+<li>Make Progress：$n\rightarrow n-1 \rightarrow \cdots \rightarrow 0\rightarrow$breaks the chain of recursion</li>
+</ul>
+<pre><code class="lang-c">#include &lt;stdio.h&gt;
+int fac(int n){
+    if(n==0) return 1;
+    else return n*fac(n-1);
+}
+int main(){
+    printf(&quot;Output:%d&quot;,fac(4));
+    return 0;
+}
+</code></pre>
+<pre><code>Output:24
+</code></pre><p>procedure:</p>
+<pre><code class="lang-c">f4           = 4 * f3
+             = 4 * (3 * f2)
+             = 4 * (3 * (2 * f1))
+             = 4 * (3 * (2 * (1 * f0)))
+             = 4 * (3 * (2 * (1 * 1)))
+             = 4 * (3 * (2 * 1))
+             = 4 * (3 * 2)
+             = 4 * 6
+             = 24
+</code></pre>
+<h3 id="Fibonacci-numbers"><a href="#Fibonacci-numbers" class="headerlink" title="Fibonacci numbers"></a>Fibonacci numbers</h3><script type="math/tex; mode=display">
+fib(n)=\begin{cases}
+n & n=0 \lor n=1, \\
+fib(n-1)+fib(n-2) & n>0,n\in\mathbb{N}.
+\end{cases}</script><h3 id="Euclidean-algorithm"><a href="#Euclidean-algorithm" class="headerlink" title="Euclidean algorithm"></a>Euclidean algorithm</h3><script type="math/tex; mode=display">
+gcd(x,y)=\begin{cases}
+ & y=0, \\
+gcd(y,x\mod y)& y >0.
+\end{cases}</script><pre><code class="lang-c">#include &lt;stdio.h&gt;
+
+int gcd( int x, int y );
+
+int main(){
+    int x=36, y=8;
+    printf(&quot;Output: %d\n&quot;, gcd(x, y));
+    return 0;
+}
+
+int gcd( int x, int y ){
+    if(y==0) return x;
+    if(y&gt;x){
+        int t=y;y=x;x=t;
+    }
+    return gcd(y,x%y);
+}
+</code></pre>
+<pre><code>Output: 4
+</code></pre><h3 id="Newton’s-method"><a href="#Newton’s-method" class="headerlink" title="Newton’s method"></a>Newton’s method</h3><p>Let the given number be $b$ and let $x<em>0$ be a rough guess of the square root of $b$. Newton’s method suggests that a better guess, a new $x</em>{n+1}(n=0,1,\cdots)$ can be computed as follows:</p>
+<script type="math/tex; mode=display">x_{n+1}=\dfrac{1}{2}\left(x_n+\dfrac{b}{x_n}\right)</script><p>One can start with a number $x<em>0$ as a rough guess and compute $x</em>{n+1}$. From $x<em>{n+1}$, one can generate a even better guess, until two successive guesses are very close, for instance, given $\varepsilon &gt;0$, $|x</em>{n+1}-x_{n}|&lt;\varepsilon$. Then either one could be considered as the square root of $b$.</p>
+<!-- <div align=center>
+<img data-sizes="auto" data-src="nm.jpg" width="20%" height="20%" alt="diagram" class="lazyload">
+</div> -->
+<p>It is actually an iterative algorithm, but it can be implemented in recursive functions.</p>
+<pre><code class="lang-c">//Using Newton&#39;s method to approximate square roots.
+#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+double f(double x, double guess, double eps);
+
+int main()
+{
+    double x=3.0, eps=1e-3;
+    printf(&quot;Output:\nsqrt(x)=%.3f\n&quot;, f(x, 1.0, eps));
+  return 0;
+}
+
+double f(double x, double guess, double eps){
+    double t=(guess+x/guess)/2.0;
+    if(fabs(guess*guess-x)&lt;eps){
+        return guess;
+    }else {
+        return f(x,t,eps);
+    }
+}
+</code></pre>
+<pre><code>Output:
+sqrt(x)=1.732
+</code></pre><h3 id="Towers-of-Hanoi"><a href="#Towers-of-Hanoi" class="headerlink" title="Towers of Hanoi"></a>Towers of Hanoi</h3><h4 id="Number-of-steps"><a href="#Number-of-steps" class="headerlink" title="Number of steps"></a>Number of steps</h4><script type="math/tex; mode=display">
+hanoi(n)=
+\begin{cases}
+1 & n=1, \\
+2\times hanoi(n-1)+1 & n>1.
+\end{cases}</script><p><strong>Proof</strong></p>
+<p>Let $H_n$ denote the number of moves needed to solve the puzzle with $n$ disks.</p>
+<p>Begin with $n$ disks on peg $1$(source peg), we can transfer the top $n-1$ disks, following the rules of the puzzle, to peg $2$(auxilary peg) using $H_{n-1}$ moves.</p>
+<p>After that, we use $1$ move to transfer the largest disk to peg $3$(target peg). Then we transfer the $n-1$ disks from peg 2 to peg 3 using $H_{n-1}$ additional moves. This cannot be done in fewer steps. Hence,</p>
+<script type="math/tex; mode=display">H_n=2H_{n-1}+1</script><p>The initial condition is $H_1=1$ since a single disk can be transferred from peg 1 to peg 3 in one move.</p>
+<h4 id="Explicit-steps"><a href="#Explicit-steps" class="headerlink" title="Explicit steps"></a>Explicit steps</h4><pre><code class="lang-c">#include &lt;stdio.h&gt;
+enum tower{
+    SRC = 0,
+    AUX    ,
+    TAR    ,
+};
+void prtMove(char from,char to){
+    printf(&quot;%c -&gt; %c\n&quot;,from,to);
+}
+void rMove(int n,char src,char aux,char tar){
+    if(n==0){
+        return;
+    }else{
+        rMove(n-1,src,tar,aux);
+        prtMove(src,tar);
+        rMove(n-1,aux,src,tar);
+    }
+}
+int main(){
+    int n=3;
+    char name[3];
+    name[SRC]=&#39;a&#39;;name[AUX]=&#39;b&#39;;name[TAR]=&#39;c&#39;;
+    printf(&quot;Output:\n&quot;);
+    printf(&quot;Hanoi Tower with %d disks\n----------------------\n&quot;,n);
+    rMove(n,name[SRC],name[AUX],name[TAR]);
+    return 0;
+}
+</code></pre>
+<pre><code>Output:
+Hanoi Tower with 3 disks
+----------------------
+a -&gt; c
+a -&gt; b
+c -&gt; b
+a -&gt; c
+b -&gt; a
+b -&gt; c
+a -&gt; c
+</code></pre><h3 id="Recursive-data-structure"><a href="#Recursive-data-structure" class="headerlink" title="Recursive data structure"></a>Recursive data structure</h3><h4 id="Linked-list"><a href="#Linked-list" class="headerlink" title="Linked list"></a>Linked list</h4><pre><code class="lang-c">struct node
+{
+  int data;           // some integer data
+  struct node *next;  // pointer to another struct node
+};
+</code></pre>
+<pre><code class="lang-c">void list_print(struct node *list)
+{
+    if (list != NULL)               // base case
+    {
+       printf (&quot;%d &quot;, list-&gt;data);  // print integer data followed by a space
+       list_print (list-&gt;next);     // recursive call on the next node
+    }
+}
+</code></pre>
+<h2 id="Types"><a href="#Types" class="headerlink" title="Types"></a>Types</h2><h3 id="Tail-recursive-functions"><a href="#Tail-recursive-functions" class="headerlink" title="Tail recursive functions"></a>Tail recursive functions</h3><p>Tail recursion is a special case of recursion where the calling function does no more computation after making a recursive call.</p>
+<p>When we have tail recursion we know that as soon as we return from the recursive call we’re going to immediately return as well, so we can skip the entire chain of recursive functions returning and return straight to the original caller.</p>
+<p>Examples: <code>gcd(x,y)</code></p>
+<p>Examples for normal recursion (non-tail recursion): <code>fac(n),fib(n)</code></p>
+<h3 id="Linear-recursive-functions-and-tree-recursive-functions"><a href="#Linear-recursive-functions-and-tree-recursive-functions" class="headerlink" title="Linear recursive functions and tree recursive functions"></a>Linear recursive functions and tree recursive functions</h3><h4 id="Linear"><a href="#Linear" class="headerlink" title="Linear"></a>Linear</h4><p>If a recursive function calling itself for one time then it’s known as Linear Recursion.<br><!-- <div align=center>
+<img data-sizes="auto" data-src="ln.png" width="20%" height="20%" alt="diagram" class="lazyload">
+</div> --><br>Examples: <code>fib(n),gcd(x,y)</code></p>
+<h4 id="Tree"><a href="#Tree" class="headerlink" title="Tree"></a>Tree</h4><p>Tree Recursion is a phrase to describe when you make a recursive call more than once in your recursive case. Whenever it is called, the recursive calls branch out and form an upside-down tree. </p>
+<p>For example, in function <code>fib(n)</code> which returns the n-th Fibonacci number, there are three parts to consider:</p>
+<ul>
+<li><p>There are two base cases. (<code>fib(0)=0,fib(1)=1</code>)</p>
+</li>
+<li><p>Otherwise, the problem is made smaller by breaking it into two sub-problems. (<code>fib(n)</code> depends on both <code>fib(n-1)</code> and <code>fib(n-2)</code>)</p>
+</li>
+<li><p>Making two recursive calls to those smaller problems gives us the answer to those smaller problems, and adding up those up gives us the answer to the original problem.</p>
+</li>
+</ul>
+<p>Tree recursive procedures typically take exponential time to compute, but sometimes they can be optimized.</p>
+<h2 id="Other-important-things-about-recursion"><a href="#Other-important-things-about-recursion" class="headerlink" title="Other important things about recursion"></a>Other important things about recursion</h2><h3 id="Order"><a href="#Order" class="headerlink" title="Order"></a>Order</h3><ul>
+<li>In the simple case of a function calling itself only once, instructions placed before the recursive call are executed once per recursion before any of the instructions placed after the recursive call. The latter are executed repeatedly after the maximum recursion has been reached</li>
+</ul>
+<h3 id="Recursion-versus-Iteration"><a href="#Recursion-versus-Iteration" class="headerlink" title="Recursion versus Iteration"></a>Recursion versus Iteration</h3><ul>
+<li>Performance Issues versus Expressiveness</li>
+<li>Stack space: recursive algorithms tend to require more stack space than iterative algorithms</li>
+<li>Linear recursion and iteration: <a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/sicp/book/node15.html" target="_blank" rel="noopener">https://mitpress.mit.edu/sites/default/files/sicp/full-text/sicp/book/node15.html</a></li>
+</ul>
+<blockquote>
+<p>In the iterative case, the program variables provide a complete description of the state of the process at any point. If we stopped the computation between steps, all we would need to do to resume the computation is to supply the interpreter with the values of the three program variables.</p>
+<p>Not so with the recursive process. In this case there is some additional ‘hidden’ information, maintained by the interpreter and not contained in the program variables, which indicates ‘where the process is’ in negotiating the chain of deferred operations. The longer the chain, the more information must be maintained.</p>
+</blockquote>
+<ul>
+<li>Iteration can be implemented recursively, for example, Newton’s method. Note that recursive implementation $\ne$ recursive computation.</li>
+</ul>
+<h1 id="第六次课"><a href="#第六次课" class="headerlink" title="第六次课"></a>第六次课</h1><h2 id="Two-important-operations-on-a-list"><a href="#Two-important-operations-on-a-list" class="headerlink" title="Two important operations on a list"></a>Two important operations on a list</h2><ul>
+<li>Searching</li>
+<li>Sorting</li>
+</ul>
+<h2 id="Searching"><a href="#Searching" class="headerlink" title="Searching"></a>Searching</h2><h3 id="Linear-Search"><a href="#Linear-Search" class="headerlink" title="Linear Search"></a>Linear Search</h3><ul>
+<li>Scope of application: any lists</li>
+<li>Key point: iteration</li>
+</ul>
+<pre><code class="lang-c">//@return the index of key in a ; -1 if not found
+int l_search (int key, vector&lt;int&gt;&amp;a) {
+    int ret = -1;
+    for(auto i : a)
+        if(a[i]==key){
+            ret = i; break;
+        }
+    return ret;
+}
+</code></pre>
+<h3 id="Binary-Search"><a href="#Binary-Search" class="headerlink" title="Binary Search"></a>Binary Search</h3><ul>
+<li>Scope of application: <strong>ordered</strong> lists</li>
+<li>Key point: narrowing down the searching scope</li>
+</ul>
+<pre><code class="lang-c">rb_search(key, a, 0, a.size()-1);
+
+//recursive function, assuming a is in ascending order
+//search range: [start,end] 
+int rb_search (int key, int a[], int start, int end) {
+    int ret = -1;
+    int mid = (end - start &gt;&gt; 1) + start; //avoid overflow in large lists
+
+    if(a[mid] == key) ret = mid;
+    else if(a[mid] &lt; key) ret = b_search(key,a,mid+1,end);
+    else ret = b_search(key,a,start,mid-1);
+
+    return ret;
+}
+
+//iterative function, assuming a is in ascending order
+//search range: [start,end]
+int ib_search (int key, int a[], int start, int end) {
+    int ret = -1;
+    while(start&lt;=end){
+        int mid = (end - start &gt;&gt; 1) + start; //avoid overflow in large lists
+        if(a[mid]==key){
+            ret = mid; break;
+        }else if(a[mid]&gt;key)
+            end=mid-1;
+        else
+            start=mid+1;
+    }
+    return ret;
+}
+</code></pre>
+<h3 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h3><h4 id="Refining-segmentation"><a href="#Refining-segmentation" class="headerlink" title="Refining segmentation"></a>Refining segmentation</h4><p>Instead of reducing the interval by half each time, we can divide it into more pieces.</p>
+<pre><code class="lang-c">int tri_search(int a[], int start, int end, int key) {
+    if (start &gt; end)
+        return -1;
+    //avoid overflow
+    int m1 = start + (end - start) / 3;
+    int m2 = end - (end - start) / 3;
+    if (a[m1]==key)
+        return m1;
+    else if (a[m1]&gt;key)
+        return tri_search(a,start,m1-1, key);
+    else {
+        if (a[m2]==key)
+            return m2;
+        else if (a[m2]&gt;key)
+            return tri_search(a,m1+1,m2-1,key);
+        else
+            return tri_search(a,m2+1,end,key);
+    }
+}
+</code></pre>
+<h2 id="Sorting"><a href="#Sorting" class="headerlink" title="Sorting"></a>Sorting</h2><h3 id="Bubble-Sort"><a href="#Bubble-Sort" class="headerlink" title="Bubble Sort"></a>Bubble Sort</h3><p>Different types of bubble sort: ascending or descending order; iterating form the beginning or the end</p>
+<h4 id="Key-point"><a href="#Key-point" class="headerlink" title="Key point"></a>Key point</h4><ul>
+<li>Steps: Compare adjacent elements and swap them if they’re in reverse order</li>
+<li>Target: Move the largest/smallest element to the end/beginning once at a time</li>
+</ul>
+<pre><code class="lang-c">//iterate from the beginning to the end of the list
+for(int i=0;i&lt;n-1;i++){
+    for(int j=0;j&lt;n-i-1;j++){
+        if(a[j]&gt;a[j+1])  swap(a[j],a[j+1]);
+    }
+}
+</code></pre>
+<h3 id="Selection-Sort"><a href="#Selection-Sort" class="headerlink" title="Selection Sort"></a>Selection Sort</h3><h4 id="Key-point-1"><a href="#Key-point-1" class="headerlink" title="Key point"></a>Key point</h4><ul>
+<li>Iterate from the beginning</li>
+<li>Select the largest/smallest element, swap it and the current element</li>
+</ul>
+<pre><code class="lang-c">for(int i=0;i&lt;n-1;i++){
+    int k=i;
+    for(int j=i+1;j&lt;n;j++){
+        if(a[k]&gt;a[j])   k=j; 
+    }
+    if(k!=i)  swap(a[k],a[i]);
+}
+</code></pre>
+<h3 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h3><p>Time(Average): $O(n^2)$</p>
+<h2 id="Optimization-1"><a href="#Optimization-1" class="headerlink" title="Optimization"></a>Optimization</h2><h3 id="Bubble-Sort-1"><a href="#Bubble-Sort-1" class="headerlink" title="Bubble Sort"></a>Bubble Sort</h3><h4 id="Break-earlier"><a href="#Break-earlier" class="headerlink" title="Break earlier"></a>Break earlier</h4><p>Sometimes, after swapping some elements, the list is already well-ordered, but the for-loop still goes on. If we can detect the the status of the list and break the loop at proper time, the program will run faster.</p>
+<p>If no swapping occurs in the inner loop, elements must be well-ordered.</p>
+<pre><code class="lang-c">for(int i=0;i&lt;n-1;i++){
+    bool isSwap=false;
+    for(int j=0;j&lt;n-i-1;j++){
+        if(a[j]&gt;a[j+1]){
+            swap(a[j],a[j+1]);
+            isSwap=true;
+        }
+    }
+    //no swapping --&gt; well-ordered
+    if(!isSwap) break;
+}
+</code></pre>
+<h4 id="Reduce-iteration-times"><a href="#Reduce-iteration-times" class="headerlink" title="Reduce iteration times"></a>Reduce iteration times</h4><p>We find the last position that swapping occurs, and elements after it must be well-ordered.</p>
+<pre><code class="lang-c">//iteration times of the outer loop will not be infected by variable &#39;new&#39;
+//we reduce iteration times of the inner loop using &#39;new&#39;
+for (int i=0;i&lt;n-1;i++){
+    int new=0;
+    for (int j=0;j&lt;n;j++)
+        if (a[j]&gt;a[j+1]){
+            swap(a[j],a[j+1];
+            new=j+1;
+        }
+    n=new;
+    //new==0 --&gt; no swapping --&gt; well-ordered
+    if (n==0)  break;
+}
+</code></pre>
+<h4 id="Two-way-Bubble-Sort"><a href="#Two-way-Bubble-Sort" class="headerlink" title="Two-way Bubble Sort"></a>Two-way Bubble Sort</h4><p>We sort the elements from two directions simultaneously.</p>
+<pre><code class="lang-c">left = 0, right = n-1;
+while(left&lt;right){
+    for(int i=left;i&lt;=right-1;i++){
+        if(a[i]&gt;a[i+1]) swap(a[i], a[i+1]);
+    }
+    right--;
+
+    for(int i=right;i&lt;=left+1;i--){
+        if(a[i-1]&gt;a[i]) swap(a[i-1], a[i]);
+    }
+    left++;
+}
+</code></pre>
+<h3 id="Selection-Sort-1"><a href="#Selection-Sort-1" class="headerlink" title="Selection Sort"></a>Selection Sort</h3><h4 id="Two-way-Selection-Sort"><a href="#Two-way-Selection-Sort" class="headerlink" title="Two-way Selection Sort"></a>Two-way Selection Sort</h4><p>We sort the elements from two directions simultaneously by finding the maximum and minimum element in just one loop.</p>
+<pre><code class="lang-c">left=0, right=n-1;
+while(left&lt;right){
+    int min=left, max=right;
+    for(int i=left;i&lt;=right;i++){
+        if (a[i]&lt;a[min])  min=i;
+        if (a[i]&gt;a[max])  max=i;
+    }
+    swap(a[max], a[right]);
+    //important special case:
+    //after swapping, consider max-element at min-position
+    if (min==right)  min=max;
+    swap(a[min], a[left]);
+    left++, right--;
+}
+</code></pre>
+<h1 id="第七次课"><a href="#第七次课" class="headerlink" title="第七次课"></a>第七次课</h1><h2 id="Insertion-Sort"><a href="#Insertion-Sort" class="headerlink" title="Insertion Sort"></a>Insertion Sort</h2><h3 id="Basic-Idea-1"><a href="#Basic-Idea-1" class="headerlink" title="Basic Idea"></a>Basic Idea</h3><ul>
+<li>Assume there is a sorted segment, then insert unsorted elements.</li>
+<li>Time complexity: $\Theta (n^2)$</li>
+</ul>
+<pre><code class="lang-c">//recursive function
+//sort range:[begin,end]
+void insertion_sort(int a[],int begin,int end){
+    if(begin&lt;end){
+       //sort [begin,end-1]  end -&gt; end-1 -&gt; ... -&gt; begin -&gt; ... end
+       insertion_sort(a,begin,end-1);
+       //[begin,end-1] is sorted
+       for(int i=end;i;i--){
+           if(a[i]&lt;a[i-1]) swap(a[i],a[i-1]);
+           else break;
+       }
+    }
+}
+
+//iterative function
+//sort range:[begin,end]
+void _insertion_sort(int a[],int begin,int end){
+    for(int i=begin;i&lt;end;i++){
+        int temp=a[i];
+        int j=i-1;
+        while(j&gt;=0 &amp;&amp; a[j]&gt;temp){
+            a[j+1]= a[j];
+            j--;
+        }
+        a[j+1]=temp;
+    }
+}
+</code></pre>
+<h3 id="Optimization-Binary-Insertion-Sort"><a href="#Optimization-Binary-Insertion-Sort" class="headerlink" title="Optimization: Binary Insertion Sort"></a>Optimization: Binary Insertion Sort</h3><ul>
+<li>Use binary search to figure out where to insert</li>
+<li>Still $\Theta (n^2)$, but can save time on comparing.</li>
+</ul>
+<h2 id="Question-Merge-two-sorted-arrays"><a href="#Question-Merge-two-sorted-arrays" class="headerlink" title="Question: Merge two sorted arrays"></a>Question: Merge two sorted arrays</h2><pre><code class="lang-c">//merge array a,b
+void merge(int q[], int l, int r) {
+    int k = 0, i = l, j = mid + 1;
+    while (i &lt;= mid &amp;&amp; j &lt;= r)
+        if (q[i] &lt;= q[j]) tmp[k ++ ] = q[i ++ ];
+        else tmp[k ++ ] = q[j ++ ];
+    while (i &lt;= mid) tmp[k ++ ] = q[i ++ ];
+    while (j &lt;= r) tmp[k ++ ] = q[j ++ ];
+    for (i = l, j = 0; i &lt;= r; i ++, j ++ ) q[i] = tmp[j];
+}
+</code></pre>
+<h2 id="Merge-Sort"><a href="#Merge-Sort" class="headerlink" title="Merge Sort"></a>Merge Sort</h2><h3 id="Basic-Idea-2"><a href="#Basic-Idea-2" class="headerlink" title="Basic Idea"></a>Basic Idea</h3><ul>
+<li>Divide and conquer strategy</li>
+<li>Key point: merge two sorted arrays</li>
+<li>Time complexity:$\Theta (n\log n)$</li>
+</ul>
+<h2 id="Top-down"><a href="#Top-down" class="headerlink" title="Top down"></a>Top down</h2><ul>
+<li>Divide the unsorted list into sublists</li>
+<li>Sort these sublists</li>
+<li>Repeatedly merge sublists</li>
+</ul>
+<pre><code class="lang-c">void merge_sort(int a[],int l,int r){
+    if(l &gt;= r) return;
+    int mid = l + ((r - l) &gt;&gt; 1);
+
+    merge_sort(a,l, mid);
+    merge_sort(a,mid + 1, r);
+
+    merge(a,l,r,mid);
+}
+</code></pre>
+<h3 id="Bottom-up"><a href="#Bottom-up" class="headerlink" title="Bottom up"></a>Bottom up</h3><pre><code class="lang-c">int a[N];
+
+void up_merge_sort(int a[],int n){
+    for(int width = 1; width &lt; n; width *= 2){
+        //Merge two arrays with length &#39;width&#39;
+        up_merge(...);
+    }
+}
+</code></pre>
+<h2 id="Quick-Sort"><a href="#Quick-Sort" class="headerlink" title="Quick Sort"></a>Quick Sort</h2><h3 id="Basic-Idea-3"><a href="#Basic-Idea-3" class="headerlink" title="Basic Idea"></a>Basic Idea</h3><ul>
+<li>Yet another example of divide and conquer strategy</li>
+<li>Key Point: Choose a pivot, then move <code>a[i]</code> to its left if <code>a[i] &lt; pivot</code>, to its right if <code>a[i] &gt; pivot</code></li>
+<li>Time complexity: $\Theta (n\log n)$ on average</li>
+</ul>
+<h3 id="Partition"><a href="#Partition" class="headerlink" title="Partition"></a>Partition</h3><ul>
+<li>Lomuto partition scheme: <code>pivot = a[len-1]</code></li>
+<li>Hoare partition scheme</li>
+<li>Other choices</li>
+</ul>
+<h3 id="How-to-choice-a-better-pivot"><a href="#How-to-choice-a-better-pivot" class="headerlink" title="How to choice a better pivot"></a>How to choice a better pivot</h3><ul>
+<li>Ideal pivot can partition array into even halves</li>
+<li>Randomly choose one is a good idea</li>
+</ul>
+<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><pre><code class="lang-c">void quick_sort(int q[], int l, int r){
+    if (l &gt;= r) return;
+    int i = l - 1, j = r + 1;
+    int pivot = select_pivot(q,l,r); //choose the pivot as you want
+    while (i &lt; j){
+        do i ++ ; while (q[i] &lt; pivot);
+        do j -- ; while (q[j] &gt; pivot);
+        if (i &lt; j) swap(q[i], q[j]);
+    }
+    quick_sort(q, l, j);
+    quick_sort(q, j + 1, r);
+}
+</code></pre>
+<h3 id="Use-qsort-in-stdlib-h"><a href="#Use-qsort-in-stdlib-h" class="headerlink" title="Use qsort in stdlib.h"></a>Use <code>qsort</code> in <code>stdlib.h</code></h3><p><code>void qsort(void *base, size_t nel, size_t width, int (*compar)(const void *, const void *));</code></p>
+<p><em>After class…</em></p>
+<h2 id="比较排序算法的速度"><a href="#比较排序算法的速度" class="headerlink" title="比较排序算法的速度"></a>比较排序算法的速度</h2><ul>
+<li><code>run.sh</code>编译运行C程序</li>
+<li>程序1生成随机数</li>
+<li>程序2读取随机数进行排序，并计算排序时间</li>
+<li>程序3验证排序是否有效</li>
+<li>得到结果`result.txt</li>
+</ul>
+<p><code>run.sh</code>:</p>
+<pre><code class="lang-bash">#! /bin/bash
+rm -f *.txt
+rm -f *.out
+
+echo &quot;Test:&quot; &gt;&gt; result.txt
+echo &quot;Mode 1-bubble 2-selection 3-insertion 4-merge 5-quicksort 6-library-quicksort&quot; &gt;&gt; result.txt
+i=10
+while(($i&lt;1000));
+do 
+    gcc data.c -o create.out -DDATA_NUM=$((i*1000)) -w
+    ./create.out
+    for((j=1;j&lt;=6;j++));
+    do
+    gcc sort.c -o  run.out -DDATA_NUM=$((i*1000)) -DMODE=${j} -w
+    echo -e &quot;$((i*1000)) ${j} \c&quot; &gt;&gt; result.txt
+    ./run.out &gt;&gt; result.txt
+    # gcc verify.c  -o verify.out -w
+    # ./verify.out &gt;&gt; result.txt
+    done
+    i=`expr $i + 10`
+done
+</code></pre>
+<h1 id="第八次课"><a href="#第八次课" class="headerlink" title="第八次课"></a>第八次课</h1><h2 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h2><ul>
+<li>程序执行速度可能与不同的测试数据有关</li>
+<li>当数据规模增大时，有些算法性能会大幅下降</li>
+</ul>
+<h3 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h3><ul>
+<li>$N$表示输入数据的规模</li>
+<li>研究程序运行时间与$N$的关系</li>
+</ul>
+<p><strong>以选择排序为例:</strong></p>
+<p>排好第$1$个位置的元素需要$N$次循环，第$2$个位置的元素需要$N-1$次循环，以此类推。算法运行时间大约与$\displaystyle \sum^N_{k=0}k=\dfrac{n^2+n}{2}$成正比。<br>除了循环次数之外，循环内部的代码也会影响运行时间，影响基本上是线性的，即$T(n)=tf(n)$,很多时候降低$f(n)$的复杂度级别能更好地优化算法。</p>
+<h3 id="Big-O-Notation"><a href="#Big-O-Notation" class="headerlink" title="Big-O Notation"></a>Big-O Notation</h3><p>$\exists M,x_0&gt;0,\forall x&gt;x_0, |f(x)|\le M|g(x)|$,即$f(x)=O(g(x))$.常用大O表示法表示时间复杂度。</p>
+<p>常见：$O(\log n),O(n),O(n\log n),O(n^k)$</p>
+<h2 id="测量程序运行时间"><a href="#测量程序运行时间" class="headerlink" title="测量程序运行时间"></a>测量程序运行时间</h2><ul>
+<li><code>time( )</code></li>
+<li><code>gettimeofday( )</code></li>
+<li><code>time + command</code> in <code>Unix</code> OS</li>
+<li>Not accurate</li>
+</ul>
+<h2 id="早期程序"><a href="#早期程序" class="headerlink" title="早期程序"></a>早期程序</h2><ul>
+<li>程序：就是一连串机器指令</li>
+<li>控制结构：跳转 —&gt; 流程图可以很好地表达早期程序，但不适合表示现在的程序</li>
+</ul>
+<h2 id="结构化程序设计"><a href="#结构化程序设计" class="headerlink" title="结构化程序设计"></a>结构化程序设计</h2><ul>
+<li>以控制结构为单位，单一出入口（慎用<code>goto</code>!),能顺序阅读程序文本</li>
+<li>程序的静态描述与控制流程建立对应</li>
+</ul>
+<h3 id="表达式和语句的区别"><a href="#表达式和语句的区别" class="headerlink" title="表达式和语句的区别"></a>表达式和语句的区别</h3><ul>
+<li>表达式会产生一个值，而语句不会。</li>
+<li>表达式可以嵌套在别的表达式中，但语句不行。语句只能独立出现。</li>
+</ul>
+<h2 id="内存分配方式"><a href="#内存分配方式" class="headerlink" title="内存分配方式"></a>内存分配方式</h2><ul>
+<li>全局数据区：内存中位于较低位置;global,static global/local</li>
+<li>堆：大约中间位置;allocated;dynamic</li>
+<li>栈：较高位置;local;auto-dynamic</li>
+</ul>
+<p><strong><code>static</code>:</strong></p>
+<ul>
+<li><code>static</code> in static global: access control</li>
+<li><code>static</code> in static local: storage; 存储是全局的，访问是局部的</li>
+</ul>
+
+  </article>
+
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    
+      
+  <div class="nexmoe-post-copyright">
+    <strong>Author：</strong>Zhiyuan Pan<br>
+    <strong>Link：</strong><a href="https://pan2013e.github.io/posts/adc/" title="https:&#x2F;&#x2F;pan2013e.github.io&#x2F;posts&#x2F;adc&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;pan2013e.github.io&#x2F;posts&#x2F;adc&#x2F;</a><br>
+    
+      <strong>Copyright:</strong> Licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> agreement.
+    
+  </div>
+
+
+    
+    <!-- <section class="nexmoe-comment">
+    <div class="valine"></div>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.9/dist/Valine.min.js'></script>
+<script>
+    // 使用方法 https://valine.js.org/quickstart.html
+    new Valine({
+        el: '.valine',
+        appId: '',
+        appKey: ''
+    })
+</script>
+</section> -->
+  </div>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!--<script src="/js/app.js?v=1702888716313"></script>-->
+
+
+    <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+
+
+  
+
+
+
+
+
+</body>
+
+</html>
