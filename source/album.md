@@ -22,9 +22,6 @@ permalink: /albums/
         <div style="display:inline-block;margin:15px;">
             <img src="https://live.staticflickr.com/65535/53402933764_316eb61973_n_d.jpg"/>
         </div>
-        <div style="display:inline-block;margin:15px;">
-            <img src="https://live.staticflickr.com/65535/53402608061_5b8ea633d4_n_d.jpg"/>
-        </div>
         <div>
             <a href="/albums/1">Read More...</a>
         </div>

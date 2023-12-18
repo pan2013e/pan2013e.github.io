@@ -38,4 +38,4 @@ Zhejiang University, Hangzhou, China
 
 **Zhiyuan Pan**, Xing Hu, Xin Xia, Xian Zhan, David Lo, Xiaohu Yang. "PPT4J: Patch Presence Test for Java Binaries"
 46th International Conference on Software Engineering (ICSE 2024), Accepted as a Full Paper
-[\[Post\]]() [\[Code\]]() [\[Preprint\]]()
+[\[Code\]](https://github.com/pan2013e/ppt4j) [\[PDF\]](/publications/icse24)
