@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  
+  <title>LaTeX在Hexo中的实现 - Zhiyuan Pan</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+  <link rel="shortcut icon" href="https://s2.loli.net/2023/12/17/6inQ3lWbw9fT4GI.png" type="image/png" />
+  <meta name="description" content="为了支持更多的LaTeX功能，我更换了Hexo自带的Mathjax组件，使用latex.js。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LaTeX在Hexo中的实现">
+<meta property="og:url" content="https://pan2013e.github.io/posts/texjs/">
+<meta property="og:site_name" content="Zhiyuan Pan">
+<meta property="og:description" content="为了支持更多的LaTeX功能，我更换了Hexo自带的Mathjax组件，使用latex.js。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-05-14T11:00:00.000Z">
+<meta property="article:modified_time" content="2020-05-20T09:39:00.000Z">
+<meta property="article:author" content="Zhiyuan Pan">
+<meta property="article:tag" content="LaTeX">
+<meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
+  
+  <!--<link rel="stylesheet" href="/css/style.css?v=1730220750200">-->
+
+  
+  <style>
+    @media screen and (min-width:1024px) { 
+      #nexmoe-content {
+        position: absolute;
+        margin-right: 40px;
+        right: 0;
+        width: calc(100% - 300px);
+      }
+    }
+  </style>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url()"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="Zhiyuan Pan" class="mdui-btn mdui-btn-icon"><img src="https://i.loli.net/2020/05/20/WRDFXA6Gd7UJx2y.png" alt="Zhiyuan Pan"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer" style="left: 0;">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Zhiyuan Pan">
+            <img src="https://i.loli.net/2020/05/20/WRDFXA6Gd7UJx2y.png" alt="Zhiyuan Pan" alt="Zhiyuan Pan">
+        </a>
+    </div>
+    <!-- <div class="nexmoe-count">
+        <div><span>Articles</span>8</div>
+        <div><span>Tags</span>6</div>
+        <div><span>Categories</span>3</div>
+    </div> -->
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="Home">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                Home
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/publications" title="Publications">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                Publications
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/photography" title="Photography">
+            <i class="mdui-list-item-icon nexmoefont icon-appstore-fill"></i>
+            <div class="mdui-list-item-content">
+                Photography
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title" style="padding-top: 12px;padding-bottom: 0px;">Social Media</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://github.com/pan2013e/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a><a class="mdui-ripple" href="mailto:zy_pan@zju.edu.cn" target="_blank" mdui-tooltip="{content: 'E-mail'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-mail-fill"></i>
+        </a><a class="mdui-ripple" href="https://space.bilibili.com/154366785" target="_blank" mdui-tooltip="{content: 'BiliBili'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a>
+    </div>
+</div>
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2024 Zhiyuan Pan<br />
+    </div>
+</div><!-- .nexmoe-drawer -->
+
+<!--
+<div class="nexmoe-copyright">
+    &copy; 2024 Zhiyuan Pan
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+</div>
+-->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+  <!-- 
+      <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
+          <img data-src="" data-sizes="auto" alt="LaTeX在Hexo中的实现" class="lazyload"> -->
+          <h1>LaTeX在Hexo中的实现</h1>
+      <!-- </div> -->
+  <!--  -->
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a style="padding: 8px 10px;"><i class="nexmoefont icon-calendar-fill"></i>2020-5-14</a>
+    <a style="padding: 8px 10px;"><i class="nexmoefont icon-areachart"></i>540 words</a>
+    <!-- <a><i class="nexmoefont icon-time-circle-fill"></i> 3 分钟</a> -->
+</div>
+
+  <div class="nexmoe-post-right">
+    
+      <div class="nexmoe-fixed">
+        <div class="nexmoe-valign">
+            <div class="nexmoe-toc">
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#latex-js"><span class="toc-number">1.</span> <span class="toc-text">latex.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用效果"><span class="toc-number">2.</span> <span class="toc-text">使用效果</span></a></li></ol>
+            </div>
+        </div>
+      </div>
+    
+  </div>
+
+  <article>
+    <script type="text/javascript"src="https://i.upmath.me/latex.js "></script>
+
+<p>为了支持更多的LaTeX功能，我更换了Hexo自带的Mathjax组件，使用<code>latex.js</code>。<br><a id="more"></a></p>
+<h2 id="latex-js"><a href="#latex-js" class="headerlink" title="latex.js"></a>latex.js</h2><p>原理和源代码可查看这个GitHub repo：<a href="https://github.com/parpalak/upmath.me" target="_blank" rel="noopener">upmath.me</a></p>
+<p>作者：Roman Parpalak</p>
+<h2 id="使用效果"><a href="#使用效果" class="headerlink" title="使用效果"></a>使用效果</h2><p>The editor converts LaTeX equations in double-dollars: </p>
+ <center> $$ ax^2+bx+c=0 $$ </center> .
+
+ All equations are rendered as block equations. If you need inline ones, you can add the prefix `\inline`: $$ \inline p={1\over q} $$  . But it is a good practice to place big equations on separate lines:
+
+ $$ x_{1,2} = {-b\pm\sqrt{b^2 - 4ac} \over 2a}. $$  
+<p>In this case the LaTeX syntax will be highlighted in the source code. You can even add equation numbers (unfortunately there is no automatic numbering and refs support):</p>
+ $$ |\vec{A}|=\sqrt{A_x^2 + A_y^2 + A_z^2}. $$   
+<p>It is possible to write Cyrillic symbols in <code>\text</code> command:  $$ Q_\text{плавления}>0 $$  .</p>
+<p>One can use matrices:</p>
+ $$ T^{\mu\nu}=\begin{pmatrix}
+\varepsilon&0&0&0\\
+0&\varepsilon/3&0&0\\
+0&0&\varepsilon/3&0\\
+0&0&0&\varepsilon/3
+\end{pmatrix}, $$  
+<p>integrals:</p>
+ $$ P_\omega={n_\omega\over 2}\hbar\omega\,{1+R\over 1-v^2}\int\limits_{-1}^{1}dx\,(x-v)|x-v|, $$  
+<p>cool tikz-pictures:<br>$$ 
+\usetikzlibrary{decorations.pathmorphing}
+\begin{tikzpicture}[line width=0.2mm,scale=1.0545]\small
+\tikzset{>=stealth}
+\tikzset{snake it/.style={->,semithick,
+decoration={snake,amplitude=.3mm,segment length=2.5mm,post length=0.9mm},decorate}}
+\def\h{3}
+\def\d{0.2}
+\def\ww{1.4}
+\def\w{1+\ww}
+\def\p{1.5}
+\def\r{0.7}
+\coordinate[label=below:$A_1$] (A1) at (\ww,\p);
+\coordinate[label=above:$B_1$] (B1) at (\ww,\p+\h);
+\coordinate[label=below:$A_2$] (A2) at (\w,\p);
+\coordinate[label=above:$B_2$] (B2) at (\w,\p+\h);
+\coordinate[label=left:$C$] (C1) at (0,0);
+\coordinate[label=left:$D$] (D) at (0,\h);
+\draw[fill=blue!14](A2)--(B2)-- ++(\d,0)-- ++(0,-\h)--cycle;
+\draw[gray,thin](C1)-- +(\w+\d,0);
+\draw[dashed,gray,fill=blue!5](A1)-- (B1)-- ++(\d,0)-- ++(0,-\h)-- cycle;
+\draw[dashed,line width=0.14mm](A1)--(C1)--(D)--(B1);
+\draw[snake it](C1)--(A2) node[pos=0.6,below] {$c\Delta t$};
+\draw[->,semithick](\ww,\p+0.44*\h)-- +(\w-\ww,0) node[pos=0.6,above] {$v\Delta t$};
+\draw[snake it](D)--(B2);
+\draw[thin](\r,0) arc (0:atan2(\p,\w):\r) node[midway,right,yshift=0.06cm] {$\theta$};
+\draw[opacity=0](-0.40,-0.14)-- ++(0,5.06);
+\end{tikzpicture}$$
+</p>
+<p>plots:</p>
+$$
+\begin{tikzpicture}[scale=1.0544]\small
+\begin{axis}[axis line style=gray,
+	samples=120,
+	width=9.0cm,height=6.4cm,
+	xmin=-1.5, xmax=1.5,
+	ymin=0, ymax=1.8,
+	restrict y to domain=-0.2:2,
+	ytick={1},
+	xtick={-1,1},
+	axis equal,
+	axis x line=center,
+	axis y line=center,
+	xlabel=$x$,ylabel=$y$]
+\addplot[red,domain=-2:1,semithick]{exp(x)};
+\addplot[black]{x+1};
+\addplot[] coordinates {(1,1.5)} node{$y=x+1$};
+\addplot[red] coordinates {(-1,0.6)} node{$y=e^x$};
+\path (axis cs:0,0) node [anchor=north west,yshift=-0.07cm] {0};
+\end{axis}
+\end{tikzpicture}$$
+
+<p>and <a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics" target="_blank" rel="noopener">the rest of LaTeX features</a>.</p>
+
+  </article>
+
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+    
+        <a class="nexmoefont icon-tag-fill -link" href="/tags/LaTeX/" rel="tag">LaTeX</a>
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    
+      
+  <div class="nexmoe-post-copyright">
+    <strong>Author：</strong>Zhiyuan Pan<br>
+    <strong>Link：</strong><a href="https://pan2013e.github.io/posts/texjs/" title="https:&#x2F;&#x2F;pan2013e.github.io&#x2F;posts&#x2F;texjs&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;pan2013e.github.io&#x2F;posts&#x2F;texjs&#x2F;</a><br>
+    
+      <strong>Copyright:</strong> Licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> agreement.
+    
+  </div>
+
+
+    
+    <!-- <section class="nexmoe-comment">
+    <div class="valine"></div>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.9/dist/Valine.min.js'></script>
+<script>
+    // 使用方法 https://valine.js.org/quickstart.html
+    new Valine({
+        el: '.valine',
+        appId: '',
+        appKey: ''
+    })
+</script>
+</section> -->
+  </div>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!--<script src="/js/app.js?v=1730220750201"></script>-->
+
+
+    <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+
+
+  
+
+
+
+
+
+</body>
+
+</html>
