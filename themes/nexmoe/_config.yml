@@ -33,18 +33,18 @@ menu:
   Home: 
     - /
     - icon-home
-  Blogs:
-    - /posts
-    - icon-rss
-  Albums:
-    - /albums
+  Publications:
+    - /publications
+    - icon-unorderedlist
+  Photography:
+    - /photography
     - icon-appstore-fill
 
 widgets:
 # - search
 - social
 # - category
-- tagcloud
+# - tagcloud
 # - archive
 # - recent_posts
 
@@ -59,6 +59,11 @@ social:
   E-mail:
     - mailto:zy_pan@zju.edu.cn
     - icon-mail-fill
+    - rgb(25, 23, 23)
+    - rgba(25, 23, 23, .15)
+  BiliBili:
+    - https://space.bilibili.com/154366785
+    - icon-bilibili
     - rgb(25, 23, 23)
     - rgba(25, 23, 23, .15)
 
