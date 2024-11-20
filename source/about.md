@@ -5,8 +5,6 @@ permalink: /
 mathjax: true
 ---
 
-<!-- <script type="text/javascript"src="https://i.upmath.me/latex.js"></script> -->
-
 ## PAN Zhiyuan (潘 致远)
 
 ### About Me
