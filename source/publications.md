@@ -20,4 +20,4 @@ Junkai Chen\*, **Zhiyuan Pan\***, Xing Hu, Zhenhao Li, Ge Li, Xin Xia. "Reasonin
 
 **Zhiyuan Pan**, Xing Hu, Xin Xia, David Lo, Xiaohu Yang. "PPT4J: Patch Presence Test for Java Binaries"
 46th International Conference on Software Engineering (ICSE 2024), Accepted as a Full Paper
-[\[Code\]](https://github.com/pan2013e/ppt4j) [\[PDF\]](/publications/icse24.pdf)
+[\[Code\]](https://github.com/pan2013e/ppt4j) [\[Docs\]](/ppt4j) [\[PDF\]](/publications/icse24.pdf)
