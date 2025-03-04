@@ -9,7 +9,7 @@ mathjax: true
 
 ### About Me
 
-I am currently a Master student at College of Computer Science and Technology, Zhejiang University.
+I am currently a second-year PhD student at College of Computer Science and Technology, Zhejiang University.
 
 I am very fortunate to work under the supervision of Prof. Xiaohu Yang, Prof. Xing Hu and Prof. Xin Xia. My research mainly focuses on automated software engineering.
 
@@ -17,9 +17,9 @@ I am very fortunate to work under the supervision of Prof. Xiaohu Yang, Prof. Xi
 
 ### Education
 
-####  M.Sc. in Computer Science and Technology
+#### PhD in Computer Science and Technology
 
-September 2023 - March 2026 **(expected)**
+September 2023 - June 2028 **(expected)**
 Zhejiang University, Hangzhou, China
 
 Advisor: [Prof. Xiaohu Yang](https://person.zju.edu.cn/xiaohu)
