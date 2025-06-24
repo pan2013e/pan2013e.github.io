@@ -101,7 +101,7 @@ theme: academic
 deploy:
   type: git
   repo: git@github.com:pan2013e/pan2013e.github.io.git
-  branch: blog-source
+  branch: master
 
 # Robots.txt
 robotstxt:
