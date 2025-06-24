@@ -1,23 +1,36 @@
 ---
 title: Publications
-layout: py
-mathjax: true
+layout: post
 permalink: /publications/
 ---
 
-## Publications
-** marks equal contribution.*
+### Timeline
 
-### 2025
-
-Junkai Chen\*, **Zhiyuan Pan\***, Xing Hu, Zhenhao Li, Ge Li, Xin Xia. "Reasoning Runtime Behavior of a Program with LLM: How Far Are We?"
-47th International Conference on Software Engineering (ICSE 2025), Accepted as a Full Paper
-[\[Code\]](https://github.com/r-eval/REval) [\[Leaderboard\]](https://r-eval.github.io) [\[PDF\]](https://arxiv.org/pdf/2403.16437)
-
----
-
-### 2024
-
-**Zhiyuan Pan**, Xing Hu, Xin Xia, David Lo, Xiaohu Yang. "PPT4J: Patch Presence Test for Java Binaries"
-46th International Conference on Software Engineering (ICSE 2024), Accepted as a Full Paper
-[\[Code\]](https://github.com/pan2013e/ppt4j) [\[Docs\]](/ppt4j) [\[PDF\]](/publications/icse24.pdf)
+{% publist pubs %}
+version: 2
+pub_dir: assets
+show_unpublished: true
+highlight_authors: ["Zhiyuan Pan"]
+extra_filters:
+- name: Category
+  path: conf.cat
+venues:
+  arXiv:
+    category: Preprints
+    occurrences:
+    - key: arXiv-all
+      matches: ^arXiv:(.+)$
+      name: arXiv
+      url: https://arxiv.org/abs/$1
+  ICSE:
+    category: Conferences
+    occurrences:
+    - key: ICSE'24
+      name: The 46th International Conference on Software Engineering
+      date: 2024-04-14
+      url: https://conf.researchr.org/home/icse-2024
+    - key: ICSE'25
+      name: The 47th International Conference on Software Engineering
+      date: 2025-04-27
+      url: https://conf.researchr.org/home/icse-2025
+{% endpublist %}

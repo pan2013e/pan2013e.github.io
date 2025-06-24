@@ -8,14 +8,8 @@
             document.querySelector('#nav-back a').href = "/";
             document.querySelector('#nav-back a').innerHTML = "&larr; HOME";
         } else {
-            document.querySelector('#nav-back a').href = "javascript:history.back();";
+            document.querySelector('#nav-back a').href = document.referrer;
             document.querySelector('#nav-back a').innerHTML = "&larr; BACK";
         }
     </script>
-    <!-- <span class="nav-right">
-        <a href="/about">ABOUT</a>
-        <a href="/blog">BLOG</a>
-        <a href="/projects">PROJECTS</a>
-        <a href="/publications">PUBLICATIONS</a>
-    </span> -->
 </div>

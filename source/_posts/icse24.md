@@ -5,7 +5,7 @@ tags:
   - paper
 type: conference
 venue: ICSE'24
-authors: ''
+authors: "<b>Zhiyuan Pan</b>, Xing Hu, Xin Xia, David Lo, Xiaohu Yang"
 date: 2025-06-24 19:40:49
 ---
 
@@ -16,6 +16,7 @@ The number of vulnerabilities reported in open source software has increased sub
 In this paper, we propose a new patch presence test framework named PPT4J (**P**atch **P**resence **T**est **for** **J**ava Binaries). PPT4J is designed for open-source Java libraries. It takes Java binaries (i.e. bytecode files) as input, extracts semantic information from patches, and uses feature-based techniques to identify patch lines in the binaries. To evaluate the effectiveness of our proposed approach PPT4J, we construct a dataset with binaries that include 110 vulnerabilities. The results show that PPT4J achieves an F1 score of 98.5% with reasonable efficiency, improving the baseline by 14.2%. Furthermore, we conduct an in-the-wild evaluation of PPT4J on JetBrains IntelliJ IDEA. The results suggest that a third-party library included in the software is not patched for two CVEs, and we have reported this potential security problem to the vendor.
 
 **Cite as**
+
 ```bibtex
 @inproceedings{10.1145/3597503.3639231,
     author = {Pan, Zhiyuan and Hu, Xing and Xia, Xin and Zhan, Xian and Lo, David and Yang, Xiaohu},
@@ -33,6 +34,9 @@ In this paper, we propose a new patch presence test framework named PPT4J (**P**
     location = {Lisbon, Portugal},
     series = {ICSE '24}
 }
+```
+```python
+print('Hello')
 ```
 
 ### Links
