@@ -1,0 +1,76 @@
+<div class="page">
+    <div class="header left">
+        <%- partial('_partial/avatar') %>
+    </div>
+    <div class="header right">
+        <h1><%= config.name %></h1>
+        <span>
+            <a href="/resume">RESUME</a> | 
+            <a href="https://github.com/pan2013e">GITHUB</a> | 
+            <a href="https://twitter.com/shaaauuuuna">TWITTER</a> | 
+        </span>
+        <br>
+        <span><%= config.description %></span>
+    </div>
+
+    <div class="rendered">
+        <%- page.content %>
+    </div>
+
+    <% site.posts.sort('date', 'desc') %>
+
+    <% site.posts.sort('date', 'desc').each(function(item){ %>
+        <% if(item.title === 'Home Page') { %>
+            <%- item.content %>
+        <% } %>
+    <% }); %>
+    
+    <div class="updates left bold">
+        Updates <br>
+    </div>
+    <div class="updates right">
+        <% let update_count = 1; %>
+        <% site.posts.sort('date', 'desc').each(function(item, i){ %>
+            <% if (update_count > 5) return; %>
+            <% if(theme[0].update_items.includes(item.layout)) { %>
+                <% update_count++; %>
+                <%- partial('_partial/article-excerpt', {item: item}) %>
+            <% } %>
+        <% }); %>
+    </div>
+
+    <div class="publication left bold">Publications</div>
+    <div class="publication right">
+        <% site.posts.sort('date', 'desc').each(function(item){ %>
+            <% if(item.layout === 'paper' && item.type === 'conference') { %>
+                <%- partial('_partial/paper-excerpt', {item: item}) %>
+            <% } %>
+            <% if(item.layout === 'paper' && item.type === 'journal') { %>
+                <%- partial('_partial/paper-excerpt', {item: item}) %>
+            <% } %>
+            <% if(item.layout === 'paper' && item.type === 'preprint') { %>
+                <%- partial('_partial/paper-excerpt', {item: item}) %>
+            <% } %>
+        <% }); %>
+    </div>
+
+    <div class="projects left bold">Projects</div>
+    <div class="projects right">
+        <% site.posts.sort('date', 'desc').each(function(item){ %>
+            <% if(item.layout === 'project') { %>
+                <%- partial('_partial/project-excerpt', {item: item}) %>
+            <% } %>
+        <% }); %>
+    </div>
+
+    <div class="projects left bold">Blog posts</div>
+    <div class="projects right">
+        <% site.posts.sort('date', 'desc').each(function(item){ %>
+            <% if(item.layout === 'blog') { %>
+                <%- partial('_partial/blog-excerpt', {item: item}) %>
+            <% } %>
+        <% }); %>
+    </div>
+
+    <%- partial('_partial/footer') %>
+</div>

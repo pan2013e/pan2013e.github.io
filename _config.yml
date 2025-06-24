@@ -5,8 +5,9 @@
 # Site
 title: Zhiyuan Pan
 subtitle: ''
-description: ''
+description: 'I am currently a second-year PhD student at College of Computer Science and Technology, Zhejiang University. I am very fortunate to work under the supervision of Prof. Xiaohu Yang, Prof. Xing Hu and Prof. Xin Xia. My research mainly focuses on automated software engineering.'
 keywords: CS
+name: Zhiyuan Pan 潘致远
 author: Zhiyuan Pan
 language: en
 timezone: Asia/Shanghai
@@ -93,7 +94,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: nexmoe
+theme: academic
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

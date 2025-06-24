@@ -1,17 +1,13 @@
 ---
-title: Home Page
-layout: py
-permalink: /
-mathjax: true
+title: About
+layout: paper
 ---
 
 ## PAN Zhiyuan (潘 致远)
 
 ### About Me
 
-I am currently a second-year PhD student at College of Computer Science and Technology, Zhejiang University.
 
-I am very fortunate to work under the supervision of Prof. Xiaohu Yang, Prof. Xing Hu and Prof. Xin Xia. My research mainly focuses on automated software engineering.
 
 ---
 

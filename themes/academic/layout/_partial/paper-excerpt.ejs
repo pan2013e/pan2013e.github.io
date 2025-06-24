@@ -1,0 +1,18 @@
+<% var c=0, j=0, p=0; %>
+<div>
+    <span class="inline">
+        <% if(item.type === 'conference') { %>
+            <%- `[C${++c}]` %>
+        <% } %>
+        <% if( item.type === 'journal') { %>
+            <%- `[J${++j}]` %>
+        <% } %>
+        <% if (item.type === 'preprint') { %>
+            <%- `[P${++p}]` %>
+        <% } %>
+        <%- item.venue %>:
+    </span>
+    <a href="<%- config.root %><%- item.path %>">
+        <%- item.title %>
+    </a>
+</div>
