@@ -109,6 +109,7 @@ robotstxt:
   allow:
     - /
   disallow:
+    - /photography/
     - /js/
     - /css/
     - /fonts/
