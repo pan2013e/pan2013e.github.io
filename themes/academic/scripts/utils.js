@@ -13,8 +13,3 @@ hexo.extend.helper.register('has_common_tags', function(tagListA, tagListB) {
     }
     return false;
 });
-
-
-// hexo.extend.filter.register('after_render:html', (data) => {
-//     console.log(typeof data);
-// });

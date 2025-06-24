@@ -1,12 +1,12 @@
 ---
-title: {{ title }}
-date: {{ date }}
-layout: {{ layout }}
+title: "Reasoning Runtime Behavior of a Program with LLM: How Far Are We?"
+layout: paper
 tags:
-  - {{ layout }}
-type: ""
-venue: ""
-authors: ""
+  - paper
+type: conference
+venue: ICSE'25
+authors: ''
+date: 2025-06-24 21:08:39
 ---
 ### Abstract
 Place your abstract here...

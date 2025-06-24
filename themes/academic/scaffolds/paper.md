@@ -4,7 +4,8 @@ date: {{ date }}
 layout: {{ layout }}
 tags:
   - {{ layout }}
-publish_place: ""
+type: ""
+venue: ""
 authors: ""
 ---
 ### Abstract

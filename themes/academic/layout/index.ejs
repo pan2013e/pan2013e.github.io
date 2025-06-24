@@ -12,21 +12,9 @@
         <br>
         <span><%= config.description %></span>
     </div>
-
-    <div class="rendered">
-        <%- page.content %>
-    </div>
-
-    <% site.posts.sort('date', 'desc') %>
-
-    <% site.posts.sort('date', 'desc').each(function(item){ %>
-        <% if(item.title === 'Home Page') { %>
-            <%- item.content %>
-        <% } %>
-    <% }); %>
     
     <div class="updates left bold">
-        Updates <br>
+        Updates
     </div>
     <div class="updates right">
         <% let update_count = 1; %>
@@ -39,22 +27,64 @@
         <% }); %>
     </div>
 
-    <div class="publication left bold">Publications</div>
+    <div class="publication left bold">
+        Publications
+    </div>
     <div class="publication right">
-        <% site.posts.sort('date', 'desc').each(function(item){ %>
-            <% if(item.layout === 'paper' && item.type === 'conference') { %>
-                <%- partial('_partial/paper-excerpt', {item: item}) %>
-            <% } %>
-            <% if(item.layout === 'paper' && item.type === 'journal') { %>
-                <%- partial('_partial/paper-excerpt', {item: item}) %>
-            <% } %>
-            <% if(item.layout === 'paper' && item.type === 'preprint') { %>
-                <%- partial('_partial/paper-excerpt', {item: item}) %>
-            <% } %>
+        <% 
+          var cItems = [], jItems = [], pItems = []; 
+          site.posts.sort('date', 'desc', -1).forEach(function(item) {
+              if (item.layout === 'paper') {
+                  if (item.type === 'conference') cItems.push(item);
+                  if (item.type === 'journal') jItems.push(item);
+                  if (item.type === 'preprint') pItems.push(item);
+              }
+          });
+        %>
+        <% cItems.forEach(function(item, idx) { %>
+          <div>
+              <span class="inline">
+                  <%- `[C${cItems.length - idx}]` %>
+                  <%- item.venue %>:
+              </span>
+              <a href="<%- config.root %><%- item.path %>">
+                  <%- item.title %>
+              </a>
+          </div>
+        <% }); %>
+        <% if (jItems.length > 0) { %>
+          <hr>
+        <% } %>
+        <% jItems.forEach(function(item, idx) { %>
+          <div>
+              <span class="inline">
+                  <%- `[J${jItems.length - idx}]` %>
+                  <%- item.venue %>:
+              </span>
+              <a href="<%- config.root %><%- item.path %>">
+                  <%- item.title %>
+              </a>
+          </div>
+        <% }); %>
+        <% if (pItems.length > 0) { %>
+          <hr>
+        <% } %>
+        <% pItems.forEach(function(item, idx) { %>
+          <div>
+              <span class="inline">
+                  <%- `[P${pItems.length - idx}]` %>
+                  <%- item.venue %>:
+              </span>
+              <a href="<%- config.root %><%- item.path %>">
+                  <%- item.title %>
+              </a>
+          </div>
         <% }); %>
     </div>
 
-    <div class="projects left bold">Projects</div>
+    <div class="projects left bold">
+        Projects
+    </div>
     <div class="projects right">
         <% site.posts.sort('date', 'desc').each(function(item){ %>
             <% if(item.layout === 'project') { %>
@@ -63,7 +93,9 @@
         <% }); %>
     </div>
 
-    <div class="projects left bold">Blog posts</div>
+    <div class="projects left bold">
+        Blog posts
+    </div>
     <div class="projects right">
         <% site.posts.sort('date', 'desc').each(function(item){ %>
             <% if(item.layout === 'blog') { %>

@@ -1,15 +1,17 @@
 ---
-title: {{ title }}
-date: {{ date }}
-layout: {{ layout }}
+title: Enhancing Repository-Level Code Generation with Integrated Contextual Information
+layout: paper
 tags:
-  - {{ layout }}
-type: ""
-venue: ""
-authors: ""
+  - paper
+type: preprint
+venue: arXiv:2406.03283
+authors: ''
+date: 2025-06-24 21:34:13
 ---
+
 ### Abstract
-Place your abstract here...
+
+
 
 **Cite as**
 *Reference to paper*

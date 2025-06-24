@@ -6,6 +6,7 @@
     
     <meta name="description" content="">
     <meta name="author" content="<%=config.author%>">
+    <%- autoCanonical(config, page) %>
     <link rel="icon" href="favicon/favicon.ico">
 
     <title><%= config.title + (page.title ? ' | ' + page.title : '') %></title>
@@ -16,13 +17,13 @@
     <%- css('styles/avatar.css') %>
     <%- css('styles/post.css') %>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z6S44QJN8B"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-79DB9R2CZC"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'G-Z6S44QJN8B');
+    gtag('config', 'G-79DB9R2CZC');
     </script>
 </head>
