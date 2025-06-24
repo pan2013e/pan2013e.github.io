@@ -150,6 +150,6 @@
 .pub-list .pub-authors > :first-child {
     margin-left: 0em;
 }
-.pub-links .pub-link-bibtex {
+.pub-links {
     display: none;
 }

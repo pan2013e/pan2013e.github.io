@@ -35,9 +35,6 @@ In this paper, we propose a new patch presence test framework named PPT4J (**P**
     series = {ICSE '24}
 }
 ```
-```python
-print('Hello')
-```
 
 ### Links
 [Full text (PDF)](/files/link_to_file.pdf) [(Arxiv)](https://arxiv.org/abs/arxiv_doi)
