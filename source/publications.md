@@ -4,7 +4,7 @@ layout: post
 permalink: /publications/
 ---
 
-### Timeline
+### 
 
 {% publist pubs %}
 version: 2

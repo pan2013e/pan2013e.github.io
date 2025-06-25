@@ -5,7 +5,7 @@ tags:
   - paper
 type: preprint
 venue: arXiv:2406.03283
-authors: "Zhiyuan Pan, Xing Hu, Xin Xia, Xiaohu Yang"
+authors: "<b>Zhiyuan Pan</b>, Xing Hu, Xin Xia, Xiaohu Yang"
 date: 2024-06-05 00:00:00
 ---
 
