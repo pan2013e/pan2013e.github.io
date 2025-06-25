@@ -5,8 +5,9 @@ tags:
   - paper
 type: conference
 venue: ICSE'24
+selected: true
 authors: "<b>Zhiyuan Pan</b>, Xing Hu, Xin Xia, David Lo, Xiaohu Yang"
-date: 2025-06-24 19:40:49
+date: 2024-04-14 00:00:00
 ---
 
 ### Abstract
@@ -19,24 +20,24 @@ In this paper, we propose a new patch presence test framework named PPT4J (**P**
 
 ```bibtex
 @inproceedings{10.1145/3597503.3639231,
-    author = {Pan, Zhiyuan and Hu, Xing and Xia, Xin and Zhan, Xian and Lo, David and Yang, Xiaohu},
-    title = {PPT4J: Patch Presence Test for Java Binaries},
-    year = {2024},
-    isbn = {9798400702174},
-    publisher = {Association for Computing Machinery},
-    address = {New York, NY, USA},
-    url = {https://doi.org/10.1145/3597503.3639231},
-    doi = {10.1145/3597503.3639231},
-    booktitle = {Proceedings of the IEEE/ACM 46th International Conference on Software Engineering},
-    articleno = {225},
-    numpages = {12},
-    keywords = {patch presence test, binary analysis, software security},
-    location = {Lisbon, Portugal},
-    series = {ICSE '24}
+  author = {Pan, Zhiyuan and Hu, Xing and Xia, Xin and Lo, David and Yang, Xiaohu},
+  title = {{PPT4J: Patch Presence Test for Java Binaries}},
+  year = {2024},
+  isbn = {9798400702174},
+  publisher = {Association for Computing Machinery},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3597503.3639231},
+  doi = {10.1145/3597503.3639231},
+  booktitle = {Proceedings of the IEEE/ACM 46th International Conference on Software Engineering},
+  articleno = {225},
+  numpages = {12},
+  keywords = {patch presence test, binary analysis, software security},
+  location = {Lisbon, Portugal},
+  series = {ICSE '24}
 }
 ```
 
 ### Links
-[Full text (PDF)](/files/link_to_file.pdf) [(Arxiv)](https://arxiv.org/abs/arxiv_doi)
-[Supplimentary materials (ZIP)](/files/link_to_file.zip)
-[Source code (Github)](https://github.com/)
+[Full text (PDF)](/assets/icse24.pdf)
+[Talk (PDF)](/assets/icse24_talk.pdf)
+[Source code (Github)](https://github.com/pan2013e/ppt4j)

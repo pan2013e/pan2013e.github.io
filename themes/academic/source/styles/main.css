@@ -160,6 +160,21 @@ pre * {
     display: inline;
 }
 
+.selected-pubs {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.selected-pubs li {
+    margin-bottom: 4px;
+}
+
+.selected-pubs li::before {
+    content: attr(pub-tag);
+    font-weight: bold;
+    padding-right: 10px;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .page {
@@ -255,7 +270,6 @@ pre * {
         max-width: 80%;
     }
 }
-
 @media only screen and (min-width: 1080px) {
     .page {
         display: grid;

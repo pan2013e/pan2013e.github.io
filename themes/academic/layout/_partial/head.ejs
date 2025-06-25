@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     
     <meta name="description" content="">
-    <meta name="author" content="<%=config.author%>">
+    <meta name="author" content="<%-config.author%>">
     <%- autoCanonical(config, page) %>
     <link rel="icon" href="favicon/favicon.ico">
 
-    <title><%= config.title + (page.title ? ' | ' + page.title : '') %></title>
+    <title><%- config.title + (page.title ? ' | ' + page.title : '') %></title>
 
     <%- css('styles/normalize.css') %>
     <%- css('styles/fonts.css') %>
@@ -18,14 +18,15 @@
     <%- css('styles/post.css') %>
     <%- css('styles/hljs.css') %>
 
-
+    <% if (theme.analytics.gtag) { %>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-79DB9R2CZC"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<%- theme.analytics.gtag %>"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'G-79DB9R2CZC');
+    gtag('config', '<%- theme.analytics.gtag %>');
     </script>
+    <% } %>
 </head>

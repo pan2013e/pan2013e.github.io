@@ -3,107 +3,152 @@
         <%- partial('_partial/avatar') %>
     </div>
     <div class="header right">
-        <h1><%= config.name %></h1>
+        <h1><%- config.name %></h1>
         <span>
-            <a href="/resume">RESUME</a> | 
-            <a href="https://github.com/pan2013e">GITHUB</a> | 
-            <a href="https://twitter.com/shaaauuuuna">TWITTER</a> | 
+            <% for (name in theme.social) { %>
+            <a href="<%- theme.social[name][0] %>"><%- name %></a> | 
+            <% } %>
         </span>
         <br>
-        <span><%= config.description %></span>
+        <span><%- config.description %></span>
     </div>
     
     <div class="updates left bold">
-        Updates
+        News
     </div>
     <div class="updates right">
         <% let update_count = 1; %>
         <% site.posts.sort('date', 'desc').each(function(item, i){ %>
             <% if (update_count > 5) return; %>
-            <% if(theme[0].update_items.includes(item.layout)) { %>
+            <% if (theme.update_items.includes(item.layout)) { %>
                 <% update_count++; %>
                 <%- partial('_partial/article-excerpt', {item: item}) %>
             <% } %>
         <% }); %>
+        <div updates-count="<%- update_count %>"></div>
+    </div>
+    <script>
+        var count = document.querySelector('.updates.right div[updates-count]');
+        if (count.getAttribute('updates-count') === '1') {
+            document.querySelector('.updates.left').remove();
+            document.querySelector('.updates.right').remove();
+        }
+    </script>
+
+    <div class="education left bold">
+        Education
+    </div>
+    <div class="education right">
+        <!-- <ul class="education-list">
+            <% site.posts.sort('date', 'desc').forEach(function(item) { %>
+                <% if (item.layout === 'education') { %>
+                    <li>
+                        <span class="inline"><%- item.degree %> at </span>
+                        <a href="<%- config.root %><%- item.path %>">
+                            <%- item.institution %>
+                        </a>
+                    </li>
+                <% } %>
+            <% }); %>
+        </ul> -->
     </div>
 
     <div class="publication left bold">
         Selected Publications<br>
-        <a href="/publications">(Full list)</a>
+        <a href="/publications">(Full List)</a>
     </div>
     <div class="publication right">
-        <% 
-          var cItems = [], jItems = [], pItems = []; 
-          site.posts.sort('date', 'desc', -1).forEach(function(item) {
-              if (item.layout === 'paper') {
-                  if (item.type === 'conference') cItems.push(item);
-                  if (item.type === 'journal') jItems.push(item);
-                  if (item.type === 'preprint') pItems.push(item);
-              }
-          });
-        %>
-        <% cItems.forEach(function(item, idx) { %>
-          <div>
-              <span class="inline">
-                  <%- `[C${cItems.length - idx}]` %>
-                  <%- item.venue %>:
-              </span>
-              <a href="<%- config.root %><%- item.path %>">
-                  <%- item.title %>
-              </a>
-          </div>
-        <% }); %>
-        <% if (jItems.length > 0) { %>
-          <hr>
-        <% } %>
-        <% jItems.forEach(function(item, idx) { %>
-          <div>
-              <span class="inline">
-                  <%- `[J${jItems.length - idx}]` %>
-                  <%- item.venue %>:
-              </span>
-              <a href="<%- config.root %><%- item.path %>">
-                  <%- item.title %>
-              </a>
-          </div>
-        <% }); %>
-        <% if (pItems.length > 0) { %>
-          <hr>
-        <% } %>
-        <% pItems.forEach(function(item, idx) { %>
-          <div>
-              <span class="inline">
-                  <%- `[P${pItems.length - idx}]` %>
-                  <%- item.venue %>:
-              </span>
-              <a href="<%- config.root %><%- item.path %>">
-                  <%- item.title %>
-              </a>
-          </div>
-        <% }); %>
+        <ul class="selected-pubs" style="margin-top: 0;">
+            <% 
+            var cItems = [], jItems = [], pItems = []; 
+            site.posts.sort('date', 'desc', -1).forEach(function(item) {
+                    if (item.layout === 'paper' && item.selected === true) {
+                        if (item.type === 'conference') cItems.push(item);
+                        if (item.type === 'journal') jItems.push(item);
+                        if (item.type === 'preprint') pItems.push(item);
+                    }
+            });
+            %>
+            <% cItems.forEach(function(item, idx) { %>
+                <li pub-tag="<%- `[C${cItems.length - idx}]` %>">
+                    <span class="inline">
+                        <%- item.venue %>:
+                    </span>
+                    <a href="<%- config.root %><%- item.path %>">
+                        <%- item.title %>
+                    </a>
+                </li>
+            <% }); %>
+            <% if (jItems.length > 0) { %>
+                <hr>
+            <% } %>
+            <% jItems.forEach(function(item, idx) { %>
+                <li pub-tag="<%- `[J${jItems.length - idx}]` %>">
+                    <span class="inline">
+                        <%- item.venue %>:
+                    </span>
+                    <a href="<%- config.root %><%- item.path %>">
+                        <%- item.title %>
+                    </a>
+                </li>
+            <% }); %>
+            <% if (pItems.length > 0) { %>
+                <hr>
+            <% } %>
+            <% pItems.forEach(function(item, idx) { %>
+                <li pub-tag="<%- `[P${pItems.length - idx}]` %>">
+                    <span class="inline">
+                        <%- item.venue %>:
+                    </span>
+                    <a href="<%- config.root %><%- item.path %>">
+                        <%- item.title %>
+                    </a>
+                </li>
+            <% }); %>
+        </ul>
     </div>
 
     <div class="projects left bold">
         Projects
     </div>
     <div class="projects right">
+        <% let project_count = 1; %>
         <% site.posts.sort('date', 'desc').each(function(item){ %>
             <% if(item.layout === 'project') { %>
+                <% project_count++; %>
                 <%- partial('_partial/project-excerpt', {item: item}) %>
             <% } %>
         <% }); %>
+        <div projects-count="<%- project_count %>"></div>
     </div>
+    <script>
+        var count = document.querySelector('.projects.right div[projects-count]');
+        if (count.getAttribute('projects-count') === '1') {
+            document.querySelector('.projects.left').remove();
+            document.querySelector('.projects.right').remove();
+        }
+    </script>
 
-    <div class="projects left bold">
+    <div class="blogs left bold">
         Blog posts
     </div>
-    <div class="projects right">
+    <div class="blogs right">
+        <% let blog_count = 1; %>
         <% site.posts.sort('date', 'desc').each(function(item){ %>
             <% if(item.layout === 'blog') { %>
+                <% blog_count++; %>
                 <%- partial('_partial/blog-excerpt', {item: item}) %>
             <% } %>
         <% }); %>
+        <div blog-count="<%- blog_count %>"></div>
     </div>
+    <script>
+        var count = document.querySelector('.blogs.right div[blog-count]');
+        if (count.getAttribute('blog-count') === '1') {
+            document.querySelector('.blogs.left').remove();
+            document.querySelector('.blogs.right').remove();
+        }
+    </script>
 
     <%- partial('_partial/footer') %>
 </div>

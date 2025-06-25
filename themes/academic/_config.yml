@@ -1,12 +1,13 @@
-- name: academic
-  description: A minimalistic Hexo theme for personal academic websites.
-  link: https://github.com/shaunabanana/hexo-theme-watermelon
-  tags:
-    - dynamic
-    - responsive
-    - two_column
-    - monospace
-  update_items:
-    - project
-    - news
-    - blog
+update_items:
+  - news
+social:
+  E-mail:
+    - mailto:zy_pan@zju.edu.cn
+  Github:
+    - https://github.com/pan2013e
+  Google Scholar:
+    - https://scholar.google.com/citations?user=oCyJ8lMAAAAJ
+  CV:
+    - /assets/cv.pdf
+analytics:
+  gtag: G-79DB9R2CZC
