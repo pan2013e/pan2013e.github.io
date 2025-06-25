@@ -1,13 +1,32 @@
 update_items:
   - news
 social:
-  E-mail:
-    - mailto:zy_pan@zju.edu.cn
-  Github:
-    - https://github.com/pan2013e
-  Google Scholar:
-    - https://scholar.google.com/citations?user=oCyJ8lMAAAAJ
-  CV:
-    - /assets/cv.pdf
+    - name: E-mail
+      url: mailto:zy_pan@zju.edu.cn
+    - name: Github
+      url: https://github.com/pan2013e
+    - name: Google Scholar
+      url: https://scholar.google.com/citations?user=oCyJ8lMAAAAJ
+    - name: CV
+      url: /assets/cv.pdf
+    - name: Albums
+      url: /photography
 analytics:
   gtag: G-79DB9R2CZC
+info:
+  education:
+    - institution: Zhejiang University
+      sub_institution: The State Key Laboratory of Blockchain and Data Security
+      degree: PhD in Computer Science and Technology
+      duration: September 2023 - Present
+      misc:
+        - 'Supervisor: Xiaohu Yang, <a href="https://xing-hu.github.io">Xing Hu</a>'
+        - 'Advisor: <a href="https://xin-xia.github.io">Xin Xia</a>'
+    - institution: Zhejiang University
+      sub_institution: Chu Kochen Honors College
+      degree: B. Eng. in Computer Science and Technology
+      duration: September 2019 - June 2023
+  awards:
+    - name: National Scholarship
+      year: 2024
+      committee: Ministry of Education, P.R.C.

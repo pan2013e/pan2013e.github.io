@@ -160,19 +160,25 @@ pre * {
     display: inline;
 }
 
-.selected-pubs {
+.info-enum {
     list-style-type: none;
     padding-left: 0;
 }
 
-.selected-pubs li {
+.info-enum li[item-tag] {
+    list-style: none;
+    position: relative;
     margin-bottom: 4px;
+    padding-left: 50px;
 }
 
-.selected-pubs li::before {
-    content: attr(pub-tag);
+.info-enum li[item-tag]::before {
+    content: attr(item-tag);
+    position: absolute;
     font-weight: bold;
+    left: 0;
     padding-right: 10px;
+    font-family: monospace, monospace;
 }
 
 /* Extra small devices (phones, 600px and down) */

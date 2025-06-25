@@ -5,9 +5,12 @@
     <div class="header right">
         <h1><%- config.name %></h1>
         <span>
-            <% for (name in theme.social) { %>
-            <a href="<%- theme.social[name][0] %>"><%- name %></a> | 
-            <% } %>
+            <% theme.social.forEach(function(item, idx) { %>
+                <a href="<%- item.url %>"><%- item.name %></a>
+                <% if (idx < theme.social.length - 1) { %>
+                    <span class="inline">|</span>
+                <% } %>
+            <% }); %>
         </span>
         <br>
         <span><%- config.description %></span>
@@ -39,18 +42,45 @@
         Education
     </div>
     <div class="education right">
-        <!-- <ul class="education-list">
-            <% site.posts.sort('date', 'desc').forEach(function(item) { %>
-                <% if (item.layout === 'education') { %>
-                    <li>
-                        <span class="inline"><%- item.degree %> at </span>
-                        <a href="<%- config.root %><%- item.path %>">
-                            <%- item.institution %>
-                        </a>
-                    </li>
-                <% } %>
+        <ul class="info-enum" style="margin-top: 0;">
+            <% theme.info.education.forEach(function(item, idx) { %>
+                <li item-tag="[E<%- theme.info.education.length - idx %>]">
+                    <span class="inline">
+                        <strong class="inline"><%- item.degree %></strong>,
+                        <em class="inline"><%- item.institution %></em>
+                    </span>
+                    <br>
+                    <em class="inline"><%- item.duration %></em>
+                    <% if (item.sub_institution) { %>
+                        <em class="inline">@ <%- item.sub_institution %></em>
+                    <% } %>
+                    <% if (item.misc) { %>
+                        <br>
+                        <ul>
+                            <% for (content of item.misc) { %>
+                            <li><%- content %></li>
+                            <% } %>
+                        </ul>
+                    <% } %>
+                </li>
             <% }); %>
-        </ul> -->
+        </ul>
+    </div>
+
+    <div class="awards left bold">
+        Awards
+    </div>
+    <div class="awards right">
+        <ul class="info-enum" style="margin-top: 0;">
+            <% var aItems = theme.info.awards.sort((a, b) => b.year - a.year); %>
+            <% aItems.forEach(function(item, idx) { %>
+                <li item-tag="[A<%- idx + 1 %>]">
+                    <strong class="inline"><%- item.name %></strong>
+                    <span class="inline">(<%- item.year %>),</span>
+                    <em class="inline"><%- item.committee %></em>
+                </li>
+            <% }); %>
+        </ul>
     </div>
 
     <div class="publication left bold">
@@ -58,7 +88,7 @@
         <a href="/publications">(Full List)</a>
     </div>
     <div class="publication right">
-        <ul class="selected-pubs" style="margin-top: 0;">
+        <ul class="info-enum" style="margin-top: 0;">
             <% 
             var cItems = [], jItems = [], pItems = []; 
             site.posts.sort('date', 'desc', -1).forEach(function(item) {
@@ -70,39 +100,33 @@
             });
             %>
             <% cItems.forEach(function(item, idx) { %>
-                <li pub-tag="<%- `[C${cItems.length - idx}]` %>">
-                    <span class="inline">
-                        <%- item.venue %>:
-                    </span>
-                    <a href="<%- config.root %><%- item.path %>">
-                        <%- item.title %>
-                    </a>
+                <li item-tag="<%- `[C${cItems.length - idx}]` %>">
+                    <a href="<%- config.root %><%- item.path %>" class="inline">
+                        <strong><%- item.title %></strong>
+                    </a>,
+                    <em class="inline"><%- item.venue %></em>
                 </li>
             <% }); %>
             <% if (jItems.length > 0) { %>
                 <hr>
             <% } %>
             <% jItems.forEach(function(item, idx) { %>
-                <li pub-tag="<%- `[J${jItems.length - idx}]` %>">
-                    <span class="inline">
-                        <%- item.venue %>:
-                    </span>
-                    <a href="<%- config.root %><%- item.path %>">
-                        <%- item.title %>
-                    </a>
+                <li item-tag="<%- `[J${jItems.length - idx}]` %>">
+                    <a href="<%- config.root %><%- item.path %>" class="inline">
+                        <strong><%- item.title %></strong>
+                    </a>,
+                    <em class="inline"><%- item.venue %></em>
                 </li>
             <% }); %>
             <% if (pItems.length > 0) { %>
                 <hr>
             <% } %>
             <% pItems.forEach(function(item, idx) { %>
-                <li pub-tag="<%- `[P${pItems.length - idx}]` %>">
-                    <span class="inline">
-                        <%- item.venue %>:
-                    </span>
-                    <a href="<%- config.root %><%- item.path %>">
-                        <%- item.title %>
-                    </a>
+                <li item-tag="<%- `[P${pItems.length - idx}]` %>">
+                    <a href="<%- config.root %><%- item.path %>" class="inline">
+                        <strong><%- item.title %></strong>
+                    </a>,
+                    <em class="inline"><%- item.venue %></em>
                 </li>
             <% }); %>
         </ul>
