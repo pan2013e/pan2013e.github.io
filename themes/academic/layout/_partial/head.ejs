@@ -27,7 +27,7 @@
     <%- css(['styles/tailwind.css', 'styles/smart-window.min.css']) %>
     <% } %>
     <%- css(['styles/normalize.min.css', 'styles/fonts.min.css', 'styles/main.min.css', 'styles/avatar.min.css', 'styles/post.min.css', 'styles/hljs.min.css']) %>
-    <% if (theme.analytics.gtag) { %>
+    <% if (theme.analytics.gtag && config.url !== '<%- config.inet_url %>') { %>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=<%- theme.analytics.gtag %>"></script>
     <script>

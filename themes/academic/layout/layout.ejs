@@ -7,4 +7,13 @@
 <% if (page.title === 'Publications') { %>
     <%- css('styles/publist.min.css') %>
 <% } %>
+<script>
+if(window.location.origin === '<%- config.inet_url %>') {
+    document.querySelectorAll('a').forEach(function(link) {
+        if (link.href.startsWith('/assets')) {
+            link.href = '<%- config.root %>' + link.href.substring(1);
+        }
+    });
+}
+</script>
 </html>
