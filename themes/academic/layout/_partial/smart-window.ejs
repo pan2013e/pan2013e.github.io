@@ -1,0 +1,112 @@
+<div id="snap-preview"
+    class="hidden fixed bg-gray-500 bg-opacity-50 border-2 border-dashed border-white rounded-lg transition-all duration-100 z-40">
+</div>
+<div id="snap-divider" class="hidden fixed top-0 h-full w-2 bg-gray-400 dark:bg-gray-600 cursor-ew-resize"></div>
+<div id="minimized-bar-container"
+    class="fixed bottom-0 left-0 right-0 flex justify-center items-end p-2 space-x-2 z-50">
+</div>
+<template id="smart-window-template">
+    <div
+        class="smart-window-modal hidden fixed bg-transparent border border-gray-200/50 dark:border-gray-700/50 rounded-lg shadow-2xl flex flex-col z-30">
+        <div class="resize-handle resize-handle-top"></div>
+        <div class="resize-handle resize-handle-bottom"></div>
+        <div class="resize-handle resize-handle-left"></div>
+        <div class="resize-handle resize-handle-right"></div>
+        <div class="resize-handle resize-handle-top-left"></div>
+        <div class="resize-handle resize-handle-top-right"></div>
+        <div class="resize-handle resize-handle-bottom-left"></div>
+        <div class="resize-handle resize-handle-bottom-right"></div>
+        <div
+            class="modal-header flex items-center p-2 bg-white/40 dark:bg-black/20 rounded-t-lg select-none cursor-move z-20">
+            <div class="window-controls flex items-center space-x-2">
+                <button class="close-btn control-btn">
+                    <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 9L9 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                        <path d="M9 9L3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                    </svg>
+                </button>
+                <button class="minimize-btn control-btn">
+                    <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 6H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                    </svg>
+                </button>
+                <div class="maximize-container relative">
+                    <button class="maximize-btn control-btn">
+                        <svg class="maximize-icon" viewBox="0 0 12 12" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3.5 8.5L2 10M2 10V7M2 10H5M8.5 3.5L10 2M10 2V5M10 2H7" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        <svg class="restore-icon hidden" viewBox="0 0 12 12" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.5 2.5L2 6M2 6V3M2 6H5M6.5 9.5L10 6M10 6V9M10 6H7" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </button>
+                    <div
+                        class="snap-popup hidden absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-xl z-10">
+                        <div class="p-2">
+                            <p class="text-xs text-gray-500 dark:text-gray-400 px-2 pb-1">Fill & Arrange</p>
+                            <div class="grid grid-cols-3 gap-1">
+                                <button
+                                    class="snap-option p-2 rounded-md border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                    data-action="maximize" title="Maximize"><svg class="w-full h-full"
+                                        viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="24" height="18" rx="2" fill="currentColor" />
+                                    </svg></button>
+                                <button
+                                    class="snap-option p-2 rounded-md border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                    data-action="snap-left" title="Snap Left"><svg class="w-full h-full"
+                                        viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M11 0H2C0.895431 0 0 0.895431 0 2V16C0 17.1046 0.895431 18 2 18H11V0Z"
+                                            fill="currentColor" />
+                                    </svg></button>
+                                <button
+                                    class="snap-option p-2 rounded-md border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                    data-action="snap-right" title="Snap Right"><svg class="w-full h-full"
+                                        viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M13 18H22C23.1046 18 24 17.1046 24 16V2C24 0.89543 23.1046 0 22 0H13V18Z"
+                                            fill="currentColor" />
+                                    </svg></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="window-title-container flex items-center justify-center px-4 flex-grow pointer-events-none">
+                <span
+                    class="window-title text-sm font-semibold text-gray-800 dark:text-gray-200 truncate">Window</span>
+            </div>
+            <div class="header-spacer"></div>
+        </div>
+        <div class="content-area flex-grow bg-white dark:bg-gray-800 p-1 relative overflow-hidden rounded-b-lg">
+            <div class="content-embed-container w-full h-full"></div>
+            <div class="inactive-overlay hidden absolute inset-1 bg-transparent z-20"></div>
+            <div class="absolute bottom-6 right-8 z-10">
+                <button
+                    class="open-new-tab-btn group flex items-center bg-gray-800 bg-opacity-50 text-white rounded-full hover:bg-opacity-75 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white transition-all duration-300 p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path
+                            d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                        <path
+                            d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                    </svg>
+                    <span
+                        class="max-w-0 group-hover:max-w-sm group-hover:ml-2 overflow-hidden whitespace-nowrap transition-all duration-300 text-sm">Open
+                        in new tab</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div
+        class="minimized-bar relative p-2 bg-gray-200 dark:bg-gray-700 rounded-t-lg cursor-pointer select-none shadow-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+        <span class="minimized-title text-sm font-semibold text-gray-800 dark:text-gray-200">Window</span>
+    </div>
+</template>
+<%- js(['js/smart-window.min.js', 'js/pdfobject.min.js']) %>

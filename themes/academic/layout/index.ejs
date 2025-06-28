@@ -3,7 +3,7 @@
         <%- partial('_partial/avatar') %>
     </div>
     <div class="header right">
-        <h1><%- config.name %></h1>
+        <h1 class="bold"><%- config.name %></h1>
         <span>
             <% theme.social.forEach(function(item, idx) { %>
                 <a href="<%- item.url %>"><%- item.name %></a>
@@ -15,7 +15,6 @@
         <br>
         <span><%- config.description %></span>
     </div>
-    
     <div class="updates left bold">
         News
     </div>
@@ -37,7 +36,6 @@
             document.querySelector('.updates.right').remove();
         }
     </script>
-
     <div class="education left bold">
         Education
     </div>
@@ -66,7 +64,6 @@
             <% }); %>
         </ul>
     </div>
-
     <div class="awards left bold">
         Awards
     </div>
@@ -82,7 +79,6 @@
             <% }); %>
         </ul>
     </div>
-
     <div class="publication left bold">
         Selected Publications<br>
         <a href="/publications">(Full List)</a>
@@ -131,7 +127,6 @@
             <% }); %>
         </ul>
     </div>
-
     <div class="projects left bold">
         Projects
     </div>
@@ -152,7 +147,6 @@
             document.querySelector('.projects.right').remove();
         }
     </script>
-
     <div class="blogs left bold">
         Blog posts
     </div>
@@ -173,6 +167,6 @@
             document.querySelector('.blogs.right').remove();
         }
     </script>
-
     <%- partial('_partial/footer') %>
+    <%- partial('_partial/smart-window') %>
 </div>

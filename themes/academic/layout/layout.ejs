@@ -1,16 +1,10 @@
-<!doctype html> <!-- HTML5 -->
-
+<!doctype html>
 <html lang="<%=config.language%>" dir="ltr">
-
-<!-- Head tag -->
 <%- partial('_partial/head') %>
-
 <body>
     <%- body %>
 </body>
-
 <% if (page.title === 'Publications') { %>
-    <%- css('styles/publist.css') %>
+    <%- css('styles/publist.min.css') %>
 <% } %>
-
 </html>

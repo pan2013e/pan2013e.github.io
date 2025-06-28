@@ -114,6 +114,7 @@ robotstxt:
     - /css/
     - /fonts/
     - /assets/
+    - /styles/
   sitemap: https://pan2013e.github.io/sitemap.xml
 
 # nofollow

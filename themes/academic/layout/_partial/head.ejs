@@ -1,23 +1,16 @@
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    
     <meta name="description" content="">
     <meta name="author" content="<%-config.author%>">
     <%- autoCanonical(config, page) %>
     <link rel="icon" href="favicon/favicon.ico">
-
     <title><%- config.title + (page.title ? ' | ' + page.title : '') %></title>
-
-    <%- css('styles/normalize.css') %>
-    <%- css('styles/fonts.css') %>
-    <%- css('styles/main.css') %>
-    <%- css('styles/avatar.css') %>
-    <%- css('styles/post.css') %>
-    <%- css('styles/hljs.css') %>
-
+    <% if (page.layout === 'index') { %>
+    <%- css(['styles/tailwind.css', 'styles/smart-window.min.css']) %>
+    <% } %>
+    <%- css(['styles/normalize.min.css', 'styles/fonts.min.css', 'styles/main.min.css', 'styles/avatar.min.css', 'styles/post.min.css', 'styles/hljs.min.css']) %>
     <% if (theme.analytics.gtag) { %>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=<%- theme.analytics.gtag %>"></script>
@@ -25,7 +18,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', '<%- theme.analytics.gtag %>');
     </script>
     <% } %>
