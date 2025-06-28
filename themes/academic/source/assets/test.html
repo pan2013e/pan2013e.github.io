@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive PDF Viewer Modal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.12/pdfobject.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .pdf-viewer-modal {
+            z-index: 50;
+            transform-origin: bottom center;
+            transition: box-shadow 0.2s ease-in-out;
+        }
+        .pdf-viewer-modal.minimizing {
+            animation: minimize-anim 0.3s ease-in forwards;
+        }
+        .pdf-viewer-modal.opening {
+            animation: open-anim 0.3s ease-out forwards;
+        }
+
+        @keyframes minimize-anim {
+            from { transform: scale(1); opacity: 1; }
+            to   { transform: scale(0.8); opacity: 0; }
+        }
+        @keyframes open-anim {
+            from { transform: scale(0.8); opacity: 0; }
+            to   { transform: scale(1); opacity: 1; }
+        }
+
+        .resize-handle {
+            position: absolute; z-index: 30;
+        }
+        .resize-handle-top { top: -5px; left: 5px; right: 5px; height: 10px; cursor: ns-resize; }
+        .resize-handle-bottom { bottom: -5px; left: 5px; right: 5px; height: 10px; cursor: ns-resize; }
+        .resize-handle-left { left: -5px; top: 5px; bottom: 5px; width: 10px; cursor: ew-resize; }
+        .resize-handle-right { right: -5px; top: 5px; bottom: 5px; width: 10px; cursor: ew-resize; }
+        .resize-handle-top-left { top: -5px; left: -5px; width: 10px; height: 10px; cursor: nwse-resize; }
+        .resize-handle-top-right { top: -5px; right: -5px; width: 10px; height: 10px; cursor: nesw-resize; }
+        .resize-handle-bottom-left { bottom: -5px; left: -5px; width: 10px; height: 10px; cursor: nesw-resize; }
+        .resize-handle-bottom-right { bottom: -5px; right: -5px; width: 10px; height: 10px; cursor: nwse-resize; }
+
+        .window-transition {
+            transition: width 0.2s ease-in-out, height 0.2s ease-in-out, top 0.2s ease-in-out, left 0.2s ease-in-out;
+        }
+        
+        .pdfobject-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        #snap-preview {
+            pointer-events: none;
+        }
+
+        #minimized-bar-container {
+            pointer-events: none;
+            overflow-x: auto;
+            scrollbar-width: none; /* Firefox */
+        }
+        #minimized-bar-container::-webkit-scrollbar {
+            display: none; /* Safari and Chrome */
+        }
+        #minimized-bar-container > * {
+            pointer-events: auto;
+            flex-shrink: 0; /* Prevent bars from shrinking */
+        }
+
+        /* --- OS-Adaptive Styles --- */
+        .pdf-title-container { text-align: center; }
+        .modal-header { transition: background-color 0.2s ease-in-out; }
+
+        /* Windows Styles */
+        .os-win .header-spacer { order: 1; }
+        .os-win .pdf-title-container { order: 2; }
+        .os-win .window-controls { order: 3; }
+        .win-btn {
+            width: 46px; height: 32px; display: flex; align-items: center; justify-content: center;
+            background-color: transparent;
+        }
+        .win-btn svg { width: 10px; height: 10px; }
+        .win-btn:hover { background-color: rgba(0,0,0,0.1); }
+        .win-close-btn:hover { background-color: #e81123; color: white; }
+        
+        /* macOS Styles */
+        .os-mac .window-controls { order: 1; padding-left: 12px; }
+        .os-mac .pdf-title-container { order: 2; flex-grow: 1; }
+        .os-mac .header-spacer { order: 3; }
+
+        .os-mac .control-btn { 
+            width: 12px; height: 12px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid rgba(0,0,0,0.15);
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+        .os-mac .control-btn svg { 
+            width: 8px; height: 8px;
+            color: rgba(0,0,0,0.6);
+            opacity: 0; 
+            transition: opacity 0.1s ease-in-out;
+        }
+        .os-mac .window-controls:hover .control-btn svg { opacity: 1; }
+        .os-mac .close-btn { background-color: #ff5f57; border-color: #e0443e;}
+        .os-mac .minimize-btn { background-color: #ffbd2e; border-color: #dea123;}
+        .os-mac .maximize-btn { background-color: #28c940; border-color: #1bad2c;}
+        
+        /* Inactive State Styles */
+        .inactive-window {
+             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-md */
+        }
+        .inactive-window .modal-header {
+            background-color: #f3f4f6; /* gray-100 */
+        }
+        .dark .inactive-window .modal-header {
+            background-color: #374151; /* gray-700 */
+        }
+        .inactive-window .pdf-title {
+            color: #6b7280; /* gray-500 */
+        }
+        .dark .inactive-window .pdf-title {
+            color: #9ca3af; /* gray-400 */
+        }
+        .os-mac.inactive-window .control-btn,
+        .os-mac .inactive-window .control-btn {
+            background-color: #d1d5db; /* gray-300 */
+            border-color: #b0b4b9;
+        }
+        .dark .os-mac.inactive-window .control-btn,
+        .dark .os-mac .inactive-window .control-btn {
+            background-color: #4b5563; /* gray-600 */
+            border-color: #404854;
+        }
+        .os-mac .inactive-window .window-controls:hover .control-btn svg,
+        .os-mac .inactive-window .control-btn svg {
+            opacity: 0;
+        }
+        
+        /* Snap divider style */
+        #snap-divider {
+            z-index: 60; /* Higher than windows */
+            transition: background-color 0.2s;
+        }
+        #snap-divider:hover {
+            background-color: #3b82f6; /* blue-500 */
+        }
+
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 flex items-center justify-center h-screen overflow-hidden">
+
+    <div class="flex flex-col space-y-4">
+        <a href="#https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf" class="open-pdf-link px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 transition-colors">
+            Open PDF Viewer 1
+        </a>
+        <a href="#https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/examples/learning/helloworld.pdf" class="open-pdf-link px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-75 transition-colors">
+            Open PDF Viewer 2 (Hello World)
+        </a>
+    </div>
+    
+    <!-- Snap Preview Area -->
+    <div id="snap-preview" class="hidden fixed bg-gray-500 bg-opacity-50 border-2 border-dashed border-white rounded-lg transition-all duration-100 z-40"></div>
+    
+    <!-- Snap Divider -->
+    <div id="snap-divider" class="hidden fixed top-0 h-full w-2 bg-gray-400 dark:bg-gray-600 cursor-ew-resize"></div>
+
+    <div id="minimized-bar-container" class="fixed bottom-0 left-0 right-0 flex justify-center items-end p-2 space-x-2 z-50"></div>
+
+    <!-- Template for PDF Viewer Modal -->
+    <template id="pdf-viewer-template">
+        <!-- **MODIFIED**: Added border to the modal window -->
+        <div class="pdf-viewer-modal hidden fixed bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-2xl flex flex-col">
+            <div class="resize-handle resize-handle-top"></div><div class="resize-handle resize-handle-bottom"></div><div class="resize-handle resize-handle-left"></div><div class="resize-handle resize-handle-right"></div><div class="resize-handle resize-handle-top-left"></div><div class="resize-handle resize-handle-top-right"></div><div class="resize-handle resize-handle-bottom-left"></div><div class="resize-handle resize-handle-bottom-right"></div>
+            <div class="modal-header flex items-center p-2 bg-gray-200 dark:bg-gray-700 rounded-t-lg select-none cursor-move">
+                <div class="window-controls flex items-center space-x-2">
+                    <button class="close-btn control-btn">
+                         <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9L9 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9 9L3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    </button>
+                    <button class="minimize-btn control-btn">
+                        <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 6H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    </button>
+                    <div class="maximize-container relative">
+                        <button class="maximize-btn control-btn">
+                            <svg class="maximize-icon" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 8.5L2 10M2 10V7M2 10H5M8.5 3.5L10 2M10 2V5M10 2H7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                            <svg class="restore-icon hidden" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 2.5L2 6M2 6V3M2 6H5M6.5 9.5L10 6M10 6V9M10 6H7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                        </button>
+                        <div class="snap-popup hidden absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-xl z-10">
+                            <div class="p-2">
+                                <p class="text-xs text-gray-500 dark:text-gray-400 px-2 pb-1">Fill & Arrange</p>
+                                <div class="grid grid-cols-3 gap-1">
+                                    <!-- **MODIFIED**: Added borders to snap option buttons -->
+                                    <button class="snap-option p-2 rounded-md border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300" data-action="maximize" title="Maximize">
+                                        <svg class="w-full h-full" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="18" rx="2" fill="currentColor"/></svg>
+                                    </button>
+                                    <button class="snap-option p-2 rounded-md border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300" data-action="snap-left" title="Snap Left">
+                                        <svg class="w-full h-full" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 0H2C0.895431 0 0 0.895431 0 2V16C0 17.1046 0.895431 18 2 18H11V0Z" fill="currentColor"/></svg>
+                                    </button>
+                                    <button class="snap-option p-2 rounded-md border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300" data-action="snap-right" title="Snap Right">
+                                        <svg class="w-full h-full" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 18H22C23.1046 18 24 17.1046 24 16V2C24 0.89543 23.1046 0 22 0H13V18Z" fill="currentColor"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pdf-title-container flex items-center justify-center px-4 flex-grow pointer-events-none">
+                    <span class="pdf-title text-sm font-semibold text-gray-800 dark:text-gray-200 truncate">PDF Viewer</span>
+                </div>
+                <div class="header-spacer"></div>
+            </div>
+            <div class="pdf-content-area flex-grow bg-gray-50 dark:bg-gray-800 p-1 relative">
+                 <div class="pdf-embed-container w-full h-full rounded-b-lg"></div>
+                 <div class="inactive-overlay hidden absolute inset-1 bg-transparent z-20"></div>
+                 <div class="absolute bottom-6 right-8 z-10">
+                    <button class="open-new-tab-btn group flex items-center bg-gray-800 bg-opacity-50 text-white rounded-full hover:bg-opacity-75 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white transition-all duration-300 p-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                            <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                        </svg>
+                        <span class="max-w-0 group-hover:max-w-sm group-hover:ml-2 overflow-hidden whitespace-nowrap transition-all duration-300 text-sm">
+                            Open in new tab
+                        </span>
+                    </button>
+                 </div>
+            </div>
+        </div>
+        <div class="minimized-bar relative p-2 bg-gray-200 dark:bg-gray-700 rounded-t-lg cursor-pointer select-none shadow-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+            <span class="minimized-title text-sm font-semibold text-gray-800 dark:text-gray-200">PDF Viewer</span>
+        </div>
+    </template>
+
+
+    <script>
+    class PDFViewer {
+        constructor(pdfUrl) {
+            this.pdfUrl = pdfUrl;
+            this.id = `pdf-viewer-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+            this.minWidth = 300; 
+            this.minHeight = 300;
+            this.isMobile = null;
+            this.windowState = 'restored';
+            this.isDragging = false;
+            this.isResizing = false;
+            this.isMinimized = false;
+            this.awaitingDragFromSpecialState = false;
+            this.lastPosition = { x: 0, y: 0 };
+            
+            const targetWidth = Math.min(1000, window.innerWidth * 0.7); 
+            const targetHeight = Math.min(window.innerHeight * 0.9, targetWidth * 1.414); 
+            const left = (window.innerWidth - targetWidth) / 2;
+            const top = (window.innerHeight - targetHeight) / 2;
+            this.initialRect = { left: left, top: top, width: targetWidth, height: targetHeight };
+            
+            this.resizeDirection = '';
+            this.snapTarget = null;
+            this.init();
+        }
+
+        init() {
+            const template = document.getElementById('pdf-viewer-template');
+            const clone = template.content.cloneNode(true);
+            
+            this.modal = clone.querySelector('.pdf-viewer-modal');
+            this.minimizedBar = clone.querySelector('.minimized-bar');
+            document.body.appendChild(this.modal);
+
+            this.modal.id = `modal-${this.id}`;
+            this.minimizedBar.id = `minimized-${this.id}`;
+
+            this.header = this.modal.querySelector('.modal-header');
+            this.pdfEmbedContainer = this.modal.querySelector('.pdf-embed-container');
+            this.pdfTitle = this.modal.querySelector('.pdf-title');
+            this.minimizedTitle = this.minimizedBar.querySelector('.minimized-title');
+            this.openInNewTabBtn = this.modal.querySelector('.open-new-tab-btn');
+            this.inactiveOverlay = this.modal.querySelector('.inactive-overlay');
+
+            this.pdfTitle.textContent = this.pdfUrl.split('/').pop();
+            this.minimizedTitle.textContent = `PDF - ${this.pdfUrl.split('/').pop()}`;
+            
+            this.setupOSStyles();
+            this.attachEventListeners();
+            this.open();
+        }
+
+        setupOSStyles() {
+            const platform = navigator.platform.toUpperCase();
+            if (platform.indexOf('MAC') >= 0) {
+                this.modal.classList.add('os-mac');
+                const controls = this.modal.querySelector('.window-controls');
+                controls.append(controls.querySelector('.close-btn'), controls.querySelector('.minimize-btn'), controls.querySelector('.maximize-container'));
+            } else {
+                this.modal.classList.add('os-win');
+                const controls = this.modal.querySelector('.window-controls');
+                controls.append(controls.querySelector('.minimize-btn'), controls.querySelector('.maximize-container'), controls.querySelector('.close-btn'));
+                controls.querySelectorAll('.control-btn').forEach(btn => btn.classList.add('win-btn'));
+                controls.querySelector('.close-btn').classList.add('win-close-btn');
+            }
+        }
+        
+        embedPdf() {
+            this.pdfEmbedContainer.innerHTML = "";
+            const options = {
+                pdfOpenParams: { view: 'FitV' },
+                callback: () => {}
+            };
+            PDFObject.embed(this.pdfUrl, this.pdfEmbedContainer, options);
+        }
+
+        open() {
+            this.modal.classList.remove('minimizing', 'hidden');
+            this.modal.classList.add('opening');
+            if (this.isMinimized) {
+                document.getElementById('minimized-bar-container').removeChild(this.minimizedBar);
+            }
+            this.isMinimized = false;
+            setActiveViewer(this);
+            this.handleUIMode(true);
+            
+            if (this.windowState === 'maximized') {
+                this.maximizeWindow(false);
+            } else {
+                 this.restoreWindow();
+            }
+
+            setTimeout(() => this.embedPdf(), 250);
+            this.modal.addEventListener('animationend', () => this.modal.classList.remove('opening'), { once: true });
+            checkAndManageSnapDivider();
+        }
+
+        close() {
+            this.modal.remove();
+            this.minimizedBar.remove();
+            delete viewers[this.id];
+            checkAndManageSnapDivider();
+        }
+        
+        openInNewTab() {
+            window.open(this.pdfUrl, '_blank');
+        }
+
+        setActive(state) {
+            if (state) {
+                this.modal.classList.remove('inactive-window');
+                this.modal.style.zIndex = 51;
+                this.inactiveOverlay.classList.add('hidden');
+            } else {
+                this.modal.classList.add('inactive-window');
+                this.modal.style.zIndex = 50;
+                this.inactiveOverlay.classList.remove('hidden');
+            }
+        }
+
+        toggleWindowState() {
+            if (this.isMobile) return;
+            this.modal.classList.add('window-transition');
+            if (this.windowState !== 'restored') this.restoreWindow();
+            else this.maximizeWindow(true);
+            setTimeout(() => this.embedPdf(), 250);
+            setTimeout(() => this.modal.classList.remove('window-transition'), 200);
+        }
+
+        maximizeWindow(store = true) {
+            if (store && this.windowState !== 'maximized') {
+                this.initialRect = { left: this.modal.offsetLeft, top: this.modal.offsetTop, width: this.modal.offsetWidth, height: this.modal.offsetHeight };
+            }
+            this.modal.style.top = '0px';
+            this.modal.style.left = '0px';
+            this.modal.style.width = '100vw';
+            this.modal.style.height = '100vh';
+            this.windowState = 'maximized';
+            if (!this.isMobile) {
+                this.modal.querySelector('.maximize-icon').classList.add('hidden');
+                this.modal.querySelector('.restore-icon').classList.remove('hidden');
+            }
+            checkAndManageSnapDivider();
+        }
+
+        restoreWindow() {
+            this.modal.style.top = `${this.initialRect.top}px`;
+            this.modal.style.left = `${this.initialRect.left}px`;
+            this.modal.style.width = `${Math.max(this.initialRect.width, this.minWidth)}px`;
+            this.modal.style.height = `${Math.max(this.initialRect.height, this.minHeight)}px`;
+            this.windowState = 'restored';
+            this.modal.querySelector('.maximize-icon').classList.remove('hidden');
+            this.modal.querySelector('.restore-icon').classList.add('hidden');
+            checkAndManageSnapDivider();
+        }
+
+        minimizeWindow() {
+            if (this.isMobile) return;
+            if (this.windowState !== 'maximized') {
+                this.initialRect = { left: this.modal.offsetLeft, top: this.modal.offsetTop, width: this.modal.offsetWidth, height: this.modal.offsetHeight };
+            }
+            this.modal.classList.add('minimizing');
+            this.modal.addEventListener('animationend', () => {
+                this.modal.classList.add('hidden');
+                this.modal.classList.remove('minimizing');
+                document.getElementById('minimized-bar-container').appendChild(this.minimizedBar);
+                this.isMinimized = true;
+            }, { once: true });
+            checkAndManageSnapDivider();
+        }
+
+        snapLeft(store = true) {
+            if (store && this.windowState === 'restored') {
+                this.initialRect = { left: this.modal.offsetLeft, top: this.modal.offsetTop, width: this.modal.offsetWidth, height: this.modal.offsetHeight };
+            }
+            this.modal.style.top = '0px';
+            this.modal.style.left = '0px';
+            
+            let width = window.innerWidth * 0.5;
+            if (rightSnappedViewer && rightSnappedViewer !== this) {
+                width = window.innerWidth - rightSnappedViewer.modal.offsetWidth;
+            }
+            this.modal.style.width = `${width}px`;
+
+            this.modal.style.height = '100vh';
+            this.windowState = 'snapped-left';
+            this.modal.querySelector('.maximize-icon').classList.remove('hidden');
+            this.modal.querySelector('.restore-icon').classList.add('hidden');
+            checkAndManageSnapDivider();
+        }
+
+        snapRight(store = true) {
+            if (store && this.windowState === 'restored') {
+                this.initialRect = { left: this.modal.offsetLeft, top: this.modal.offsetTop, width: this.modal.offsetWidth, height: this.modal.offsetHeight };
+            }
+            this.modal.style.top = '0px';
+
+            let width = window.innerWidth * 0.5;
+            let left = window.innerWidth * 0.5;
+            if (leftSnappedViewer && leftSnappedViewer !== this) {
+                const leftWidth = leftSnappedViewer.modal.offsetWidth;
+                width = window.innerWidth - leftWidth;
+                left = leftWidth;
+            }
+            this.modal.style.left = `${left}px`;
+            this.modal.style.width = `${width}px`;
+
+            this.modal.style.height = '100vh';
+            this.windowState = 'snapped-right';
+            this.modal.querySelector('.maximize-icon').classList.remove('hidden');
+            this.modal.querySelector('.restore-icon').classList.add('hidden');
+            checkAndManageSnapDivider();
+        }
+
+        handleUIMode(force = false) {
+            const newIsMobile = window.innerWidth < 768;
+            if (newIsMobile === this.isMobile && !force) return;
+            this.isMobile = newIsMobile;
+
+            const controls = this.modal.querySelector('.window-controls');
+            const spacer = this.modal.querySelector('.header-spacer');
+            
+            this.minWidth = Math.max(300, window.innerWidth * 0.3);
+            this.minHeight = Math.max(300, window.innerHeight * 0.5);
+
+            if (this.isMobile) {
+                this.header.style.cursor = 'default';
+                controls.querySelector('.maximize-container').style.display = 'none';
+                controls.querySelector('.minimize-btn').style.display = 'none';
+                this.modal.querySelectorAll('.resize-handle').forEach(h => h.style.display = 'none');
+                spacer.style.width = '0px';
+                if (this.windowState !== 'maximized') {
+                    this.maximizeWindow(true);
+                    setTimeout(() => this.embedPdf(), 250);
+                }
+            } else {
+                this.header.style.cursor = 'move';
+                controls.querySelector('.maximize-container').style.display = 'block';
+                controls.querySelector('.minimize-btn').style.display = 'flex';
+                this.modal.querySelectorAll('.resize-handle').forEach(h => h.style.display = 'block');
+                setTimeout(() => {
+                    spacer.style.width = `${controls.offsetWidth}px`;
+                }, 1);
+            }
+        }
+
+        attachEventListeners() {
+            this.modal.querySelector('.close-btn').addEventListener('click', () => this.close());
+            this.modal.querySelector('.maximize-btn').addEventListener('click', (e) => {
+                 // Prevent the container's click event from firing
+                e.stopPropagation();
+                this.toggleWindowState();
+            });
+            this.modal.querySelector('.minimize-btn').addEventListener('click', () => this.minimizeWindow());
+            this.minimizedBar.addEventListener('click', () => this.open());
+            
+            this.openInNewTabBtn.addEventListener('click', () => this.openInNewTab());
+
+            this.header.addEventListener('mousedown', e => {
+                setActiveViewer(this);
+                if (e.target.closest('button') || this.isMobile) return;
+                
+                if (this.windowState !== 'restored') {
+                    this.awaitingDragFromSpecialState = true;
+                } else {
+                    this.isDragging = true;
+                }
+                this.pdfEmbedContainer.style.pointerEvents = 'none';
+                this.lastPosition = { x: e.clientX - this.modal.offsetLeft, y: e.clientY - this.modal.offsetTop };
+            });
+
+            this.modal.querySelectorAll('.resize-handle').forEach(h => {
+                h.addEventListener('mousedown', e => {
+                    setActiveViewer(this);
+e.stopPropagation();
+
+                    const direction = h.className.match(/resize-handle-([a-z-]+)/)[1];
+                    let allowResize = false;
+
+                    if (this.windowState === 'restored') {
+                        allowResize = true;
+                    } else if (this.windowState === 'snapped-left' && direction === 'right') {
+                        allowResize = true;
+                    } else if (this.windowState === 'snapped-right' && direction === 'left') {
+                        allowResize = true;
+                    }
+                    
+                    if (leftSnappedViewer && rightSnappedViewer) {
+                        allowResize = false;
+                    }
+
+                    if (this.isMobile || !allowResize) return;
+                    
+                    this.isResizing = true;
+                    this.isDragging = false;
+                    this.pdfEmbedContainer.style.pointerEvents = 'none';
+                    this.resizeDirection = direction;
+                    const rect = this.modal.getBoundingClientRect();
+                    this.initialRect = { left: rect.left, top: rect.top, width: rect.width, height: rect.height };
+                    this.lastPosition = { x: e.clientX, y: e.clientY };
+                    document.body.style.userSelect = 'none';
+                });
+            });
+
+            this.header.addEventListener('dblclick', e => {
+                if (this.isMobile || e.target.closest('button')) return;
+                this.toggleWindowState();
+            });
+
+            this.inactiveOverlay.addEventListener('wheel', () => {
+                setActiveViewer(this);
+            });
+
+            const maximizeContainer = this.modal.querySelector('.maximize-container');
+            const snapPopup = this.modal.querySelector('.snap-popup');
+            let showTimeout, hideTimeout;
+
+            maximizeContainer.addEventListener('mouseenter', () => {
+                clearTimeout(hideTimeout);
+                showTimeout = setTimeout(() => {
+                    if (this.windowState === 'maximized') return;
+                    snapPopup.classList.remove('hidden');
+                }, 400);
+            });
+
+            maximizeContainer.addEventListener('mouseleave', () => {
+                clearTimeout(showTimeout);
+                hideTimeout = setTimeout(() => {
+                    snapPopup.classList.add('hidden');
+                }, 200);
+            });
+
+            this.modal.querySelectorAll('.snap-option').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const action = e.currentTarget.dataset.action;
+                    this.modal.classList.add('window-transition');
+                    switch(action) {
+                        case 'maximize':
+                            this.maximizeWindow(true);
+                            break;
+                        case 'snap-left':
+                            this.snapLeft(true);
+                            break;
+                        case 'snap-right':
+                            this.snapRight(true);
+                            break;
+                    }
+                    snapPopup.classList.add('hidden');
+                    setTimeout(() => this.embedPdf(), 250);
+                    setTimeout(() => this.modal.classList.remove('window-transition'), 200);
+                });
+            });
+        }
+    }
+
+    // --- Global Listeners & Logic ---
+    const snapPreview = document.getElementById('snap-preview');
+    let viewers = {};
+    let activeViewer = null;
+
+    // Snap Divider Logic
+    let leftSnappedViewer = null;
+    let rightSnappedViewer = null;
+    let isSnapResizing = false;
+    const snapDivider = document.getElementById('snap-divider');
+
+    function checkAndManageSnapDivider() {
+        leftSnappedViewer = null;
+        rightSnappedViewer = null;
+        for (const viewer of Object.values(viewers)) {
+            if (viewer.isMinimized) continue;
+            if (viewer.windowState === 'snapped-left') {
+                leftSnappedViewer = viewer;
+            } else if (viewer.windowState === 'snapped-right') {
+                rightSnappedViewer = viewer;
+            }
+        }
+
+        if (leftSnappedViewer && rightSnappedViewer) {
+            snapDivider.classList.remove('hidden');
+            snapDivider.style.left = `${leftSnappedViewer.modal.offsetWidth}px`;
+        } else {
+            snapDivider.classList.add('hidden');
+        }
+    }
+
+    snapDivider.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        isSnapResizing = true;
+        document.body.style.cursor = 'ew-resize';
+        Object.values(viewers).forEach(v => v.pdfEmbedContainer.style.pointerEvents = 'none');
+    });
+
+    function setActiveViewer(viewerToActivate) {
+        if (!viewerToActivate || viewerToActivate === activeViewer) {
+            return;
+        }
+
+        Object.values(viewers).forEach(v => {
+            if (v !== viewerToActivate) {
+                v.setActive(false);
+            }
+        });
+        viewerToActivate.setActive(true);
+        activeViewer = viewerToActivate;
+    }
+
+
+    window.addEventListener('mousemove', e => {
+        if (isSnapResizing) {
+            const minWidth = leftSnappedViewer.minWidth;
+            const newLeftWidth = Math.max(minWidth, Math.min(e.clientX, window.innerWidth - rightSnappedViewer.minWidth));
+
+            leftSnappedViewer.modal.style.width = `${newLeftWidth}px`;
+            rightSnappedViewer.modal.style.left = `${newLeftWidth}px`;
+            rightSnappedViewer.modal.style.width = `${window.innerWidth - newLeftWidth}px`;
+            snapDivider.style.left = `${newLeftWidth}px`;
+            return;
+        }
+
+        if (!activeViewer || activeViewer.isMinimized) return;
+
+        if (activeViewer.awaitingDragFromSpecialState) {
+            if (Math.abs(e.clientX - activeViewer.lastPosition.x) > 5 || Math.abs(e.clientY - activeViewer.lastPosition.y) > 5) {
+                activeViewer.awaitingDragFromSpecialState = false;
+                activeViewer.isDragging = true;
+                
+                const proportionalX = (activeViewer.lastPosition.x / window.innerWidth);
+                
+                activeViewer.modal.classList.remove('window-transition');
+                activeViewer.restoreWindow();
+                
+                const newOffsetX = activeViewer.modal.offsetWidth * proportionalX;
+                activeViewer.lastPosition.x = newOffsetX;
+                activeViewer.lastPosition.y = e.offsetY > 0 ? e.offsetY : 20;
+
+                const newLeft = e.clientX - activeViewer.lastPosition.x;
+                const newTop = e.clientY - activeViewer.lastPosition.y;
+                
+                activeViewer.modal.style.left = `${newLeft}px`;
+                activeViewer.modal.style.top = `${Math.max(0, newTop)}px`;
+                return;
+            }
+        }
+
+        if (activeViewer.isDragging && activeViewer.windowState === 'restored') {
+            const newX = e.clientX - activeViewer.lastPosition.x;
+            const newY = e.clientY - activeViewer.lastPosition.y;
+            activeViewer.modal.style.left = `${newX}px`;
+            const clampedY = Math.max(0, Math.min(newY, window.innerHeight - activeViewer.header.offsetHeight));
+            activeViewer.modal.style.top = `${clampedY}px`;
+
+            const snapThreshold = 15;
+            if (e.clientY < snapThreshold || e.clientY > window.innerHeight - snapThreshold) {
+                activeViewer.snapTarget = 'maximize';
+                snapPreview.style.top = '0px'; snapPreview.style.left = '0px'; snapPreview.style.width = '100vw'; snapPreview.style.height = '100vh';
+                snapPreview.classList.remove('hidden');
+            } else if (e.clientX < snapThreshold) {
+                activeViewer.snapTarget = 'left';
+                snapPreview.style.top = '0px';
+                snapPreview.style.left = '0px';
+                let width = '50vw';
+                if (rightSnappedViewer && rightSnappedViewer !== activeViewer) {
+                    width = `${window.innerWidth - rightSnappedViewer.modal.offsetWidth}px`;
+                }
+                snapPreview.style.width = width;
+                snapPreview.style.height = '100vh';
+                snapPreview.classList.remove('hidden');
+            } else if (e.clientX > window.innerWidth - snapThreshold) {
+                activeViewer.snapTarget = 'right';
+                snapPreview.style.top = '0px';
+                let width = '50vw';
+                let left = '50vw';
+                if (leftSnappedViewer && leftSnappedViewer !== activeViewer) {
+                    const leftWidth = leftSnappedViewer.modal.offsetWidth;
+                    width = `${window.innerWidth - leftWidth}px`;
+                    left = `${leftWidth}px`;
+                }
+                snapPreview.style.left = left;
+                snapPreview.style.width = width;
+                snapPreview.style.height = '100vh';
+                snapPreview.classList.remove('hidden');
+            } else {
+                activeViewer.snapTarget = null;
+                snapPreview.classList.add('hidden');
+            }
+        } else if (activeViewer.isResizing) {
+            const dx = e.clientX - activeViewer.lastPosition.x;
+            const dy = e.clientY - activeViewer.lastPosition.y;
+            let newWidth = activeViewer.initialRect.width, newHeight = activeViewer.initialRect.height;
+            let newLeft = activeViewer.initialRect.left, newTop = activeViewer.initialRect.top;
+
+            if (activeViewer.resizeDirection.includes('right')) newWidth = Math.max(activeViewer.minWidth, activeViewer.initialRect.width + dx);
+            if (activeViewer.resizeDirection.includes('bottom')) newHeight = Math.max(activeViewer.minHeight, activeViewer.initialRect.height + dy);
+            if (activeViewer.resizeDirection.includes('left')) { const pW = activeViewer.initialRect.width - dx; if (pW > activeViewer.minWidth) { newWidth = pW; newLeft = activeViewer.initialRect.left + dx; } }
+            if (activeViewer.resizeDirection.includes('top')) { const pH = activeViewer.initialRect.height - dy; if (pH > activeViewer.minHeight) { newHeight = pH; newTop = activeViewer.initialRect.top + dy; } }
+            
+            if (activeViewer.windowState === 'snapped-left' || activeViewer.windowState === 'snapped-right') {
+                newHeight = activeViewer.initialRect.height;
+                newTop = activeViewer.initialRect.top;
+            }
+
+            activeViewer.modal.style.width = `${newWidth}px`;
+            activeViewer.modal.style.height = `${newHeight}px`;
+            activeViewer.modal.style.left = `${newLeft}px`;
+            activeViewer.modal.style.top = `${newTop}px`;
+        }
+    });
+
+    window.addEventListener('mouseup', () => {
+        if (isSnapResizing) {
+            isSnapResizing = false;
+            document.body.style.cursor = 'default';
+            if (leftSnappedViewer) {
+                 leftSnappedViewer.pdfEmbedContainer.style.pointerEvents = 'auto';
+                 leftSnappedViewer.embedPdf();
+            }
+            if (rightSnappedViewer) {
+                rightSnappedViewer.pdfEmbedContainer.style.pointerEvents = 'auto';
+                rightSnappedViewer.embedPdf();
+            }
+        }
+
+        if (!activeViewer) return;
+        
+        activeViewer.pdfEmbedContainer.style.pointerEvents = 'auto';
+        activeViewer.awaitingDragFromSpecialState = false;
+        
+        if (activeViewer.isDragging && activeViewer.snapTarget) {
+            activeViewer.modal.classList.add('window-transition');
+            switch (activeViewer.snapTarget) {
+                case 'maximize': activeViewer.maximizeWindow(true); break;
+                case 'left': activeViewer.snapLeft(true); break;
+                case 'right': activeViewer.snapRight(true); break;
+            }
+            setTimeout(() => activeViewer.embedPdf(), 250);
+            setTimeout(() => activeViewer.modal.classList.remove('window-transition'), 200);
+        }
+
+        snapPreview.classList.add('hidden');
+        if(activeViewer.snapTarget) activeViewer.snapTarget = null;
+
+        if (activeViewer.isResizing) {
+            setTimeout(() => activeViewer.embedPdf(), 50);
+        }
+        activeViewer.isDragging = false;
+        activeViewer.isResizing = false;
+        document.body.style.userSelect = '';
+    });
+    
+    // --- App Initialization ---
+    function createViewer(url) {
+        if (!url) return;
+        const viewer = new PDFViewer(url);
+        viewers[viewer.id] = viewer; 
+
+        viewer.modal.addEventListener('mousedown', () => {
+            setActiveViewer(viewer);
+        });
+    }
+
+    document.querySelectorAll('.open-pdf-link').forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            const url = e.currentTarget.getAttribute('href').substring(1);
+            createViewer(url);
+        });
+    });
+
+    window.addEventListener('resize', () => {
+        Object.values(viewers).forEach(viewer => viewer.handleUIMode());
+        checkAndManageSnapDivider();
+    });
+    
+    if (window.location.hash) {
+        const urlFromHash = window.location.hash.substring(1);
+        if (urlFromHash.toLowerCase().endsWith('.pdf')) {
+            createViewer(urlFromHash);
+        }
+    }
+    
+    // Set initial active state if a window is open on load
+    if (Object.keys(viewers).length > 0) {
+        setActiveViewer(Object.values(viewers)[0]);
+    }
+    </script>
+</body>
+</html>
