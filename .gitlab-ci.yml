@@ -1,0 +1,19 @@
+image: node:latest
+
+pages:
+  cache:
+    key: 
+      files:
+        - package.json
+    paths:
+      - node_modules/
+  script:
+    - npm install -g hexo-cli
+    - npm install
+    - hexo clean
+    - hexo generate
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
