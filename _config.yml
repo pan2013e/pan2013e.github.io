@@ -15,14 +15,14 @@ timezone: Asia/Shanghai
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 # for github build
-# url: https://pan2013e.github.io
-# root: /
+url: https://pan2013e.github.io
+root: /
 # for dynamic dispatch
 inet_url: http://10.112.2.17
 inet_root: /~pzy
 # for inet build
-url: http://10.112.2.17/~pzy
-root: /~pzy/
+# url: http://10.112.2.17/~pzy
+# root: /~pzy/
 permalink: posts/:title/
 permalink_defaults:
 pretty_urls:
