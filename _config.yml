@@ -18,12 +18,11 @@ timezone: Asia/Shanghai
 # url: https://pan2013e.github.io
 # root: /
 # for dynamic dispatch
-test_url: http://10.112.2.17
-inet_url: https://pzy.pages.zjusct.io
-inet_root: /site
+inet_url: http://10.112.2.17
+inet_root: /~pzy
 # for inet build
-url: https://pzy.pages.zjusct.io/site
-root: /site/
+url: http://10.112.2.17/~pzy
+root: /~pzy/
 permalink: posts/:title/
 permalink_defaults:
 pretty_urls:

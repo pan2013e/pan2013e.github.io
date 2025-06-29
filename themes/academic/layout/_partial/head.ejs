@@ -12,9 +12,9 @@
             try {
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), 500);
-                const response = await fetch('<%- config.test_url %>/handshake', { signal: controller.signal });
+                const response = await fetch('<%- config.inet_url %>/handshake', { signal: controller.signal });
                 if (response.ok) {
-                    window.location.href = '<%- config.inet_url %><%- config.inet_root %>' + window.location.pathname + window.location.search;
+                    alert('Test');
                 }
             } catch (error) {}
         }
