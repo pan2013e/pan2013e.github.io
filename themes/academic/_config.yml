@@ -20,7 +20,7 @@ info:
       degree: PhD in Computer Science and Technology
       duration: September 2023 - Present
       misc:
-        - 'Supervisor: Xiaohu Yang, <a href="https://xing-hu.github.io">Xing Hu</a>'
+        - 'Supervisor: <a href="https://person.zju.edu.cn/en/xiaohu">Xiaohu Yang</a>, <a href="https://xing-hu.github.io">Xing Hu</a>'
         - 'Advisor: <a href="https://xin-xia.github.io">Xin Xia</a>'
     - institution: Zhejiang University
       sub_institution: Chu Kochen Honors College
@@ -30,3 +30,6 @@ info:
     - name: National Scholarship
       year: 2024
       committee: Ministry of Education, P.R.C.
+    - name: Outstanding Graduate
+      year: 2023
+      committee: Zhejiang University

@@ -10,7 +10,10 @@
     <% if (page.layout === 'index') { %>
     <%- css(['styles/tailwind.css', 'styles/smart-window.min.css']) %>
     <% } %>
-    <%- css(['styles/normalize.min.css', 'styles/fonts.min.css', 'styles/main.min.css', 'styles/avatar.min.css', 'styles/post.min.css', 'styles/hljs.min.css']) %>
+    <%- css(['styles/normalize.min.css', 'styles/fonts.min.css', 'styles/main.min.css', 'styles/post.min.css', 'styles/hljs.min.css']) %>
+    <% if (page.layout === 'index') { %>
+    <%- css(['styles/avatar.min.css']) %>
+    <% } %>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=<%- theme.analytics.gtag %>"></script>
     <script>
