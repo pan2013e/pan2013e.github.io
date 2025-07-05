@@ -69,7 +69,7 @@
         <ul class="info-enum" style="margin-top: 0;">
             <% var aItems = theme.info.awards.sort((a, b) => b.year - a.year); %>
             <% aItems.forEach(function(item, idx) { %>
-                <li item-tag="[A<%- idx + 1 %>]">
+                <li item-tag="[A<%- aItems.length - idx %>]">
                     <strong class="inline"><%- item.name %></strong>
                     <span class="inline">(<%- item.year %>),</span>
                     <em class="inline"><%- item.committee %></em>
