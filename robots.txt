@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /photography/
+Disallow: /js/
+Disallow: /css/
+Disallow: /fonts/
+Disallow: /assets/
+Disallow: /styles/
+Allow: /
+Sitemap: https://pan2013e.github.io/sitemap.xml
