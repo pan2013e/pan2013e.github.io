@@ -15,6 +15,12 @@ analytics:
   gtag: G-79DB9R2CZC
 info:
   education:
+    - institution: National University of Singapore
+      sub_institution: Trustworthy and Secure Software (TSS) Group
+      degree: Research Associate
+      duration: September 2025 - September 2026
+      misc:
+        - 'Advisor: <a href="https://abhikrc.com">Abhik Roychoudhury</a>'
     - institution: Zhejiang University
       sub_institution: The State Key Laboratory of Blockchain and Data Security
       degree: PhD in Computer Science and Technology
