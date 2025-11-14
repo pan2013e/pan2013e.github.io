@@ -33,4 +33,10 @@ venues:
       name: The 47th International Conference on Software Engineering
       date: 2025-04-27
       url: https://conf.researchr.org/home/icse-2025
+  TOSEM:
+    category: Journals
+    occurrences:
+    - key: TOSEM
+      name: ACM Transactions on Software Engineering and Methodology
+      url: https://dl.acm.org/journal/tosem
 {% endpublist %}
