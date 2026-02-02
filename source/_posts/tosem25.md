@@ -18,9 +18,22 @@ Large language models (LLMs) have demonstrated remarkable capabilities in code g
 **Cite as**
 
 ```bibtex
-TO BE ADDED AFTER PUBLICATION
+@article{10.1145/3779217,
+author = {Pan, Zhiyuan and Hu, Xing and Xia, Xin and Yang, Xiaohu},
+title = {CATCODER: Repository-Level Code Generation with Relevant Code and Type Context},
+year = {2025},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+issn = {1049-331X},
+url = {https://doi.org/10.1145/3779217},
+doi = {10.1145/3779217},
+journal = {ACM Trans. Softw. Eng. Methodol.},
+month = dec,
+keywords = {Large Language Model, Code Generation, Repository Context}
+}
 ```
 
 ### Links
 
-TO BE ADDED AFTER PUBLICATION
+[Full text (PDF)](/assets/tosem25.pdf)
+[Source code (Github)](https://github.com/pan2013e/catcoder)
