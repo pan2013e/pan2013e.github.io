@@ -12,7 +12,8 @@
     <% } %>
     <%- css(['styles/normalize.min.css', 'styles/fonts.min.css', 'styles/main.min.css', 'styles/post.min.css', 'styles/hljs.min.css']) %>
     <% if (page.layout === 'index') { %>
-    <%- css(['styles/avatar.min.css']) %>
+    <% const avatarHref = `${config.root}styles/avatar.min.css${theme.assets_version ? `?v=${theme.assets_version}` : ''}`; %>
+    <link rel="stylesheet" href="<%- avatarHref %>">
     <% } %>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=<%- theme.analytics.gtag %>"></script>
