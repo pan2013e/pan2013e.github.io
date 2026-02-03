@@ -1,5 +1,14 @@
+<% const avatarRotator = theme.avatar_rotator || {}; %>
+<% const avatarPool = avatarRotator.enabled !== false && Array.isArray(avatarRotator.images) ? avatarRotator.images : []; %>
 <div class="page">
-    <div class="header left avatar-img"></div>
+    <div class="header left avatar-img" id="avatar-rotator" role="img" aria-label="Avatar" data-root="<%- config.root %>">
+        <% if (avatarPool.length > 0) { %>
+            <% avatarPool.forEach(function(item) { %>
+                <template class="avatar-option" data-src="<%= item.src %>" data-caption="<%= item.caption || '' %>"></template>
+            <% }); %>
+        <% } %>
+        <div class="avatar-caption"></div>
+    </div>
     <div class="header right">
         <h1 class="bold"><%- config.name %></h1>
         <span>
@@ -13,6 +22,9 @@
         <br>
         <span><%- config.description %></span>
     </div>
+    <% if (avatarPool.length > 0) { %>
+	    <%- js('js/avatar.min.js') %>
+    <% } %>
     <div class="updates left bold">
         News
     </div>

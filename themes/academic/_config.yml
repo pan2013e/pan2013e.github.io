@@ -39,3 +39,10 @@ info:
     - name: Outstanding Graduate
       year: 2023
       committee: Zhejiang University
+avatar_rotator:
+  enabled: true
+  images:
+    - src: /assets/avatars/1.jpg
+      caption: "Ottawa, ON, Canada"
+    - src: /assets/avatars/2.jpg
+      caption: "Cairo, Egypt"
