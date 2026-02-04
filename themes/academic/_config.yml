@@ -44,7 +44,7 @@ avatar_rotator:
   enabled: true
   images:
     - src: /assets/avatars/1.jpg
-      caption: "Ottawa, ON, Canada"
+      caption: "Ottawa, Canada"
     - src: /assets/avatars/2.jpg
       caption: "Cairo, Egypt"
     - src: /assets/avatars/3.jpg
