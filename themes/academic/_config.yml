@@ -47,3 +47,15 @@ avatar_rotator:
       caption: "Ottawa, ON, Canada"
     - src: /assets/avatars/2.jpg
       caption: "Cairo, Egypt"
+    - src: /assets/avatars/3.jpg
+      caption: "East Java, Indonesia"
+    - src: /assets/avatars/4.jpg
+      caption: "Vancouver, Canada"
+    - src: /assets/avatars/5.jpg
+      caption: "Harbin, China"
+    - src: /assets/avatars/6.jpg
+      caption: "Kuala Lumpur, M'sia"
+    - src: /assets/avatars/7.jpg
+      caption: "Xinjiang, China"
+    - src: /assets/avatars/8.jpg
+      caption: "Lisbon, Portugal"
