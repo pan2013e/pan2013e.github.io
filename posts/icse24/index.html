@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content>
+    <meta name="author" content="Zhiyuan Pan">
+    <link rel="canonical" href="https://pan2013e.github.io/posts/icse24/">
+    <link rel="icon" href="favicon/favicon.ico">
+    <title>Zhiyuan Pan | PPT4J: Patch Presence Test for Java Binaries</title>
+    
+    
+<link rel="stylesheet" href="/styles/normalize.min.css">
+<link rel="stylesheet" href="/styles/fonts.min.css">
+<link rel="stylesheet" href="/styles/main.min.css">
+<link rel="stylesheet" href="/styles/post.min.css">
+<link rel="stylesheet" href="/styles/hljs.min.css">
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-79DB9R2CZC"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-79DB9R2CZC');
+    </script>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/rss2.xml" title="Zhiyuan Pan" type="application/rss+xml">
+</head>
+
+<body>
+    <div class="page">
+    <div class="post header left">
+    <span class="nav-left" id="nav-back">
+        <a href="/">&larr; BACK</a><br>
+    </span>
+    <script>
+        if (document.referrer == "" || history.length == 0) {
+            document.querySelector('#nav-back a').innerHTML = "&larr; HOME";
+        } else {
+            document.querySelector('#nav-back a').innerHTML = "&larr; BACK";
+        }
+    </script>
+</div>
+    <div class="post header right">
+        <h1>PPT4J: Patch Presence Test for Java Binaries</h1>
+        <span style="color: gray">
+            <b>Zhiyuan Pan</b>, Xing Hu, Xin Xia, David Lo, Xiaohu Yang
+        </span>
+    </div>
+    <div class="rendered">
+        <h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>The number of vulnerabilities reported in open source software has increased substantially in recent years. Security patches provide the necessary measures to protect software from attacks and vulnerabilities. In practice, it is difficult to identify whether patches have been integrated into software, especially if we only have binary files. Therefore, the ability to test whether a patch is applied to the target binary, a.k.a. patch presence test, is crucial for practitioners. However, it is challenging to obtain accurate semantic information from patches, which could lead to incorrect results.</p>
+<p>In this paper, we propose a new patch presence test framework named PPT4J (<strong>P</strong>atch <strong>P</strong>resence <strong>T</strong>est <strong>for</strong> <strong>J</strong>ava Binaries). PPT4J is designed for open-source Java libraries. It takes Java binaries (i.e. bytecode files) as input, extracts semantic information from patches, and uses feature-based techniques to identify patch lines in the binaries. To evaluate the effectiveness of our proposed approach PPT4J, we construct a dataset with binaries that include 110 vulnerabilities. The results show that PPT4J achieves an F1 score of 98.5% with reasonable efficiency, improving the baseline by 14.2%. Furthermore, we conduct an in-the-wild evaluation of PPT4J on JetBrains IntelliJ IDEA. The results suggest that a third-party library included in the software is not patched for two CVEs, and we have reported this potential security problem to the vendor.</p>
+<p><strong>Cite as</strong></p>
+<pre><code class="hljs bibtex">@inproceedings&#123;10.1145/3597503.3639231,
+  author = &#123;Pan, Zhiyuan and Hu, Xing and Xia, Xin and Lo, David and Yang, Xiaohu&#125;,
+  title = &#123;&#123;PPT4J: Patch Presence Test for Java Binaries&#125;&#125;,
+  year = &#123;2024&#125;,
+  isbn = &#123;9798400702174&#125;,
+  publisher = &#123;Association for Computing Machinery&#125;,
+  address = &#123;New York, NY, USA&#125;,
+  url = &#123;https://doi.org/10.1145/3597503.3639231&#125;,
+  doi = &#123;10.1145/3597503.3639231&#125;,
+  booktitle = &#123;Proceedings of the IEEE/ACM 46th International Conference on Software Engineering&#125;,
+  articleno = &#123;225&#125;,
+  numpages = &#123;12&#125;,
+  keywords = &#123;patch presence test, binary analysis, software security&#125;,
+  location = &#123;Lisbon, Portugal&#125;,
+  series = &#123;ICSE &#x27;24&#125;
+&#125;</code></pre>
+<h3 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h3><p><a href="/assets/icse24.pdf">Full text (PDF)</a><br><a href="/assets/icse24_talk.pdf">Talk (PDF)</a><br><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/pan2013e/ppt4j">Source code (Github)</a></p>
+
+    </div>
+    
+<script src="/js/format-two-columns.min.js"></script>
+
+    <!-- Reserved -->
+<!-- <div class="footer right" style="margin-top: 5rem; color: grey">
+    Copyright(C)2020-2026 Zhiyuan Pan.
+</div> -->
+</div>
+</body>
+
+</html>

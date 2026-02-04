@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Zhiyuan Pan</title>
+    <link>https://pan2013e.github.io/</link>
+    
+    <atom:link href="https://pan2013e.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
+    
+    <description>I am a third-year PhD student at College of Computer Science and Technology, Zhejiang University. I am currently visiting National University of Singapore as Research Associate, hosted by Prof. Abhik Roychoudhury. I am very fortunate to be supervised by Prof. Xiaohu Yang and Prof. Xing Hu, and to receive valuable advice from Prof. Xin Xia. My research mainly focuses on automated software engineering.</description>
+    <pubDate>Thu, 13 Nov 2025 16:00:00 GMT</pubDate>
+    <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>CATCODER: Repository-Level Code Generation with Relevant Code and Type Context</title>
+      <link>https://pan2013e.github.io/posts/tosem25/</link>
+      <guid>https://pan2013e.github.io/posts/tosem25/</guid>
+      <pubDate>Thu, 13 Nov 2025 16:00:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h3 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h3&gt;&lt;p&gt;Large language models (LLMs) have demonstrated</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>Large language models (LLMs) have demonstrated remarkable capabilities in code generation tasks. However, repository-level code generation presents unique challenges, particularly due to the need to utilize information spread across multiple files within a repository. Specifically, successful generation depends on a solid grasp of both general, context-agnostic knowledge and specific, context-dependent knowledge. While LLMs are widely used for the context-agnostic aspect, existing retrieval-based approaches sometimes fall short as they are limited in obtaining a broader and deeper repository context. In this paper, we present CatCoder, a novel code generation framework designed for statically typed programming languages. CatCoder enhances repository-level code generation by integrating relevant code and type context. Specifically, it leverages static analyzers to extract type dependencies and merges this information with retrieved code to create comprehensive prompts for LLMs. To evaluate the effectiveness of CatCoder, we adapt and construct benchmarks that include 199 Java tasks and 90 Rust tasks. The results show that CatCoder outperforms the RepoCoder baseline by up to 14.44% and 17.35%, in terms of compile@𝑘 and pass@𝑘 scores. In addition, the generalizability of CatCoder is assessed using various LLMs, including both code-specialized models and general-purpose models. Our findings indicate consistent performance improvements across all models, which underlines the practicality of CatCoder. Furthermore, we evaluate the time consumption of CatCoder in a large open source repository, and the results demonstrate the scalability of CatCoder.</p><p><strong>Cite as</strong></p><pre><code class="hljs bibtex">@article&#123;10.1145/3779217,author = &#123;Pan, Zhiyuan and Hu, Xing and Xia, Xin and Yang, Xiaohu&#125;,title = &#123;CATCODER: Repository-Level Code Generation with Relevant Code and Type Context&#125;,year = &#123;2025&#125;,publisher = &#123;Association for Computing Machinery&#125;,address = &#123;New York, NY, USA&#125;,issn = &#123;1049-331X&#125;,url = &#123;https://doi.org/10.1145/3779217&#125;,doi = &#123;10.1145/3779217&#125;,journal = &#123;ACM Trans. Softw. Eng. Methodol.&#125;,month = dec,keywords = &#123;Large Language Model, Code Generation, Repository Context&#125;&#125;</code></pre><h3 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h3><p><a href="/assets/tosem25.pdf">Full text (PDF)</a><br><a href="https://github.com/pan2013e/catcoder">Source code (Github)</a></p>]]></content:encoded>
+      
+      
+      
+      <category domain="https://pan2013e.github.io/tags/paper/">paper</category>
+      
+      
+      <comments>https://pan2013e.github.io/posts/tosem25/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Re-Evaluating Code LLM Benchmarks Under Semantic Mutation</title>
+      <link>https://pan2013e.github.io/posts/arxiv25/</link>
+      <guid>https://pan2013e.github.io/posts/arxiv25/</guid>
+      <pubDate>Tue, 24 Jun 2025 15:05:22 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h3 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h3&gt;&lt;p&gt;In the era of large language models (LLMs), co</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>In the era of large language models (LLMs), code benchmarks have become an important research area in software engineering and are widely used by practitioners. These benchmarks evaluate the performance of LLMs on specific code-related tasks, such as code understanding and generation. A critical step in constructing code benchmarks is the design of prompts. However, as existing code benchmarks typically rely on a single prompt template per task, they are prone to the issue of prompt sensitivity, where minor prompt variations could result in substantial performance variations, leading to unreliable evaluations of model capabilities.</p><p>While previous studies have explored prompt sensitivity, their experimental designs and findings are limited to traditional natural language processing (NLP) tasks. In this paper, we present an empirical study to investigate prompt sensitivity in code benchmarks. We first propose a general framework that modifies prompt templates in a manner that preserves both their semantics and their structure as much as possible. Based on the framework, we conduct extensive experiments across eight code benchmark tasks on 10 representative open-source LLMs, with each task featuring 100 semantically similar prompt templates. We then analyze the evaluation results using various statistical metrics, focusing on both absolute and relative model performance. Our findings suggest that even slight prompt variations can lead to significant shifts in performance. Additionally, we observe that such variations can introduce inconsistencies in the performance rankings across different models. These insights highlight the need for considering prompt sensitivity when designing future code benchmarks, to ensure more reliable and accurate evaluation of LLM capabilities.</p><p><strong>Cite as</strong></p><pre><code class="hljs bibtex">@misc&#123;pan2025reevaluatingcodellmbenchmarks,  title=&#123;&#123;Re-Evaluating Code LLM Benchmarks Under Semantic Mutation&#125;&#125;,   author=&#123;Zhiyuan Pan and Xing Hu and Xin Xia and Xiaohu Yang&#125;,  year=&#123;2025&#125;,  eprint=&#123;2506.17369&#125;,  archivePrefix=&#123;arXiv&#125;,  primaryClass=&#123;cs.SE&#125;,  url=&#123;https://arxiv.org/abs/2506.17369&#125;, &#125;</code></pre><h3 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h3><p><a href="https://arxiv.org/abs/2506.17369">Full text (arXiv)</a></p>]]></content:encoded>
+      
+      
+      
+      <category domain="https://pan2013e.github.io/tags/paper/">paper</category>
+      
+      
+      <comments>https://pan2013e.github.io/posts/arxiv25/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Reasoning Runtime Behavior of a Program with LLM: How Far Are We?</title>
+      <link>https://pan2013e.github.io/posts/icse25/</link>
+      <guid>https://pan2013e.github.io/posts/icse25/</guid>
+      <pubDate>Sat, 26 Apr 2025 16:00:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h3 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h3&gt;&lt;p&gt;Large language models for code (i.e., code LLM</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>Large language models for code (i.e., code LLMs) have shown strong code understanding and generation capabilities. To evaluate the capabilities of code LLMs in various aspects, many benchmarks have been proposed (e.g., HumanEval and ClassEval). Code reasoning is one of the most essential abilities of code LLMs, but existing benchmarks for code reasoning are not sufficient. Typically, they focus on predicting the input and output of a program, ignoring the evaluation of the intermediate behavior during program execution, as well as the logical consistency (e.g., the model should not give the correct output if the prediction of execution path is wrong) when performing the reasoning. To address these problems, in this paper, we propose a framework, namely REval, for evaluating code reasoning abilities and consistency of code LLMs with program execution. We utilize existing code benchmarks and adapt them to new benchmarks within our framework. A large-scale empirical study is conducted and most LLMs show unsatisfactory performance on both Runtime Behavior Reasoning (i.e., an average accuracy of 44.4%) and Incremental Consistency Evaluation (i.e., an average IC score of 10.3). Evaluation results of current code LLMs reflect the urgent need for the community to strengthen the code reasoning capability of code LLMs. Our code, data, and REval leaderboard are available at <a href="https://r-eval.github.io/">this https URL</a>.</p><p><strong>Cite as</strong></p><pre><code class="hljs bibtex">@inproceedings&#123;11029885,  author = &#123; Chen, Junkai and Pan, Zhiyuan and Hu, Xing and Li, Zhenhao and Li, Ge and Xia, Xin &#125;,  booktitle = &#123; 2025 IEEE/ACM 47th International Conference on Software Engineering (ICSE) &#125;,  title = &#123;&#123; Reasoning Runtime Behavior of a Program with LLM: How Far are We? &#125;&#125;,  year = &#123;2025&#125;,  pages = &#123;1869-1881&#125;,  keywords = &#123;Code Reasoning, Large Language Model, Benchmark&#125;,  doi = &#123;10.1109/ICSE55347.2025.00012&#125;,  url = &#123;https://doi.ieeecomputersociety.org/10.1109/ICSE55347.2025.00012&#125;,  publisher = &#123;IEEE Computer Society&#125;,  address = &#123;Los Alamitos, CA, USA&#125;,  month = May&#125;</code></pre><h3 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h3><p><a href="/assets/icse25.pdf">Full text (PDF)</a><br><a href="/assets/icse25_talk.pdf">Talk (PDF)</a><br><a href="https://r-eval.github.io">Leaderboard</a><br><a href="https://github.com/pan2013e/dreval">Source code (Github)</a></p>]]></content:encoded>
+      
+      
+      
+      <category domain="https://pan2013e.github.io/tags/paper/">paper</category>
+      
+      
+      <comments>https://pan2013e.github.io/posts/icse25/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>PPT4J: Patch Presence Test for Java Binaries</title>
+      <link>https://pan2013e.github.io/posts/icse24/</link>
+      <guid>https://pan2013e.github.io/posts/icse24/</guid>
+      <pubDate>Sat, 13 Apr 2024 16:00:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h3 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h3&gt;&lt;p&gt;The number of vulnerabilities reported in open</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>The number of vulnerabilities reported in open source software has increased substantially in recent years. Security patches provide the necessary measures to protect software from attacks and vulnerabilities. In practice, it is difficult to identify whether patches have been integrated into software, especially if we only have binary files. Therefore, the ability to test whether a patch is applied to the target binary, a.k.a. patch presence test, is crucial for practitioners. However, it is challenging to obtain accurate semantic information from patches, which could lead to incorrect results.</p><p>In this paper, we propose a new patch presence test framework named PPT4J (<strong>P</strong>atch <strong>P</strong>resence <strong>T</strong>est <strong>for</strong> <strong>J</strong>ava Binaries). PPT4J is designed for open-source Java libraries. It takes Java binaries (i.e. bytecode files) as input, extracts semantic information from patches, and uses feature-based techniques to identify patch lines in the binaries. To evaluate the effectiveness of our proposed approach PPT4J, we construct a dataset with binaries that include 110 vulnerabilities. The results show that PPT4J achieves an F1 score of 98.5% with reasonable efficiency, improving the baseline by 14.2%. Furthermore, we conduct an in-the-wild evaluation of PPT4J on JetBrains IntelliJ IDEA. The results suggest that a third-party library included in the software is not patched for two CVEs, and we have reported this potential security problem to the vendor.</p><p><strong>Cite as</strong></p><pre><code class="hljs bibtex">@inproceedings&#123;10.1145/3597503.3639231,  author = &#123;Pan, Zhiyuan and Hu, Xing and Xia, Xin and Lo, David and Yang, Xiaohu&#125;,  title = &#123;&#123;PPT4J: Patch Presence Test for Java Binaries&#125;&#125;,  year = &#123;2024&#125;,  isbn = &#123;9798400702174&#125;,  publisher = &#123;Association for Computing Machinery&#125;,  address = &#123;New York, NY, USA&#125;,  url = &#123;https://doi.org/10.1145/3597503.3639231&#125;,  doi = &#123;10.1145/3597503.3639231&#125;,  booktitle = &#123;Proceedings of the IEEE/ACM 46th International Conference on Software Engineering&#125;,  articleno = &#123;225&#125;,  numpages = &#123;12&#125;,  keywords = &#123;patch presence test, binary analysis, software security&#125;,  location = &#123;Lisbon, Portugal&#125;,  series = &#123;ICSE &#x27;24&#125;&#125;</code></pre><h3 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h3><p><a href="/assets/icse24.pdf">Full text (PDF)</a><br><a href="/assets/icse24_talk.pdf">Talk (PDF)</a><br><a href="https://github.com/pan2013e/ppt4j">Source code (Github)</a></p>]]></content:encoded>
+      
+      
+      
+      <category domain="https://pan2013e.github.io/tags/paper/">paper</category>
+      
+      
+      <comments>https://pan2013e.github.io/posts/icse24/#disqus_thread</comments>
+      
+    </item>
+    
+  </channel>
+</rss>

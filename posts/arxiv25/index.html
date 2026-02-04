@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content>
+    <meta name="author" content="Zhiyuan Pan">
+    <link rel="canonical" href="https://pan2013e.github.io/posts/arxiv25/">
+    <link rel="icon" href="favicon/favicon.ico">
+    <title>Zhiyuan Pan | Re-Evaluating Code LLM Benchmarks Under Semantic Mutation</title>
+    
+    
+<link rel="stylesheet" href="/styles/normalize.min.css">
+<link rel="stylesheet" href="/styles/fonts.min.css">
+<link rel="stylesheet" href="/styles/main.min.css">
+<link rel="stylesheet" href="/styles/post.min.css">
+<link rel="stylesheet" href="/styles/hljs.min.css">
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-79DB9R2CZC"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-79DB9R2CZC');
+    </script>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/rss2.xml" title="Zhiyuan Pan" type="application/rss+xml">
+</head>
+
+<body>
+    <div class="page">
+    <div class="post header left">
+    <span class="nav-left" id="nav-back">
+        <a href="/">&larr; BACK</a><br>
+    </span>
+    <script>
+        if (document.referrer == "" || history.length == 0) {
+            document.querySelector('#nav-back a').innerHTML = "&larr; HOME";
+        } else {
+            document.querySelector('#nav-back a').innerHTML = "&larr; BACK";
+        }
+    </script>
+</div>
+    <div class="post header right">
+        <h1>Re-Evaluating Code LLM Benchmarks Under Semantic Mutation</h1>
+        <span style="color: gray">
+            <b>Zhiyuan Pan</b>, Xing Hu, Xin Xia, Xiaohu Yang
+        </span>
+    </div>
+    <div class="rendered">
+        <h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>In the era of large language models (LLMs), code benchmarks have become an important research area in software engineering and are widely used by practitioners. These benchmarks evaluate the performance of LLMs on specific code-related tasks, such as code understanding and generation. A critical step in constructing code benchmarks is the design of prompts. However, as existing code benchmarks typically rely on a single prompt template per task, they are prone to the issue of prompt sensitivity, where minor prompt variations could result in substantial performance variations, leading to unreliable evaluations of model capabilities.</p>
+<p>While previous studies have explored prompt sensitivity, their experimental designs and findings are limited to traditional natural language processing (NLP) tasks. In this paper, we present an empirical study to investigate prompt sensitivity in code benchmarks. We first propose a general framework that modifies prompt templates in a manner that preserves both their semantics and their structure as much as possible. Based on the framework, we conduct extensive experiments across eight code benchmark tasks on 10 representative open-source LLMs, with each task featuring 100 semantically similar prompt templates. We then analyze the evaluation results using various statistical metrics, focusing on both absolute and relative model performance. Our findings suggest that even slight prompt variations can lead to significant shifts in performance. Additionally, we observe that such variations can introduce inconsistencies in the performance rankings across different models. These insights highlight the need for considering prompt sensitivity when designing future code benchmarks, to ensure more reliable and accurate evaluation of LLM capabilities.</p>
+<p><strong>Cite as</strong></p>
+<pre><code class="hljs bibtex">@misc&#123;pan2025reevaluatingcodellmbenchmarks,
+  title=&#123;&#123;Re-Evaluating Code LLM Benchmarks Under Semantic Mutation&#125;&#125;, 
+  author=&#123;Zhiyuan Pan and Xing Hu and Xin Xia and Xiaohu Yang&#125;,
+  year=&#123;2025&#125;,
+  eprint=&#123;2506.17369&#125;,
+  archivePrefix=&#123;arXiv&#125;,
+  primaryClass=&#123;cs.SE&#125;,
+  url=&#123;https://arxiv.org/abs/2506.17369&#125;, 
+&#125;</code></pre>
+<h3 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h3><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://arxiv.org/abs/2506.17369">Full text (arXiv)</a></p>
+
+    </div>
+    
+<script src="/js/format-two-columns.min.js"></script>
+
+    <!-- Reserved -->
+<!-- <div class="footer right" style="margin-top: 5rem; color: grey">
+    Copyright(C)2020-2026 Zhiyuan Pan.
+</div> -->
+</div>
+</body>
+
+</html>

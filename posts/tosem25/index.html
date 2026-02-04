@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content>
+    <meta name="author" content="Zhiyuan Pan">
+    <link rel="canonical" href="https://pan2013e.github.io/posts/tosem25/">
+    <link rel="icon" href="favicon/favicon.ico">
+    <title>Zhiyuan Pan | CATCODER: Repository-Level Code Generation with Relevant Code and Type Context</title>
+    
+    
+<link rel="stylesheet" href="/styles/normalize.min.css">
+<link rel="stylesheet" href="/styles/fonts.min.css">
+<link rel="stylesheet" href="/styles/main.min.css">
+<link rel="stylesheet" href="/styles/post.min.css">
+<link rel="stylesheet" href="/styles/hljs.min.css">
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-79DB9R2CZC"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-79DB9R2CZC');
+    </script>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/rss2.xml" title="Zhiyuan Pan" type="application/rss+xml">
+</head>
+
+<body>
+    <div class="page">
+    <div class="post header left">
+    <span class="nav-left" id="nav-back">
+        <a href="/">&larr; BACK</a><br>
+    </span>
+    <script>
+        if (document.referrer == "" || history.length == 0) {
+            document.querySelector('#nav-back a').innerHTML = "&larr; HOME";
+        } else {
+            document.querySelector('#nav-back a').innerHTML = "&larr; BACK";
+        }
+    </script>
+</div>
+    <div class="post header right">
+        <h1>CATCODER: Repository-Level Code Generation with Relevant Code and Type Context</h1>
+        <span style="color: gray">
+            <b>Zhiyuan Pan</b>, Xing Hu, Xin Xia, Xiaohu Yang
+        </span>
+    </div>
+    <div class="rendered">
+        <h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>Large language models (LLMs) have demonstrated remarkable capabilities in code generation tasks. However, repository-level code generation presents unique challenges, particularly due to the need to utilize information spread across multiple files within a repository. Specifically, successful generation depends on a solid grasp of both general, context-agnostic knowledge and specific, context-dependent knowledge. While LLMs are widely used for the context-agnostic aspect, existing retrieval-based approaches sometimes fall short as they are limited in obtaining a broader and deeper repository context. In this paper, we present CatCoder, a novel code generation framework designed for statically typed programming languages. CatCoder enhances repository-level code generation by integrating relevant code and type context. Specifically, it leverages static analyzers to extract type dependencies and merges this information with retrieved code to create comprehensive prompts for LLMs. To evaluate the effectiveness of CatCoder, we adapt and construct benchmarks that include 199 Java tasks and 90 Rust tasks. The results show that CatCoder outperforms the RepoCoder baseline by up to 14.44% and 17.35%, in terms of compile@𝑘 and pass@𝑘 scores. In addition, the generalizability of CatCoder is assessed using various LLMs, including both code-specialized models and general-purpose models. Our findings indicate consistent performance improvements across all models, which underlines the practicality of CatCoder. Furthermore, we evaluate the time consumption of CatCoder in a large open source repository, and the results demonstrate the scalability of CatCoder.</p>
+<p><strong>Cite as</strong></p>
+<pre><code class="hljs bibtex">@article&#123;10.1145/3779217,
+author = &#123;Pan, Zhiyuan and Hu, Xing and Xia, Xin and Yang, Xiaohu&#125;,
+title = &#123;CATCODER: Repository-Level Code Generation with Relevant Code and Type Context&#125;,
+year = &#123;2025&#125;,
+publisher = &#123;Association for Computing Machinery&#125;,
+address = &#123;New York, NY, USA&#125;,
+issn = &#123;1049-331X&#125;,
+url = &#123;https://doi.org/10.1145/3779217&#125;,
+doi = &#123;10.1145/3779217&#125;,
+journal = &#123;ACM Trans. Softw. Eng. Methodol.&#125;,
+month = dec,
+keywords = &#123;Large Language Model, Code Generation, Repository Context&#125;
+&#125;</code></pre>
+<h3 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h3><p><a href="/assets/tosem25.pdf">Full text (PDF)</a><br><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/pan2013e/catcoder">Source code (Github)</a></p>
+
+    </div>
+    
+<script src="/js/format-two-columns.min.js"></script>
+
+    <!-- Reserved -->
+<!-- <div class="footer right" style="margin-top: 5rem; color: grey">
+    Copyright(C)2020-2026 Zhiyuan Pan.
+</div> -->
+</div>
+</body>
+
+</html>

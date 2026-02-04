@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content>
+    <meta name="author" content="Zhiyuan Pan">
+    <link rel="canonical" href="https://pan2013e.github.io/posts/icse25/">
+    <link rel="icon" href="favicon/favicon.ico">
+    <title>Zhiyuan Pan | Reasoning Runtime Behavior of a Program with LLM: How Far Are We?</title>
+    
+    
+<link rel="stylesheet" href="/styles/normalize.min.css">
+<link rel="stylesheet" href="/styles/fonts.min.css">
+<link rel="stylesheet" href="/styles/main.min.css">
+<link rel="stylesheet" href="/styles/post.min.css">
+<link rel="stylesheet" href="/styles/hljs.min.css">
+
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-79DB9R2CZC"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-79DB9R2CZC');
+    </script>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/rss2.xml" title="Zhiyuan Pan" type="application/rss+xml">
+</head>
+
+<body>
+    <div class="page">
+    <div class="post header left">
+    <span class="nav-left" id="nav-back">
+        <a href="/">&larr; BACK</a><br>
+    </span>
+    <script>
+        if (document.referrer == "" || history.length == 0) {
+            document.querySelector('#nav-back a').innerHTML = "&larr; HOME";
+        } else {
+            document.querySelector('#nav-back a').innerHTML = "&larr; BACK";
+        }
+    </script>
+</div>
+    <div class="post header right">
+        <h1>Reasoning Runtime Behavior of a Program with LLM: How Far Are We?</h1>
+        <span style="color: gray">
+            Junkai Chen*, <b>Zhiyuan Pan</b>*, Xing Hu, Zhenhao Li, Ge Li, Xin Xia<br><small>* Equal Contribution</small>
+        </span>
+    </div>
+    <div class="rendered">
+        <h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>Large language models for code (i.e., code LLMs) have shown strong code understanding and generation capabilities. To evaluate the capabilities of code LLMs in various aspects, many benchmarks have been proposed (e.g., HumanEval and ClassEval). Code reasoning is one of the most essential abilities of code LLMs, but existing benchmarks for code reasoning are not sufficient. Typically, they focus on predicting the input and output of a program, ignoring the evaluation of the intermediate behavior during program execution, as well as the logical consistency (e.g., the model should not give the correct output if the prediction of execution path is wrong) when performing the reasoning. To address these problems, in this paper, we propose a framework, namely REval, for evaluating code reasoning abilities and consistency of code LLMs with program execution. We utilize existing code benchmarks and adapt them to new benchmarks within our framework. A large-scale empirical study is conducted and most LLMs show unsatisfactory performance on both Runtime Behavior Reasoning (i.e., an average accuracy of 44.4%) and Incremental Consistency Evaluation (i.e., an average IC score of 10.3). Evaluation results of current code LLMs reflect the urgent need for the community to strengthen the code reasoning capability of code LLMs. Our code, data, and REval leaderboard are available at <a target="_blank" rel="external nofollow noopener noreferrer" href="https://r-eval.github.io/">this https URL</a>.</p>
+<p><strong>Cite as</strong></p>
+<pre><code class="hljs bibtex">@inproceedings&#123;11029885,
+  author = &#123; Chen, Junkai and Pan, Zhiyuan and Hu, Xing and Li, Zhenhao and Li, Ge and Xia, Xin &#125;,
+  booktitle = &#123; 2025 IEEE/ACM 47th International Conference on Software Engineering (ICSE) &#125;,
+  title = &#123;&#123; Reasoning Runtime Behavior of a Program with LLM: How Far are We? &#125;&#125;,
+  year = &#123;2025&#125;,
+  pages = &#123;1869-1881&#125;,
+  keywords = &#123;Code Reasoning, Large Language Model, Benchmark&#125;,
+  doi = &#123;10.1109/ICSE55347.2025.00012&#125;,
+  url = &#123;https://doi.ieeecomputersociety.org/10.1109/ICSE55347.2025.00012&#125;,
+  publisher = &#123;IEEE Computer Society&#125;,
+  address = &#123;Los Alamitos, CA, USA&#125;,
+  month = May
+&#125;</code></pre>
+<h3 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h3><p><a href="/assets/icse25.pdf">Full text (PDF)</a><br><a href="/assets/icse25_talk.pdf">Talk (PDF)</a><br><a target="_blank" rel="external nofollow noopener noreferrer" href="https://r-eval.github.io">Leaderboard</a><br><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/pan2013e/dreval">Source code (Github)</a></p>
+
+    </div>
+    
+<script src="/js/format-two-columns.min.js"></script>
+
+    <!-- Reserved -->
+<!-- <div class="footer right" style="margin-top: 5rem; color: grey">
+    Copyright(C)2020-2026 Zhiyuan Pan.
+</div> -->
+</div>
+</body>
+
+</html>
