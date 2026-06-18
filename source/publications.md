@@ -39,4 +39,11 @@ venues:
     - key: TOSEM
       name: ACM Transactions on Software Engineering and Methodology
       url: https://dl.acm.org/journal/tosem
+  ASE:
+    category: Conferences
+    occurrences:
+    - key: ASE'26
+      name: The 41st IEEE/ACM International Conference on Automated Software Engineering
+      date: 2026-10-12
+      url: https://conf.researchr.org/home/ase-2026
 {% endpublist %}
