@@ -13,7 +13,9 @@ social:
       url: /photography
 analytics:
   gtag: G-79DB9R2CZC
-assets_version: 20260203
+# Cache-busting for CSS/JS is derived from the file contents (see
+# themes/academic/scripts/utils.js) — nothing to bump by hand. Set
+# assets_version here only to pin it while debugging.
 info:
   education:
     - institution: National University of Singapore

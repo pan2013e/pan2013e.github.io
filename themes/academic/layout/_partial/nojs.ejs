@@ -1,0 +1,79 @@
+<%
+    // Without JavaScript the page still has all its content — every layout is
+    // rendered server-side. What JavaScript adds is presentation: the margin
+    // column on post pages, the portrait, and the preference controls.
+    //
+    // So rather than a dead end, this restores a plain single-column reading
+    // view. Nothing is duplicated: the same markup is restyled, which is why
+    // this stays a stylesheet rather than a second copy of the page.
+    const rotator = theme.avatar_rotator || {};
+    const headshot = rotator.headshot || null;
+%>
+<noscript>
+    <style>
+        .page {
+            display: block;
+            max-width: 42rem;
+            margin: 0 auto;
+            padding: 2rem 1.25rem 4rem;
+        }
+
+        .left, .right, .site-bio, .site-footer {
+            max-width: none;
+            text-align: left;
+            padding-right: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Margin labels become ordinary run-in headings. */
+        h2.left, .left > h2 {
+            margin: 2rem 0 0.5rem;
+        }
+
+        /* Post and paper bodies: format-two-columns.js never ran, so show the
+           source block it would have re-parented. */
+        .rendered {
+            display: block;
+        }
+
+        .rendered h2 {
+            margin-top: 2rem;
+        }
+
+        /* JavaScript-only affordances. */
+        .site-prefs,
+        .avatar-hint,
+        .avatar-caption {
+            display: none;
+        }
+
+        /* The portrait is a CSS background applied by script; use a plain
+           image instead. The slot's fixed height would otherwise leave a gap. */
+        .avatar-slot {
+            height: auto;
+        }
+
+        .avatar-img {
+            display: none;
+        }
+
+        .nojs-portrait {
+            display: block;
+            width: 200px;
+            height: auto;
+            border-radius: 3px;
+            margin-bottom: 1.5rem;
+        }
+
+        .nojs-note {
+            display: block;
+            margin: 0 0 2rem;
+            padding: 0.6rem 0.8rem;
+            border: 1px solid var(--rule);
+            border-radius: 4px;
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+    </style>
+</noscript>

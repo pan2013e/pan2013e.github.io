@@ -1,18 +1,25 @@
+/* Portrait rotator.
+ *
+ * Responsibilities are deliberately small: fetch an image, publish its aspect
+ * ratio as a custom property, and swap the background. All geometry lives in
+ * avatar.css — the photo is absolutely positioned inside a fixed-height slot,
+ * so changing pictures cannot reflow the page.
+ *
+ * An earlier version measured the neighbouring text and wrote explicit pixel
+ * width/height onto the element on every load. That is what made the layout
+ * jump on each click, and what made the portrait balloon at some viewport
+ * widths.
+ */
 (function () {
     var avatarEl = document.getElementById('avatar-rotator');
     if (!avatarEl) return;
+
+    var slotEl = avatarEl.parentElement;
     var captionEl = avatarEl.querySelector('.avatar-caption');
     var options = avatarEl.querySelectorAll('.avatar-option[data-src]');
     if (!options || options.length === 0) return;
+
     var root = avatarEl.getAttribute('data-root') || '/';
-    var pageEl = avatarEl.closest('.page') || avatarEl.parentElement;
-    var rightHeaderEl = pageEl ? pageEl.querySelector('.header.right') : null;
-    var imgNaturalWidth = 0;
-    var imgNaturalHeight = 0;
-    var sizingRaf = 0;
-    var sizingAttached = false;
-    var lastWidth = 0;
-    var lastHeight = 0;
 
     function resolveSrc(src) {
         if (typeof src !== 'string') return '';
@@ -22,112 +29,73 @@
         return src;
     }
 
-    function setAvatarSize(width, height) {
-        width = Math.round(width);
-        height = Math.round(height);
-        if (Math.abs(width - lastWidth) < 1 && Math.abs(height - lastHeight) < 1) return;
-        lastWidth = width;
-        lastHeight = height;
-        avatarEl.style.width = width + 'px';
-        avatarEl.style.height = height + 'px';
-    }
-
-    function applySizing() {
-        if (!(imgNaturalWidth > 0 && imgNaturalHeight > 0)) return;
-        var aspect = imgNaturalWidth / imgNaturalHeight;
-
-        var isDesktop = window.matchMedia && window.matchMedia('(min-width:800px)').matches;
-        var pageWidth = pageEl ? pageEl.getBoundingClientRect().width : window.innerWidth;
-
-        if (isDesktop && rightHeaderEl) {
-            var rightHeight = rightHeaderEl.getBoundingClientRect().height;
-            var targetHeight = rightHeight * 0.95;
-            var minHeight = 180;
-            var maxHeight = Math.min(400, window.innerHeight * 0.65);
-            targetHeight = Math.max(minHeight, Math.min(targetHeight, maxHeight));
-
-            var maxWidth = Math.min(520, pageWidth * 0.55);
-            var width = targetHeight * aspect;
-            var height = targetHeight;
-
-            if (width > maxWidth) {
-                width = maxWidth;
-                height = width / aspect;
-            }
-
-            setAvatarSize(width, height);
-            return;
-        }
-
-        var maxWidth = Math.min(pageWidth, 300);
-        var width = maxWidth;
-        var height = width / aspect;
-        var maxMobileHeight = Math.min(300, window.innerHeight * 0.6);
-
-        if (height > maxMobileHeight) {
-            height = maxMobileHeight;
-            width = height * aspect;
-        }
-
-        setAvatarSize(width, height);
-    }
-
-    function scheduleSizing() {
-        if (sizingRaf) cancelAnimationFrame(sizingRaf);
-        sizingRaf = requestAnimationFrame(function () {
-            sizingRaf = 0;
-            applySizing();
-        });
-    }
-
-    function attachSizing() {
-        if (sizingAttached) return;
-        sizingAttached = true;
-
-        window.addEventListener('resize', scheduleSizing);
-
-        if (typeof ResizeObserver !== 'undefined' && rightHeaderEl) {
-            var ro = new ResizeObserver(scheduleSizing);
-            ro.observe(rightHeaderEl);
-        }
-    }
-
     // Index 0 is the headshot from avatar_rotator.headshot; the rest are the
-    // gallery. The page always opens on the headshot — the travel photos are
-    // only reachable by clicking. Ordering is fixed in the template.
-    var current = -1;
+    // gallery, in config order. The page opens on the headshot, and the cycle
+    // is circular — clicking past the last travel photo wraps back round to
+    // the headshot, so it stays reachable without being listed twice.
+    //
+    // `current` is set when a load is *requested*, not when it completes:
+    // tracking it in the onload handler meant a click during the first image's
+    // load still saw -1 and re-showed the headshot instead of advancing.
+    var current = 0;
+
+    function wrap(idx) {
+        return ((idx % options.length) + options.length) % options.length;
+    }
+
+    // Gallery photos are fetched only when they are asked for, so a click can
+    // sit on the network for a moment. The spinner is delayed so an image that
+    // is already cached swaps instantly instead of flashing a spinner.
+    var SPINNER_DELAY = 150;
+    var spinnerTimer = 0;
+
+    function startLoading() {
+        clearTimeout(spinnerTimer);
+        spinnerTimer = setTimeout(function () {
+            avatarEl.classList.add('is-loading');
+        }, SPINNER_DELAY);
+    }
+
+    function stopLoading() {
+        clearTimeout(spinnerTimer);
+        avatarEl.classList.remove('is-loading');
+    }
 
     function show(index, direction) {
         var attempts = 0;
+        current = wrap(index);
+        startLoading();
 
         function attempt(idx) {
-            if (attempts >= options.length) return;
+            if (attempts >= options.length) return stopLoading();
             attempts += 1;
 
-            var opt = options[((idx % options.length) + options.length) % options.length];
+            var opt = options[wrap(idx)];
             var src = resolveSrc(opt.getAttribute('data-src'));
             if (!src) return attempt(idx + direction);
             var caption = opt.getAttribute('data-caption') || '';
 
             var img = new Image();
+
             img.onload = function () {
+                stopLoading();
                 if (img.naturalWidth > 0 && img.naturalHeight > 0) {
-                    imgNaturalWidth = img.naturalWidth;
-                    imgNaturalHeight = img.naturalHeight;
-                    avatarEl.style.setProperty('--avatar-ar', img.naturalWidth + ' / ' + img.naturalHeight);
+                    // The only geometry this script sets. CSS turns it into a
+                    // width via aspect-ratio against the slot's fixed height.
+                    slotEl.style.setProperty('--avatar-ar', img.naturalWidth + ' / ' + img.naturalHeight);
                 }
-                attachSizing();
-                scheduleSizing();
-                avatarEl.style.backgroundImage = 'url(' + src + ')';
+                avatarEl.style.backgroundImage = 'url("' + src + '")';
                 if (captionEl) captionEl.textContent = caption;
-                avatarEl.setAttribute('aria-label', caption
-                    ? 'Photo: ' + caption
-                    : 'Portrait');
-                current = ((idx % options.length) + options.length) % options.length;
+                avatarEl.setAttribute('aria-label', caption ? 'Photo: ' + caption : 'Portrait');
+                current = wrap(idx);
             };
+
             img.onerror = function () {
+                // Skip a missing file rather than stalling the cycle on it.
+                current = wrap(idx + direction);
                 attempt(idx + direction);
             };
+
             img.src = src;
         }
 

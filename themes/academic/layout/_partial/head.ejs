@@ -1,5 +1,6 @@
 <%
-    const v = theme.assets_version ? `?v=${theme.assets_version}` : '';
+    // Fingerprint of the theme's CSS/JS; see scripts/utils.js.
+    const v = `?v=${asset_version()}`;
     const asset = (p) => `${config.root}${p}${v}`;
 
     const isIndex = page.layout === 'index';
@@ -9,10 +10,11 @@
     const pageDesc = (page.description || (isPaper && page.excerpt) || config.description || '')
         .replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim().slice(0, 300);
 
-    // The index's front-matter title is a placeholder ("Home Page"); the site
-    // title is the real one there.
+    // The index's front-matter title is a placeholder ("Home Page"). A bare
+    // name is a weak <title> for search results, so the home page gets a
+    // descriptive one; every other page keeps "Name | Page".
     const shortTitle = isIndex ? config.title : (page.title || config.title);
-    const pageTitle = isIndex ? config.title : `${config.title} | ${page.title}`;
+    const pageTitle = isIndex ? `${config.title}'s Home Page` : `${config.title} | ${page.title}`;
     const pageUrl = full_url_for(page.path || '/');
 
     // Google Scholar indexes personal paper pages via these tags. authors is
@@ -27,6 +29,40 @@
     if (isIndex) styles.push('styles/tailwind.css', 'styles/smart-window.css', 'styles/avatar.css');
     else styles.push('styles/post.css', 'styles/hljs.css');
     if (page.title === 'Publications') styles.push('styles/publist.css');
+
+    // The portrait is the largest element on the home page and is requested by
+    // avatar.js, so the browser cannot discover it while parsing. Preloading it
+    // starts the fetch with the stylesheets instead of after the script runs.
+    const rotator = theme.avatar_rotator || {};
+    const headshotSrc = isIndex && rotator.enabled !== false && rotator.headshot
+        ? rotator.headshot.src : null;
+
+    // Structured data. A Person on the home page ties the site to the social
+    // and Scholar profiles; a ScholarlyArticle on each paper page complements
+    // the citation_* tags, which only Google Scholar reads.
+    const socials = (theme.social || []).map(s => s.url)
+        .filter(u => /^https?:/.test(u));
+
+    const jsonld = isIndex ? {
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        name: config.name,
+        url: full_url_for('/'),
+        description: pageDesc,
+        sameAs: socials,
+        jobTitle: 'PhD Student',
+        affiliation: (theme.info && theme.info.education || [])
+            .map(e => ({ '@type': 'Organization', name: e.institution }))
+    } : isPaper ? {
+        '@context': 'https://schema.org',
+        '@type': 'ScholarlyArticle',
+        headline: page.title,
+        author: scholarAuthors.map(a => ({ '@type': 'Person', name: a })),
+        datePublished: page.date ? date(page.date, 'YYYY-MM-DD') : undefined,
+        publication: page.venue || undefined,
+        url: pageUrl,
+        ...(pdfLink ? { encoding: { '@type': 'MediaObject', contentUrl: pdfLink } } : {})
+    } : null;
 %>
 <head>
     <meta charset="utf-8">
@@ -81,9 +117,17 @@
     <% } %>
     <% } %>
 
+    <% if (headshotSrc) { %>
+    <link rel="preload" as="image" href="<%- url_for(headshotSrc) %>" fetchpriority="high">
+    <% } %>
+
     <% styles.forEach(function (href) { %>
     <link rel="stylesheet" href="<%- asset(href) %>">
     <% }); %>
+
+    <% if (jsonld) { %>
+    <script type="application/ld+json"><%- JSON.stringify(jsonld) %></script>
+    <% } %>
 
     <% if (theme.analytics && theme.analytics.gtag) { %>
     <script async src="https://www.googletagmanager.com/gtag/js?id=<%- theme.analytics.gtag %>"></script>

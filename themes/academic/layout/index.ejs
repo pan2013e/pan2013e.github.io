@@ -33,14 +33,30 @@
     ].filter(g => g.items.length > 0);
 %>
 <div class="page index">
-    <div class="header left avatar-img" id="avatar-rotator" role="img"
-         aria-label="Portrait of <%= config.name %>" data-root="<%- config.root %>">
-        <% avatarPool.forEach(function (item) { %>
-        <template class="avatar-option" data-src="<%= item.src %>" data-caption="<%= item.caption || '' %>"></template>
-        <% }); %>
-        <div class="avatar-caption"></div>
-        <% if (avatarPool.length > 1) { %>
-        <div class="avatar-hint" aria-hidden="true">click to browse</div>
+    <%# The slot is a fixed-height grid item; the portrait inside it is taken
+        out of flow and anchored to the slot's right edge. Photos therefore
+        differ in width without ever resizing the grid track — which is what
+        made the whole page flash on every click — and a landscape shot simply
+        extends further left into the margin. %>
+    <div class="header left avatar-slot">
+        <div class="avatar-img" id="avatar-rotator" role="img"
+             aria-label="Portrait of <%= config.name %>" data-root="<%- config.root %>">
+            <% avatarPool.forEach(function (item) { %>
+            <template class="avatar-option" data-src="<%= item.src %>" data-caption="<%= item.caption || '' %>"></template>
+            <% }); %>
+            <div class="avatar-spinner" aria-hidden="true"></div>
+            <div class="avatar-caption"></div>
+            <% if (avatarPool.length > 1) { %>
+            <div class="avatar-hint" aria-hidden="true">click to browse</div>
+            <% } %>
+        </div>
+        <% if (headshot && headshot.src) { %>
+        <%# Only fetched when scripting is off — with JS the portrait is a CSS
+            background applied by avatar.js, so this costs nothing. %>
+        <noscript>
+            <img class="nojs-portrait" src="<%- url_for(headshot.src) %>"
+                 width="200" height="267" alt="<%= config.name %>">
+        </noscript>
         <% } %>
     </div>
 
@@ -57,7 +73,7 @@
     </header>
 
     <% if (avatarPool.length > 0) { %>
-    <%- js('js/avatar.js') %>
+    <%- theme_js('js/avatar.js') %>
     <% } %>
 
     <% if (news.length > 0) { %>
@@ -106,10 +122,13 @@
     </section>
 
     <% if (pubGroups.length > 0) { %>
-    <h2 class="publication left">
-        Selected Publications
-        <a class="section-sub" href="<%- config.root %>publications">Full list &rarr;</a>
-    </h2>
+    <%# The link is a sibling of the heading, not part of it: "Full list" is
+        navigation, and burying it inside the <h2> put it in the heading text
+        for screen readers and search engines alike. %>
+    <div class="publication left">
+        <h2>Selected Publications</h2>
+        <a class="section-sub" href="<%- config.root %>publications">Full list</a>
+    </div>
     <section class="publication right" aria-label="Selected publications">
         <ul class="info-enum">
             <% pubGroups.forEach(function (group, gi) { %>

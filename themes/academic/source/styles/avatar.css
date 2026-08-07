@@ -1,12 +1,41 @@
-/* Portrait shown in the page header. Starts on the headshot; clicking cycles
-   through the travel photos listed under avatar_rotator.images in _config.yml. */
+/* Portrait shown in the page header.
+ *
+ * Layout contract: the *slot* owns the geometry, the *photo* does not. The
+ * slot is a normal grid item with a fixed height and the width of its column;
+ * the photo is absolutely positioned inside it, anchored to the slot's right
+ * edge so it lines up with the margin headings below.
+ *
+ * That separation is the point. Previously the script measured each image and
+ * wrote explicit pixel width/height onto the element, so every click resized
+ * the grid track and reflowed the entire page — the flash. Now a wider photo
+ * simply reaches further left into the margin and nothing else moves.
+ *
+ * The photo starts on the headshot; clicking cycles the travel photos listed
+ * under avatar_rotator.images in _config.yml, wrapping back to the headshot.
+ */
+
+.avatar-slot {
+    position: relative;
+    width: 100%;
+    height: var(--avatar-height);
+
+    /* Height drives the size; width follows from the image's aspect ratio.
+       Capped so a panorama cannot reach past the left edge of the window. */
+    --avatar-height: 12rem;
+    --avatar-max-width: min(20rem, 34vw);
+}
 
 .avatar-img {
-    align-self: center;
-    position: relative;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    /* --avatar-ar is set by avatar.js from the loaded image's real dimensions;
+       the fallback is a portrait crop so the box is sensibly shaped before the
+       first photo arrives. */
+    aspect-ratio: var(--avatar-ar, 4 / 5);
+    max-width: var(--avatar-max-width);
     overflow: hidden;
-    width: 300px;
-    height: 250px;
     border-radius: 3px;
     background-color: var(--rule);
     background-size: cover;
@@ -36,6 +65,48 @@
     display: none;
 }
 
+/* Shown while the next photo is being fetched. Gallery images are only
+   requested when clicked, so there is a real wait to acknowledge — but the
+   spinner is held back briefly by the script so a cached image does not make
+   it flash. */
+.avatar-img .avatar-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 26px;
+    height: 26px;
+    margin: -13px 0 0 -13px;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-top-color: rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.avatar-img.is-loading .avatar-spinner {
+    opacity: 1;
+    animation: avatar-spin 0.7s linear infinite;
+}
+
+/* Dim the outgoing photo so the spinner reads against a busy image. */
+.avatar-img.is-loading::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+}
+
+@keyframes avatar-spin {
+    to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .avatar-img.is-loading .avatar-spinner {
+        animation: none;
+    }
+}
+
 /* Hint that the portrait is clickable, without competing with the caption. */
 .avatar-img .avatar-hint {
     position: absolute;
@@ -61,5 +132,36 @@
 @media (prefers-reduced-motion: reduce) {
     .avatar-img .avatar-hint {
         transition: none;
+    }
+}
+
+/* Single-column layout: the slot spans the full width, so centre the photo
+   rather than pinning it to an edge — there is no margin column for it to
+   align with here. */
+@media only screen and (max-width: 919px) {
+    .avatar-slot {
+        --avatar-height: 13rem;
+        --avatar-max-width: 100%;
+    }
+
+    .avatar-img {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+/* Wider viewports get a taller portrait, but it stays bounded — the previous
+   script scaled it against the height of the text beside it, which produced a
+   very large photo at some widths. */
+@media only screen and (min-width: 1100px) {
+    .avatar-slot {
+        --avatar-height: 13rem;
+    }
+}
+
+@media only screen and (min-width: 1500px) {
+    .avatar-slot {
+        --avatar-height: 14rem;
     }
 }

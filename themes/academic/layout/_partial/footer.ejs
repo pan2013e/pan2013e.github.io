@@ -24,9 +24,11 @@
 
     <p class="footer-legal">
         &copy; <%= date(Date.now(), 'YYYY') %> <%= config.author %>.
-        <%# data-no-window keeps the feed out of the floating-window handler —
-            an XML feed in an iframe is not something anyone wants. %>
-        <a href="<%- config.root %>rss2.xml" data-no-window>RSS</a>
+        <%# The feed is a document the browser hands to a reader, not a page of
+            this site: data-no-window keeps it out of the floating-window
+            handler, and target="_blank" makes it behave — and be marked — like
+            any other external link. %>
+        <a href="<%- config.root %>rss2.xml" data-no-window target="_blank" rel="noopener">RSS</a>
     </p>
-    <%- js('js/prefs.js') %>
+    <%- theme_js('js/prefs.js') %>
 </footer>

@@ -42,6 +42,13 @@
        edge, so wide viewports get wider margins rather than longer lines. */
     --measure: 36rem;
 
+    /* Box-and-arrow "opens in a new tab" glyph, matching the floating window's
+       own control. Used as a mask, so the fill colour here is irrelevant. */
+    --icon-external: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z'/%3E%3Cpath d='M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z'/%3E%3C/svg%3E");
+
+    /* Plain right-pointing arrow for "read more" style links. */
+    --icon-arrow-right: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8.5 2.5 14 8l-5.5 5.5-1.06-1.06L10.88 8.75H2v-1.5h8.88L7.44 3.56z'/%3E%3C/svg%3E");
+
     --font-serif: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
     --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
@@ -81,9 +88,14 @@
 }
 
 /* Reserving the scrollbar gutter keeps the layout from jumping sideways when
-   filtering the publication list changes the page height. */
+   filtering the publication list changes the page height.
+
+   `both-edges` reserves the same width on the left as the scrollbar takes on
+   the right; with plain `stable` the content block sits about 15px off centre.
+   Browsers that do not know the keyword fall back to `stable`, keeping the
+   no-jump behaviour. */
 html {
-    scrollbar-gutter: stable;
+    scrollbar-gutter: stable both-edges;
 }
 
 /* Theme switching is deliberately instant. Transitioning the page background
@@ -116,6 +128,47 @@ a:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
     border-radius: 1px;
+}
+
+/* Links that leave the site get a small mark, so a new tab is never a
+   surprise. hexo's external_link config already adds target="_blank" to
+   off-site links, so the attribute is the signal — no extra markup needed.
+
+   The glyph is the same box-and-arrow used by the floating window's "open in
+   new tab" control, drawn as a mask rather than a background image so it takes
+   its colour from the text and stays consistent in both themes. A text arrow
+   (↗) was tried first and sat badly on the baseline at small sizes.
+
+   Excluded: mailto (the label already says E-mail), anything inside the
+   floating-window chrome, and anything opting out with data-no-icon. */
+a[target="_blank"]:not([href^="mailto:"]):not([data-no-icon])::after {
+    content: "";
+    display: inline-block;
+    width: 0.72em;
+    height: 0.72em;
+    margin-left: 0.24em;
+    vertical-align: -0.01em;
+    background-color: currentColor;
+    opacity: 0.55;
+    -webkit-mask-image: var(--icon-external);
+    mask-image: var(--icon-external);
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+}
+
+a[target="_blank"]:hover::after {
+    opacity: 1;
+}
+
+/* The window chrome has its own control, and the publication list's own links
+   are already labelled. */
+.smart-window-modal a::after,
+.pub-links a::after {
+    content: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -243,22 +296,66 @@ pre * {
 /* Section labels in the left margin. These are real headings; the margin
    position is presentational only. */
 h2.left, .left > h2 {
+    overflow-wrap: normal;
+    hyphens: none;
+    line-height: 1.25;
     font-family: var(--font-sans);
     font-size: 0.78rem;
     font-weight: 600;
     letter-spacing: 0.07em;
     text-transform: uppercase;
     color: var(--muted);
-    margin: 0.35rem 0 0 0;
+    /* Single column: a plain left-aligned heading above its section. */
+    margin: 1.5rem 0 0.1rem 0;
 }
 
+/* Small navigation link under a margin heading. Set apart from the heading by
+   weight and colour rather than an underline, so it reads as a quiet
+   continuation of the label instead of competing with it. */
 .left .section-sub {
-    display: block;
+    display: inline-block;
+    margin-top: 0.4rem;
     font-family: var(--font-sans);
     font-size: 0.72rem;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.02em;
     text-transform: none;
     font-weight: 400;
+    color: var(--muted);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.left .section-sub::after {
+    content: "";
+    display: inline-block;
+    width: 0.6em;
+    height: 0.6em;
+    margin-left: 0.35em;
+    background-color: currentColor;
+    -webkit-mask-image: var(--icon-arrow-right);
+    mask-image: var(--icon-arrow-right);
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    transition: transform 0.15s ease;
+}
+
+.left .section-sub:hover {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.left .section-sub:hover::after {
+    transform: translateX(2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .left .section-sub::after {
+        transition: none;
+    }
 }
 
 .footnotes-side {
@@ -346,6 +443,10 @@ h2.left, .left > h2 {
     font-family: var(--font-sans);
     font-size: 0.8rem;
     color: var(--muted);
+    /* Spans the margin and body columns rather than sitting in the body one,
+       so the rule above it runs the full width of the content block. */
+    max-width: none;
+    text-align: left;
 }
 
 .site-footer a {
@@ -433,6 +534,25 @@ h2.left, .left > h2 {
     visibility: hidden;
 }
 
+/* On a touch screen the profile links were 20px tall — under the 24px minimum
+   target size, and easy to mis-tap when they sit on one line separated by
+   middots. Padding raises the hit area without changing how they read. */
+@media only screen and (max-width: 600px) {
+    .site-nav ul {
+        line-height: 2.1;
+    }
+
+    .site-nav a {
+        display: inline-block;
+        padding: 0.3rem 0;
+    }
+
+    .entry-list a,
+    .info-enum a {
+        padding: 0.12rem 0;
+    }
+}
+
 /* "In a floating window" is a long label; on a phone the row is stacked so it
    never has to fit beside its own heading. */
 @media only screen and (max-width: 600px) {
@@ -498,9 +618,9 @@ h2.left, .left > h2 {
 /* ---------------------------------------------------------------------------
    Responsive grid.
 
-   Below 800px the page is one column: margin labels stack above their content.
+   Below 920px the page is one column: margin labels stack above their content.
 
-   From 800px up it is four tracks — [flex] [label] [body] [flex]. The two
+   From 920px up it is four tracks — [flex] [label] [body] [flex]. The two
    outer tracks are `1fr`, so they absorb leftover width equally and the
    content block stays optically centred instead of hugging the left edge.
    The body track is capped at --measure; the label track is a fixed width
@@ -522,11 +642,11 @@ h2.left, .left > h2 {
     }
 }
 
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: 920px) {
     .page {
         grid-template-columns:
             minmax(1.5rem, 1fr)
-            11rem
+            fit-content(7.5rem)
             minmax(0, var(--measure))
             minmax(1.5rem, 1fr);
         column-gap: 2.5rem;
@@ -545,6 +665,22 @@ h2.left, .left > h2 {
         max-width: none;
         text-align: left;
         margin-bottom: 1rem;
+    }
+
+    h2.left, .left > h2 {
+        max-width: 9rem;
+        margin: 0.35rem 0 0 auto;
+    }
+
+    /* Full-width across the label and body columns.
+
+       min-width:0 matters: a spanning grid item contributes its min-content to
+       the tracks it covers, so the footer's controls were widening the label
+       column by ~100px. That dead space sat to the left of the portrait and
+       made the page look left-heavy even though the outer tracks were equal. */
+    .site-footer {
+        grid-column: 2 / 4;
+        min-width: 0;
     }
 
     .header.left {
@@ -568,10 +704,14 @@ h2.left, .left > h2 {
 }
 
 @media only screen and (min-width: 1100px) {
+    :root {
+        --measure: 40rem;
+    }
+
     .page {
         grid-template-columns:
             minmax(2rem, 1fr)
-            13rem
+            fit-content(8.5rem)
             minmax(0, var(--measure))
             minmax(2rem, 1fr);
     }
@@ -581,13 +721,13 @@ h2.left, .left > h2 {
    keep a real margin on both sides. 38rem is ~75 characters — the ceiling. */
 @media only screen and (min-width: 1500px) {
     :root {
-        --measure: 38rem;
+        --measure: 42rem;
     }
 
     .page {
         grid-template-columns:
             minmax(2rem, 1fr)
-            15rem
+            fit-content(9rem)
             minmax(0, var(--measure))
             minmax(2rem, 1fr);
     }
@@ -595,7 +735,7 @@ h2.left, .left > h2 {
 
 /* Pages flagged `wide: true` trade the reading measure for room — the
    publication list carries a year rail and filter chrome that need it. */
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: 920px) {
     .page.wide {
         grid-template-columns:
             minmax(1.5rem, 1fr)
@@ -615,39 +755,28 @@ h2.left, .left > h2 {
     }
 }
 
-/* The home page is mostly short list entries — publication titles, degrees,
-   awards — which tolerate a wider column than running prose does. It gets one,
-   and the single paragraph of prose on it keeps the reading measure via
-   .site-bio below. */
-@media only screen and (min-width: 1100px) {
-    .page.index {
-        grid-template-columns:
-            minmax(2rem, 1fr)
-            13rem
-            minmax(0, 44rem)
-            minmax(2rem, 1fr);
-    }
-}
+/* One column width for everything.
 
-@media only screen and (min-width: 1500px) {
-    .page.index {
-        grid-template-columns:
-            minmax(2rem, 1fr)
-            15rem
-            minmax(0, 46rem)
-            minmax(2rem, 1fr);
-    }
-}
+   The home page previously had a wider body track than the reading measure,
+   with .site-bio capped back down inside it. That left the bio's right edge
+   short of the publication and education entries beside it — a ragged right
+   boundary, and an asymmetric page: the unused strip on the right was wider
+   than the margin on the left even though the outer grid tracks are equal.
 
-.site-bio {
-    max-width: var(--measure);
-}
+   Now every block in the body column shares --measure, so the column is
+   exactly as wide as its content and the two 1fr tracks resolve equal. */
 
-/* On a large display the constraint is line length, not available width, so
-   the type scales up rather than the column stretching. Because --measure and
-   the track widths are in rem, the whole layout grows with it. */
+/* On a large display the binding constraint is line length, not available
+   width, so the type scales up and --measure grows with it in rem — the
+   column gets physically wider while characters-per-line stays put. */
 @media only screen and (min-width: 1500px) {
     html, body {
-        font-size: 18px;
+        font-size: 19px;
+    }
+}
+
+@media only screen and (min-width: 1800px) {
+    html, body {
+        font-size: 21px;
     }
 }
