@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "autoprefixer": "^10.4.21",
-    "hexo": "^6.3.0",
+    "hexo": "^8.1.2",
     "hexo-auto-canonical": "^0.1.1",
     "hexo-autonofollow": "^1.0.1",
     "hexo-deployer-git": "^4.0.0",
