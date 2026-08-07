@@ -1,182 +1,152 @@
-<% const avatarRotator = theme.avatar_rotator || {}; %>
-<% const avatarPool = avatarRotator.enabled !== false && Array.isArray(avatarRotator.images) ? avatarRotator.images : []; %>
-<div class="page">
-    <div class="header left avatar-img" id="avatar-rotator" role="img" aria-label="Avatar" data-root="<%- config.root %>">
-        <% if (avatarPool.length > 0) { %>
-            <% avatarPool.forEach(function(item) { %>
-                <template class="avatar-option" data-src="<%= item.src %>" data-caption="<%= item.caption || '' %>"></template>
-            <% }); %>
-        <% } %>
+<%
+    const rotator = theme.avatar_rotator || {};
+    const rotatorOn = rotator.enabled !== false;
+    // The headshot loads first; the travel photos are only reachable by click.
+    const headshot = rotatorOn ? (rotator.headshot || null) : null;
+    const gallery = rotatorOn && Array.isArray(rotator.images) ? rotator.images : [];
+    const avatarPool = (headshot ? [headshot] : []).concat(gallery);
+
+    const posts = site.posts.sort('date', 'desc');
+
+    // Partition once, in the template, so each section knows whether it has
+    // anything to show before it renders. The previous version rendered every
+    // section unconditionally and deleted the empty ones with an inline script
+    // after paint, which flashed empty headings on load.
+    const updateLayouts = theme.update_items || [];
+    const news = posts.filter(p => updateLayouts.includes(p.layout)).limit(5);
+    const projects = posts.filter(p => p.layout === 'project');
+    const blogs = posts.filter(p => p.layout === 'blog');
+
+    const selected = { conference: [], journal: [], preprint: [] };
+    posts.forEach(function (p) {
+        if (p.layout === 'paper' && p.selected === true && selected[p.type]) {
+            selected[p.type].push(p);
+        }
+    });
+    // Oldest-first within a group so [C1] is the earliest paper, as in a CV.
+    Object.keys(selected).forEach(k => selected[k].reverse());
+
+    const pubGroups = [
+        { key: 'C', items: selected.conference },
+        { key: 'J', items: selected.journal },
+        { key: 'P', items: selected.preprint }
+    ].filter(g => g.items.length > 0);
+%>
+<div class="page index">
+    <div class="header left avatar-img" id="avatar-rotator" role="img"
+         aria-label="Portrait of <%= config.name %>" data-root="<%- config.root %>">
+        <% avatarPool.forEach(function (item) { %>
+        <template class="avatar-option" data-src="<%= item.src %>" data-caption="<%= item.caption || '' %>"></template>
+        <% }); %>
         <div class="avatar-caption"></div>
+        <% if (avatarPool.length > 1) { %>
+        <div class="avatar-hint" aria-hidden="true">click to browse</div>
+        <% } %>
     </div>
-    <div class="header right">
-        <h1 class="bold"><%- config.name %></h1>
-        <span>
-            <% theme.social.forEach(function(item, idx) { %>
-                <a href="<%- item.url %>"><%- item.name %></a>
-                <% if (idx < theme.social.length - 1) { %>
-                    <span class="inline">|</span>
-                <% } %>
-            <% }); %>
-        </span>
-        <br>
-        <span><%- config.description %></span>
-    </div>
+
+    <header class="header right">
+        <h1><%= config.name %></h1>
+        <nav class="site-nav" aria-label="Profile links">
+            <ul>
+                <% theme.social.forEach(function (item) { %>
+                <li><a href="<%- item.url %>"><%= item.name %></a></li>
+                <% }); %>
+            </ul>
+        </nav>
+        <p class="site-bio"><%- config.description %></p>
+    </header>
+
     <% if (avatarPool.length > 0) { %>
-	    <%- js('js/avatar.min.js') %>
+    <%- js('js/avatar.js') %>
     <% } %>
-    <div class="updates left bold">
-        News
-    </div>
-    <div class="updates right">
-        <% let update_count = 1; %>
-        <% site.posts.sort('date', 'desc').each(function(item, i){ %>
-            <% if (update_count > 5) return; %>
-            <% if (theme.update_items.includes(item.layout)) { %>
-                <% update_count++; %>
-                <%- partial('_partial/article-excerpt', {item: item}) %>
-            <% } %>
-        <% }); %>
-        <div updates-count="<%- update_count %>"></div>
-    </div>
-    <script>
-        var count = document.querySelector('.updates.right div[updates-count]');
-        if (count.getAttribute('updates-count') === '1') {
-            document.querySelector('.updates.left').remove();
-            document.querySelector('.updates.right').remove();
-        }
-    </script>
-    <div class="education left bold">
-        Education
-    </div>
-    <div class="education right">
-        <ul class="info-enum" style="margin-top: 0;">
-            <% theme.info.education.forEach(function(item, idx) { %>
-                <li item-tag="[E<%- theme.info.education.length - idx %>]">
-                    <span class="inline">
-                        <strong class="inline"><%- item.degree %></strong>,
-                        <em class="inline"><%- item.institution %></em>
-                    </span>
-                    <br>
-                    <em class="inline"><%- item.duration %></em>
-                    <% if (item.sub_institution) { %>
-                        <em class="inline">@ <%- item.sub_institution %></em>
-                    <% } %>
-                    <% if (item.misc) { %>
-                        <br>
-                        <ul>
-                            <% for (content of item.misc) { %>
-                            <li><%- content %></li>
-                            <% } %>
-                        </ul>
-                    <% } %>
-                </li>
+
+    <% if (news.length > 0) { %>
+    <h2 class="updates left">News</h2>
+    <section class="updates right" aria-label="News">
+        <ul class="entry-list">
+            <% news.each(function (item) { %>
+            <li><%- partial('_partial/article-excerpt', { item: item }) %></li>
             <% }); %>
         </ul>
-    </div>
-    <div class="awards left bold">
-        Awards
-    </div>
-    <div class="awards right">
-        <ul class="info-enum" style="margin-top: 0;">
-            <% var aItems = theme.info.awards.sort((a, b) => b.year - a.year); %>
-            <% aItems.forEach(function(item, idx) { %>
-                <li item-tag="[A<%- aItems.length - idx %>]">
-                    <strong class="inline"><%- item.name %></strong>
-                    <span class="inline">(<%- item.year %>),</span>
-                    <em class="inline"><%- item.committee %></em>
-                </li>
+    </section>
+    <% } %>
+
+    <h2 class="education left">Education</h2>
+    <section class="education right" aria-label="Education">
+        <ul class="info-enum">
+            <% theme.info.education.forEach(function (item, idx) { %>
+            <li item-tag="[E<%= theme.info.education.length - idx %>]">
+                <strong><%- item.degree %></strong>, <em><%- item.institution %></em>
+                <span class="entry-meta">
+                    <%- item.duration %><% if (item.sub_institution) { %> &middot; <%- item.sub_institution %><% } %>
+                </span>
+                <% if (item.misc) { %>
+                <ul>
+                    <% item.misc.forEach(function (content) { %>
+                    <li><%- content %></li>
+                    <% }); %>
+                </ul>
+                <% } %>
+            </li>
             <% }); %>
         </ul>
-    </div>
-    <div class="publication left bold">
-        Selected Publications<br>
-        <a href="<%- config.root %>publications">(Full List)</a>
-    </div>
-    <div class="publication right">
-        <ul class="info-enum" style="margin-top: 0;">
-            <% 
-            var cItems = [], jItems = [], pItems = []; 
-            site.posts.sort('date', 'desc', -1).forEach(function(item) {
-                    if (item.layout === 'paper' && item.selected === true) {
-                        if (item.type === 'conference') cItems.push(item);
-                        if (item.type === 'journal') jItems.push(item);
-                        if (item.type === 'preprint') pItems.push(item);
-                    }
-            });
-            %>
-            <% cItems.forEach(function(item, idx) { %>
-                <li item-tag="<%- `[C${cItems.length - idx}]` %>">
-                    <a href="<%- config.root %><%- item.path %>" class="inline">
-                        <strong><%- item.title %></strong>
-                    </a>,
-                    <em class="inline"><%- item.venue %></em>
-                </li>
-            <% }); %>
-            <% if (jItems.length > 0) { %>
-                <hr>
-            <% } %>
-            <% jItems.forEach(function(item, idx) { %>
-                <li item-tag="<%- `[J${jItems.length - idx}]` %>">
-                    <a href="<%- config.root %><%- item.path %>" class="inline">
-                        <strong><%- item.title %></strong>
-                    </a>,
-                    <em class="inline"><%- item.venue %></em>
-                </li>
-            <% }); %>
-            <% if (pItems.length > 0) { %>
-                <hr>
-            <% } %>
-            <% pItems.forEach(function(item, idx) { %>
-                <li item-tag="<%- `[P${pItems.length - idx}]` %>">
-                    <a href="<%- config.root %><%- item.path %>" class="inline">
-                        <strong><%- item.title %></strong>
-                    </a>,
-                    <em class="inline"><%- item.venue %></em>
-                </li>
+    </section>
+
+    <h2 class="awards left">Awards</h2>
+    <section class="awards right" aria-label="Awards">
+        <ul class="info-enum">
+            <% const awards = theme.info.awards.slice().sort((a, b) => b.year - a.year); %>
+            <% awards.forEach(function (item, idx) { %>
+            <li item-tag="[A<%= awards.length - idx %>]">
+                <strong><%- item.name %></strong> (<%= item.year %>)
+                <span class="entry-meta"><%- item.committee %></span>
+            </li>
             <% }); %>
         </ul>
-    </div>
-    <div class="projects left bold">
-        Projects
-    </div>
-    <div class="projects right">
-        <% let project_count = 1; %>
-        <% site.posts.sort('date', 'desc').each(function(item){ %>
-            <% if(item.layout === 'project') { %>
-                <% project_count++; %>
-                <%- partial('_partial/project-excerpt', {item: item}) %>
-            <% } %>
-        <% }); %>
-        <div projects-count="<%- project_count %>"></div>
-    </div>
-    <script>
-        var count = document.querySelector('.projects.right div[projects-count]');
-        if (count.getAttribute('projects-count') === '1') {
-            document.querySelector('.projects.left').remove();
-            document.querySelector('.projects.right').remove();
-        }
-    </script>
-    <div class="blogs left bold">
-        Blog posts
-    </div>
-    <div class="blogs right">
-        <% let blog_count = 1; %>
-        <% site.posts.sort('date', 'desc').each(function(item){ %>
-            <% if(item.layout === 'blog') { %>
-                <% blog_count++; %>
-                <%- partial('_partial/blog-excerpt', {item: item}) %>
-            <% } %>
-        <% }); %>
-        <div blog-count="<%- blog_count %>"></div>
-    </div>
-    <script>
-        var count = document.querySelector('.blogs.right div[blog-count]');
-        if (count.getAttribute('blog-count') === '1') {
-            document.querySelector('.blogs.left').remove();
-            document.querySelector('.blogs.right').remove();
-        }
-    </script>
+    </section>
+
+    <% if (pubGroups.length > 0) { %>
+    <h2 class="publication left">
+        Selected Publications
+        <a class="section-sub" href="<%- config.root %>publications">Full list &rarr;</a>
+    </h2>
+    <section class="publication right" aria-label="Selected publications">
+        <ul class="info-enum">
+            <% pubGroups.forEach(function (group, gi) { %>
+            <% if (gi > 0) { %><hr><% } %>
+            <% group.items.forEach(function (item, idx) { %>
+            <li item-tag="[<%= group.key %><%= group.items.length - idx %>]">
+                <a href="<%- config.root %><%- item.path %>"><strong><%= item.title %></strong></a>
+                <span class="entry-meta"><%- item.venue %></span>
+            </li>
+            <% }); %>
+            <% }); %>
+        </ul>
+    </section>
+    <% } %>
+
+    <% if (projects.length > 0) { %>
+    <h2 class="projects left">Projects</h2>
+    <section class="projects right" aria-label="Projects">
+        <ul class="entry-list">
+            <% projects.each(function (item) { %>
+            <li><%- partial('_partial/project-excerpt', { item: item }) %></li>
+            <% }); %>
+        </ul>
+    </section>
+    <% } %>
+
+    <% if (blogs.length > 0) { %>
+    <h2 class="blogs left">Blog posts</h2>
+    <section class="blogs right" aria-label="Blog posts">
+        <ul class="entry-list">
+            <% blogs.each(function (item) { %>
+            <li><%- partial('_partial/blog-excerpt', { item: item }) %></li>
+            <% }); %>
+        </ul>
+    </section>
+    <% } %>
+
     <%- partial('_partial/footer') %>
     <%- partial('_partial/smart-window') %>
 </div>

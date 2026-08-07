@@ -115,12 +115,12 @@ robotstxt:
   allow:
     - /
   disallow:
-    - /photography/
     - /js/
     - /css/
     - /fonts/
-    - /assets/
     - /styles/
+    # /assets/ is deliberately crawlable: it holds the paper PDFs that
+    # citation_pdf_url points Google Scholar at, plus the CV.
   sitemap: https://pan2013e.github.io/sitemap.xml
 
 # nofollow

@@ -1,12 +1,3 @@
-<div class="post header left">
-    <span class="nav-left" id="nav-back">
-        <a href="<%- config.root %>">&larr; BACK</a><br>
-    </span>
-    <script>
-        if (document.referrer == "" || history.length == 0) {
-            document.querySelector('#nav-back a').innerHTML = "&larr; HOME";
-        } else {
-            document.querySelector('#nav-back a').innerHTML = "&larr; BACK";
-        }
-    </script>
-</div>
+<nav class="post header left" aria-label="Breadcrumb">
+    <a href="<%- config.root %>">&larr; Home</a>
+</nav>

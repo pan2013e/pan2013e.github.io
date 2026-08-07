@@ -1,10 +1,23 @@
 <!doctype html>
-<html lang="<%=config.language%>" dir="ltr">
+<html lang="<%= config.language %>" dir="ltr">
 <%- partial('_partial/head') %>
-<body>
+<body data-smart-window-default="<%= (theme.smart_window && theme.smart_window.default_enabled === false) ? 'false' : 'true' %>">
+    <noscript>
+        <style>.page { display: none !important; }</style>
+        <div class="no-js-notice">
+            <h1>JavaScript is required to view this site</h1>
+            <p>
+                This page builds its layout in the browser, so it cannot be shown
+                with JavaScript disabled. Please enable JavaScript and reload.
+            </p>
+            <p>
+                You can still reach my
+                <a href="https://scholar.google.com/citations?user=oCyJ8lMAAAAJ">Google Scholar profile</a>
+                or email me at
+                <a href="mailto:<%= config.email || 'zy_pan@zju.edu.cn' %>"><%= config.email || 'zy_pan@zju.edu.cn' %></a>.
+            </p>
+        </div>
+    </noscript>
     <%- body %>
 </body>
-<% if (page.title === 'Publications') { %>
-    <%- css('styles/publist.min.css') %>
-<% } %>
 </html>

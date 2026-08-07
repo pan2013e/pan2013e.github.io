@@ -1,0 +1,39 @@
+/* Type scale.
+
+   No webfonts are downloaded. The serif stack resolves to Charter on macOS
+   and iOS, Sitka Text on Windows, and Georgia everywhere else — all of which
+   are designed for body text at reading sizes. The sans stack is reserved for
+   chrome: margin labels, navigation, footer, and the smart-window controls.
+
+   Font families themselves are declared as custom properties in main.css. */
+
+.bold {
+    font-weight: 600;
+}
+
+/* Author lists, venue names, and dates sit below body text in the hierarchy. */
+.paper-authors {
+    display: block;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.paper-venue {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    margin-top: 0.35rem;
+}
+
+/* Venue names in running lists read as titles of works. */
+em, cite {
+    font-style: italic;
+}
+
+strong {
+    font-weight: 600;
+}

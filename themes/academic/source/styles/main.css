@@ -1,0 +1,653 @@
+:root {
+    /* Ink and paper. Near-neutral by design: the page should read as a
+       document, so only links carry chroma. */
+    --dark: #1a1a1a;        /* body text                                   */
+    --muted: #5c5c5c;       /* secondary text: dates, author lists, notes  */
+    --rule: #dcdcdc;        /* hairlines and dividers                      */
+    --background: #fcfcfc;  /* paper                                       */
+    --surface: #ffffff;     /* raised panels: menus, window chrome         */
+    --shadow: rgba(0, 0, 0, 0.12);
+    --hover: rgba(0, 0, 0, 0.05);   /* row/button hover wash                */
+
+    /* Single accent. --accent is the link colour; --accent-strong is the
+       hover/visited-adjacent tone. Change these two to re-theme the site. */
+    --accent: #00356b;
+    --accent-strong: #002247;
+
+    /* Kept for the smart-window chrome, which styles itself against the page. */
+    --medium: var(--accent);
+    --light: var(--rule);
+
+    /* hexo-next-publist injects Primer CSS at runtime and expects these to be
+       defined by the host page. Left undefined, its dropdown chevron renders
+       transparent — which is why a hand-drawn triangle used to sit on top. */
+    --btn-default-border-color: var(--muted);
+    --color-canvas-overlay: var(--surface);
+
+    /* Syntax highlighting tokens, consumed by hljs.css. Kept here so both
+       themes are defined in one place alongside the rest of the palette. */
+    --code-bg: #f6f6f5;
+    --code-fg: #24292f;
+    --code-comment: #6a737d;
+    --code-keyword: #a4262c;
+    --code-string: #0a6a4a;
+    --code-number: #0550ae;
+    --code-title: #6f42c1;
+    --code-variable: #953800;
+    --code-builtin: #0a6a4a;
+    --code-meta: #1f7199;
+
+    /* Reading measure, applied to the body column. Deliberately capped: past
+       ~75 characters a line the eye loses its place returning to the left
+       edge, so wide viewports get wider margins rather than longer lines. */
+    --measure: 36rem;
+
+    --font-serif: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+    color-scheme: light;
+}
+
+/* --- Dark theme -----------------------------------------------------------
+   `data-theme` is always present: an inline script in <head> resolves the
+   stored choice (auto | light | dark) to a concrete value before first paint.
+   That keeps this to a single selector, which the publist plugin overrides and
+   Tailwind's dark: variants can both key off. */
+
+:root[data-theme="dark"] {
+    --dark: #e8e6e3;
+    --muted: #9aa4ae;
+    --rule: #2f3438;
+    --background: #15181b;
+    --surface: #1d2125;
+    --shadow: rgba(0, 0, 0, 0.5);
+    --hover: rgba(255, 255, 255, 0.07);
+    --accent: #8ab4e8;
+    --accent-strong: #b6d2f2;
+
+    --code-bg: #1b1f24;
+    --code-fg: #d6dae0;
+    --code-comment: #8b949e;
+    --code-keyword: #ff7b72;
+    --code-string: #7ee787;
+    --code-number: #79c0ff;
+    --code-title: #d2a8ff;
+    --code-variable: #ffa657;
+    --code-builtin: #7ee787;
+    --code-meta: #79c0ff;
+
+    color-scheme: dark;
+}
+
+/* Reserving the scrollbar gutter keeps the layout from jumping sideways when
+   filtering the publication list changes the page height. */
+html {
+    scrollbar-gutter: stable;
+}
+
+/* Theme switching is deliberately instant. Transitioning the page background
+   cross-fades every surface at once, which reads as a smear rather than a
+   polish — and leaves the page in a half-toned state if frames stall. */
+
+html, body {
+    font-family: var(--font-serif);
+    line-height: 1.6;
+    font-size: 17px;
+    color: var(--dark);
+    background: var(--background);
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+}
+
+a {
+    text-decoration: none;
+    color: var(--accent);
+}
+
+a:hover {
+    color: var(--accent-strong);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+}
+
+a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 1px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0rem;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+}
+
+h1 {
+    font-size: 1.9rem;
+    line-height: 1.25;
+    margin-bottom: 0.75rem;
+}
+
+h2 {
+    font-size: 1rem;
+    line-height: 1.4;
+    margin-bottom: 0;
+}
+
+h3 {
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 1em 0;
+  max-width: 50vw;
+}
+
+p {
+    margin-top: 0px;
+}
+
+small, .muted {
+    color: var(--muted);
+}
+
+img {
+    width: 100%;
+}
+
+table{
+    table-layout: fixed;
+    width: 100%;
+}
+
+td {
+    width: 2rem;
+    word-wrap:break-word
+}
+td+td {
+width: auto;
+}
+
+td.gutter {
+    display: none;
+}
+
+pre {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+code, kbd, samp, pre {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+}
+
+.code {
+    line-height: 1.45;
+}
+
+pre * {
+    display: inline;
+}
+
+
+.page {
+    display: grid;
+    grid-template-columns: 0.5rem auto 0.5rem;
+    grid-template-rows: auto auto auto auto auto;
+    column-gap: 1rem;
+    row-gap: 1rem;
+    padding-top: 3rem;
+}
+
+
+.left {
+    grid-column-start: 2;
+    grid-column-end: 2;
+    text-align: left;
+}
+
+.right {
+    grid-column-start: 2;
+    grid-column-end: 2;
+    margin-bottom: 1rem;
+    /* Cap the reading measure at ~68 characters. Without this the grid column
+       stretches to the viewport and body text runs past 90 characters a line. */
+    max-width: var(--measure);
+}
+
+/* Pages that set `wide: true` in front matter opt out of the reading measure —
+   the publication list and any wide tables manage their own width. */
+.page.wide .right, .publication.right, .rendered {
+    max-width: none;
+}
+
+.header {
+    align-self: end;
+    padding-right: 0rem;
+}
+
+.header.left {
+    justify-self: center;
+    padding-right: 0rem;
+}
+
+/* Section labels in the left margin. These are real headings; the margin
+   position is presentational only. */
+h2.left, .left > h2 {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0.35rem 0 0 0;
+}
+
+.left .section-sub {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+    text-transform: none;
+    font-weight: 400;
+}
+
+.footnotes-side {
+    display: none;
+}
+.footnotes-bottom {
+    display: block;
+}
+
+.info-enum {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 0;
+}
+
+.info-enum > li {
+    margin-bottom: 0.7rem;
+}
+
+.info-enum > li:last-child {
+    margin-bottom: 0;
+}
+
+.info-enum li[item-tag] {
+    list-style: none;
+    position: relative;
+    padding-left: 3rem;
+}
+
+.info-enum li[item-tag]::before {
+    content: attr(item-tag);
+    position: absolute;
+    left: 0;
+    top: 0.1em;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+}
+
+/* Nested detail lines (advisors, sub-institutions). */
+.info-enum ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0.15rem 0 0 0;
+}
+
+.info-enum ul li {
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+
+.entry-meta {
+    display: block;
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+
+/* Inline link list under the site title. */
+.site-nav ul {
+    list-style: none;
+    margin: 0.1rem 0 0.9rem 0;
+    padding: 0;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+}
+
+.site-nav li {
+    display: inline;
+}
+
+.site-nav li + li::before {
+    content: "·";
+    margin: 0 0.5em;
+    color: var(--rule);
+}
+
+.site-bio {
+    margin: 0;
+}
+
+.site-footer {
+    margin-top: 4rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+.site-footer a {
+    color: var(--muted);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+}
+
+.site-footer a:hover {
+    color: var(--accent);
+}
+
+.site-footer p {
+    margin: 0 0 0.35rem 0;
+}
+
+/* --- Preference controls --------------------------------------------------
+   Explicit segmented controls rather than a sentence with a hidden verb. Each
+   row states what is being set, and every option is visible with the active
+   one marked — so the current state is readable without clicking anything. */
+
+.site-prefs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 2rem;
+    margin: 0 0 1.1rem 0;
+}
+
+.pref-row {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+}
+
+.pref-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+.pref-options {
+    display: inline-flex;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--surface);
+}
+
+.pref-options button {
+    font: inherit;
+    font-size: 0.78rem;
+    line-height: 1;
+    color: var(--muted);
+    background: none;
+    border: none;
+    border-right: 1px solid var(--rule);
+    padding: 0.34rem 0.65rem;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.pref-options button:last-child {
+    border-right: none;
+}
+
+.pref-options button:hover {
+    color: var(--dark);
+    background: var(--background);
+}
+
+.pref-options button[aria-checked="true"] {
+    color: var(--surface);
+    background: var(--accent);
+}
+
+.pref-options button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+}
+
+/* The controls do nothing until their script wires them up. */
+.site-prefs:not(.is-ready) {
+    visibility: hidden;
+}
+
+/* "In a floating window" is a long label; on a phone the row is stacked so it
+   never has to fit beside its own heading. */
+@media only screen and (max-width: 600px) {
+    .site-prefs {
+        gap: 0.9rem;
+    }
+
+    .pref-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+    }
+
+    .pref-options {
+        max-width: 100%;
+    }
+
+    .pref-options button {
+        padding: 0.4rem 0.55rem;
+    }
+}
+
+/* --- No-JavaScript notice -------------------------------------------------
+   The page body is assembled at runtime (two-column re-parenting, portrait,
+   floating windows), so there is no meaningful static fallback. A <noscript>
+   block in layout.ejs hides .page and shows this instead. */
+
+.no-js-notice {
+    max-width: 32rem;
+    margin: 6rem auto;
+    padding: 0 1.5rem;
+    text-align: center;
+}
+
+.no-js-notice h1 {
+    font-size: 1.35rem;
+    margin-bottom: 0.75rem;
+}
+
+.no-js-notice p {
+    color: var(--muted);
+}
+
+.entry-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.entry-list > li {
+    margin-bottom: 0.6rem;
+}
+
+.entry-kicker {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-right: 0.5em;
+}
+
+/* ---------------------------------------------------------------------------
+   Responsive grid.
+
+   Below 800px the page is one column: margin labels stack above their content.
+
+   From 800px up it is four tracks — [flex] [label] [body] [flex]. The two
+   outer tracks are `1fr`, so they absorb leftover width equally and the
+   content block stays optically centred instead of hugging the left edge.
+   The body track is capped at --measure; the label track is a fixed width
+   that steps up on larger screens. Wide viewports therefore add margin, not
+   line length.
+
+   The body track is a fixed minmax() rather than `auto` for a second reason:
+   an `auto` track is sized by its content, so filtering the publication list
+   changed the widest entry and shifted the whole layout sideways.
+   --------------------------------------------------------------------------- */
+
+.page {
+    grid-template-columns: 0 auto 0;
+}
+
+@media only screen and (min-width: 600px) {
+    .page {
+        grid-template-columns: 1.5rem auto 1.5rem;
+    }
+}
+
+@media only screen and (min-width: 800px) {
+    .page {
+        grid-template-columns:
+            minmax(1.5rem, 1fr)
+            11rem
+            minmax(0, var(--measure))
+            minmax(1.5rem, 1fr);
+        column-gap: 2.5rem;
+        padding-top: 6rem;
+    }
+
+    .left {
+        grid-column: 2;
+        max-width: none;
+        text-align: right;
+        padding-right: 0;
+    }
+
+    .right {
+        grid-column: 3;
+        max-width: none;
+        text-align: left;
+        margin-bottom: 1rem;
+    }
+
+    .header.left {
+        justify-self: right;
+        padding-right: 0;
+        margin-bottom: 2rem;
+    }
+
+    .header.right {
+        margin-bottom: 3rem;
+    }
+
+    /* Footnotes move from under the paragraph into the left margin. */
+    .footnotes-side {
+        display: block;
+    }
+
+    .footnotes-bottom {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 1100px) {
+    .page {
+        grid-template-columns:
+            minmax(2rem, 1fr)
+            13rem
+            minmax(0, var(--measure))
+            minmax(2rem, 1fr);
+    }
+}
+
+/* Only past this point is there enough room to lengthen the line and still
+   keep a real margin on both sides. 38rem is ~75 characters — the ceiling. */
+@media only screen and (min-width: 1500px) {
+    :root {
+        --measure: 38rem;
+    }
+
+    .page {
+        grid-template-columns:
+            minmax(2rem, 1fr)
+            15rem
+            minmax(0, var(--measure))
+            minmax(2rem, 1fr);
+    }
+}
+
+/* Pages flagged `wide: true` trade the reading measure for room — the
+   publication list carries a year rail and filter chrome that need it. */
+@media only screen and (min-width: 800px) {
+    .page.wide {
+        grid-template-columns:
+            minmax(1.5rem, 1fr)
+            11rem
+            minmax(0, 52rem)
+            minmax(1.5rem, 1fr);
+    }
+}
+
+@media only screen and (min-width: 1100px) {
+    .page.wide {
+        grid-template-columns:
+            minmax(2rem, 1fr)
+            13rem
+            minmax(0, 56rem)
+            minmax(2rem, 1fr);
+    }
+}
+
+/* The home page is mostly short list entries — publication titles, degrees,
+   awards — which tolerate a wider column than running prose does. It gets one,
+   and the single paragraph of prose on it keeps the reading measure via
+   .site-bio below. */
+@media only screen and (min-width: 1100px) {
+    .page.index {
+        grid-template-columns:
+            minmax(2rem, 1fr)
+            13rem
+            minmax(0, 44rem)
+            minmax(2rem, 1fr);
+    }
+}
+
+@media only screen and (min-width: 1500px) {
+    .page.index {
+        grid-template-columns:
+            minmax(2rem, 1fr)
+            15rem
+            minmax(0, 46rem)
+            minmax(2rem, 1fr);
+    }
+}
+
+.site-bio {
+    max-width: var(--measure);
+}
+
+/* On a large display the constraint is line length, not available width, so
+   the type scales up rather than the column stretching. Because --measure and
+   the track widths are in rem, the whole layout grows with it. */
+@media only screen and (min-width: 1500px) {
+    html, body {
+        font-size: 18px;
+    }
+}

@@ -1,21 +1,91 @@
+<%
+    const v = theme.assets_version ? `?v=${theme.assets_version}` : '';
+    const asset = (p) => `${config.root}${p}${v}`;
+
+    const isIndex = page.layout === 'index';
+    const isPaper = page.layout === 'paper';
+
+    // Papers describe themselves; everything else falls back to the site bio.
+    const pageDesc = (page.description || (isPaper && page.excerpt) || config.description || '')
+        .replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim().slice(0, 300);
+
+    // The index's front-matter title is a placeholder ("Home Page"); the site
+    // title is the real one there.
+    const shortTitle = isIndex ? config.title : (page.title || config.title);
+    const pageTitle = isIndex ? config.title : `${config.title} | ${page.title}`;
+    const pageUrl = full_url_for(page.path || '/');
+
+    // Google Scholar indexes personal paper pages via these tags. authors is
+    // authored as HTML in front matter, so strip tags and split on commas.
+    const scholarAuthors = isPaper && page.authors
+        ? page.authors.replace(/<[^>]*>/g, '').split(/\s*,\s*/)
+            .map(a => a.replace(/\*/g, '').trim()).filter(Boolean)
+        : [];
+    const pdfLink = isPaper && page.pdf ? full_url_for(page.pdf) : null;
+
+    const styles = ['styles/normalize.css', 'styles/fonts.css', 'styles/main.css'];
+    if (isIndex) styles.push('styles/tailwind.css', 'styles/smart-window.css', 'styles/avatar.css');
+    else styles.push('styles/post.css', 'styles/hljs.css');
+    if (page.title === 'Publications') styles.push('styles/publist.css');
+%>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="description" content="">
-    <meta name="author" content="<%-config.author%>">
+    <title><%- pageTitle %></title>
+    <meta name="description" content="<%= pageDesc %>">
+    <meta name="author" content="<%= config.author %>">
     <%- autoCanonical(config, page) %>
-    <link rel="icon" href="favicon/favicon.ico">
-    <title><%- config.title + (page.title ? ' | ' + page.title : '') %></title>
-    <% if (page.layout === 'index') { %>
-    <%- css(['styles/tailwind.css', 'styles/smart-window.min.css']) %>
+
+    <!-- Resolves the theme before first paint, so navigating with dark mode on
+         never flashes white. "auto" is resolved to a concrete value here rather
+         than left to a media query, so a single [data-theme="dark"] selector
+         covers hand-written CSS, the publist plugin, and Tailwind's dark:
+         variants alike. -->
+    <script>
+    (function () {
+        var choice = 'auto';
+        try { choice = localStorage.getItem('theme') || 'auto'; } catch (e) { /* storage blocked */ }
+        var resolved = (choice === 'dark' || choice === 'light')
+            ? choice
+            : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', resolved);
+    })();
+    </script>
+
+    <link rel="icon" href="<%- asset('favicon.svg') %>" type="image/svg+xml">
+    <link rel="alternate" type="application/rss+xml" title="<%= config.title %>" href="<%- config.root %>rss2.xml">
+
+    <meta property="og:type" content="<%= isPaper ? 'article' : 'profile' %>">
+    <meta property="og:site_name" content="<%= config.title %>">
+    <meta property="og:title" content="<%= shortTitle %>">
+    <meta property="og:description" content="<%= pageDesc %>">
+    <meta property="og:url" content="<%- pageUrl %>">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="<%= shortTitle %>">
+    <meta name="twitter:description" content="<%= pageDesc %>">
+
+    <% if (isPaper) { %>
+    <meta name="citation_title" content="<%= page.title %>">
+    <% scholarAuthors.forEach(function (a) { %>
+    <meta name="citation_author" content="<%= a %>">
+    <% }); %>
+    <% if (page.date) { %>
+    <meta name="citation_publication_date" content="<%= date(page.date, 'YYYY/MM/DD') %>">
     <% } %>
-    <%- css(['styles/normalize.min.css', 'styles/fonts.min.css', 'styles/main.min.css', 'styles/post.min.css', 'styles/hljs.min.css']) %>
-    <% if (page.layout === 'index') { %>
-    <% const avatarHref = `${config.root}styles/avatar.min.css${theme.assets_version ? `?v=${theme.assets_version}` : ''}`; %>
-    <link rel="stylesheet" href="<%- avatarHref %>">
+    <% if (page.venue) { %>
+    <meta name="citation_conference_title" content="<%= page.venue %>">
     <% } %>
-    <!-- Google tag (gtag.js) -->
+    <% if (pdfLink) { %>
+    <meta name="citation_pdf_url" content="<%- pdfLink %>">
+    <% } %>
+    <% } %>
+
+    <% styles.forEach(function (href) { %>
+    <link rel="stylesheet" href="<%- asset(href) %>">
+    <% }); %>
+
+    <% if (theme.analytics && theme.analytics.gtag) { %>
     <script async src="https://www.googletagmanager.com/gtag/js?id=<%- theme.analytics.gtag %>"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -23,4 +93,5 @@
     gtag('js', new Date());
     gtag('config', '<%- theme.analytics.gtag %>');
     </script>
+    <% } %>
 </head>

@@ -40,11 +40,18 @@ info:
     - name: Outstanding Graduate
       year: 2023
       committee: Zhejiang University
+# Floating windows for internal links. Visitors can flip this per-browser with
+# the toggle in the page footer; this is only the first-visit default.
+smart_window:
+  default_enabled: true
+
 avatar_rotator:
   enabled: true
+  # Shown on load. The images below are only reachable by clicking the photo.
+  headshot:
+    src: /assets/avatars/1.jpg
+    caption: "ICSE 2025, Ottawa"
   images:
-    - src: /assets/avatars/1.jpg
-      caption: "Ottawa, Canada"
     - src: /assets/avatars/2.jpg
       caption: "Cairo, Egypt"
     - src: /assets/avatars/3.jpg

@@ -1,4 +1,32 @@
-<!-- Reserved -->
-<!-- <div class="footer right" style="margin-top: 5rem; color: grey">
-    Copyright(C)2020-<%- date(Date.now(), 'YYYY') %> Zhiyuan Pan.
-</div> -->
+<footer class="site-footer right">
+    <div class="site-prefs" id="site-prefs">
+        <div class="pref-row">
+            <span class="pref-label" id="pref-theme-label">Theme</span>
+            <div class="pref-options" role="radiogroup" aria-labelledby="pref-theme-label">
+                <button type="button" role="radio" aria-checked="false" data-theme-choice="auto">Auto</button>
+                <button type="button" role="radio" aria-checked="false" data-theme-choice="light">Light</button>
+                <button type="button" role="radio" aria-checked="false" data-theme-choice="dark">Dark</button>
+            </div>
+        </div>
+
+        <% /* Floating windows only exist on the home page, so the control that
+              governs them only appears there. */ %>
+        <% if (page.layout === 'index') { %>
+        <div class="pref-row">
+            <span class="pref-label" id="pref-links-label">Site links open</span>
+            <div class="pref-options" role="radiogroup" aria-labelledby="pref-links-label">
+                <button type="button" role="radio" aria-checked="false" data-window-choice="tab">In this tab</button>
+                <button type="button" role="radio" aria-checked="false" data-window-choice="window">In a floating window</button>
+            </div>
+        </div>
+        <% } %>
+    </div>
+
+    <p class="footer-legal">
+        &copy; <%= date(Date.now(), 'YYYY') %> <%= config.author %>.
+        <%# data-no-window keeps the feed out of the floating-window handler —
+            an XML feed in an iframe is not something anyone wants. %>
+        <a href="<%- config.root %>rss2.xml" data-no-window>RSS</a>
+    </p>
+    <%- js('js/prefs.js') %>
+</footer>

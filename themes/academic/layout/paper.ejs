@@ -1,14 +1,15 @@
 <div class="page">
     <%- partial('_partial/post-nav') %>
-    <div class="post header right">
-        <h1><%- page.title %></h1>
-        <span style="color: gray">
-            <%- page.authors %>
-        </span>
-    </div>
+    <header class="post header right">
+        <h1><%= page.title %></h1>
+        <p class="paper-authors"><%- page.authors %></p>
+        <% if (page.venue) { %>
+        <p class="paper-venue"><%- page.venue %></p>
+        <% } %>
+    </header>
     <div class="rendered">
         <%- page.content %>
     </div>
-    <%- js('js/format-two-columns.min.js') %>
     <%- partial('_partial/footer') %>
+    <%- js('js/format-two-columns.js') %>
 </div>

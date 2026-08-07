@@ -1,14 +1,23 @@
-<div class="page">
+<div class="page<%= page.wide ? ' wide' : '' %>">
     <%- partial('_partial/post-nav') %>
-    <div class="post header right">
-        <h1><%- page.title %></h1>
-        <span style="color: gray">
-            Last updated <%- date(page.updated) %> 
-        </span>
-    </div>
+    <header class="post header right">
+        <h1><%= page.title %></h1>
+        <% /* Only dated entries carry a timestamp. Standalone pages such as
+              Publications live outside _posts, where Hexo falls back to the
+              file's creation time — that printed a "last updated" date that
+              moved on every deploy without the content changing. */ %>
+        <% const isDatedEntry = page.source && page.source.replace(/\\/g, '/').indexOf('_posts/') === 0; %>
+        <% if (isDatedEntry && page.date) { %>
+        <p class="entry-meta">
+            <time datetime="<%= date(page.updated || page.date, 'YYYY-MM-DD') %>">
+                Last updated <%= date(page.updated || page.date, 'D MMMM YYYY') %>
+            </time>
+        </p>
+        <% } %>
+    </header>
     <div class="rendered">
         <%- page.content %>
     </div>
-    <%- js('js/format-two-columns.min.js') %>
     <%- partial('_partial/footer') %>
+    <%- js('js/format-two-columns.js') %>
 </div>

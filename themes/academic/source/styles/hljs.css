@@ -1,0 +1,121 @@
+/* Syntax highlighting.
+ *
+ * Replaces the stock highlight.js "Default" theme, which hard-coded a light
+ * #f3f3f3 background and stayed light in dark mode. Every colour here comes
+ * from a token defined in main.css, so the code block follows the page theme.
+ *
+ * Class names are highlight.js's; only the palette is ours.
+ */
+
+pre {
+    background: var(--code-bg);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 0.85em 1em;
+    overflow-x: auto;
+    margin: 0 0 1rem 0;
+}
+
+/* Inline code, outside a <pre>. */
+:not(pre) > code {
+    background: var(--code-bg);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 0.1em 0.35em;
+}
+
+pre code.hljs {
+    display: block;
+    padding: 0;
+    background: none;
+}
+
+code.hljs {
+    padding: 0;
+    background: none;
+}
+
+.hljs {
+    color: var(--code-fg);
+    background: none;
+}
+
+.hljs-comment,
+.hljs-quote {
+    color: var(--code-comment);
+    font-style: italic;
+}
+
+.hljs-attribute,
+.hljs-doctag,
+.hljs-keyword,
+.hljs-meta .hljs-keyword,
+.hljs-name,
+.hljs-selector-tag {
+    color: var(--code-keyword);
+    font-weight: 600;
+}
+
+.hljs-deletion,
+.hljs-selector-class,
+.hljs-selector-id,
+.hljs-string,
+.hljs-template-tag,
+.hljs-type {
+    color: var(--code-string);
+}
+
+.hljs-number,
+.hljs-literal {
+    color: var(--code-number);
+}
+
+.hljs-section,
+.hljs-title {
+    color: var(--code-title);
+    font-weight: 600;
+}
+
+.hljs-link,
+.hljs-operator,
+.hljs-regexp,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-symbol,
+.hljs-template-variable,
+.hljs-variable {
+    color: var(--code-variable);
+}
+
+.hljs-addition,
+.hljs-built_in,
+.hljs-bullet,
+.hljs-code {
+    color: var(--code-builtin);
+}
+
+.hljs-meta {
+    color: var(--code-meta);
+}
+
+.hljs-meta .hljs-string {
+    color: var(--code-string);
+}
+
+.hljs-punctuation,
+.hljs-tag {
+    color: var(--code-comment);
+}
+
+.hljs-tag .hljs-attr,
+.hljs-tag .hljs-name {
+    color: var(--code-fg);
+}
+
+.hljs-emphasis {
+    font-style: italic;
+}
+
+.hljs-strong {
+    font-weight: 700;
+}

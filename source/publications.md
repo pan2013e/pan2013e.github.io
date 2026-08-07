@@ -2,9 +2,9 @@
 title: Publications
 layout: post
 permalink: /publications/
+# The publication list manages its own width; opt out of the body measure.
+wide: true
 ---
-
-### 
 
 {% publist pubs %}
 version: 2

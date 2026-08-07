@@ -8,9 +8,10 @@ venue: ICSE'24
 selected: true
 authors: "<b>Zhiyuan Pan</b>, Xing Hu, Xin Xia, David Lo, Xiaohu Yang"
 date: 2024-04-14 00:00:00
+pdf: "/assets/icse24.pdf"
 ---
 
-### Abstract
+## Abstract
 
 The number of vulnerabilities reported in open source software has increased substantially in recent years. Security patches provide the necessary measures to protect software from attacks and vulnerabilities. In practice, it is difficult to identify whether patches have been integrated into software, especially if we only have binary files. Therefore, the ability to test whether a patch is applied to the target binary, a.k.a. patch presence test, is crucial for practitioners. However, it is challenging to obtain accurate semantic information from patches, which could lead to incorrect results.
 
@@ -37,7 +38,7 @@ In this paper, we propose a new patch presence test framework named PPT4J (**P**
 }
 ```
 
-### Links
+## Links
 [Full text (PDF)](/assets/icse24.pdf)
 [Talk (PDF)](/assets/icse24_talk.pdf)
 [Source code (Github)](https://github.com/pan2013e/ppt4j)

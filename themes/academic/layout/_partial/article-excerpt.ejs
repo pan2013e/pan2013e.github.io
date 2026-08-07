@@ -1,6 +1,1 @@
-<div>
-    <a href="<%- config.root %><%- item.path %>">
-        <%- item.layout.toUpperCase() + ' | ' %>
-        <%- item.title %>
-    </a>
-</div>
+<span class="entry-kicker"><%= item.layout %></span><a href="<%- config.root %><%- item.path %>"><%= item.title %></a>

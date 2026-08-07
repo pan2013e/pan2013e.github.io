@@ -1,6 +1,2 @@
-<div>
-    <a href="<%- config.root %><%- item.path %>">
-        <%- item.title %>
-    </a>
-    <p><%- item.excerpt %><p>
-</div>
+<a href="<%- config.root %><%- item.path %>"><%= item.title %></a>
+<% if (item.excerpt) { %><span class="entry-meta"><%- item.excerpt %></span><% } %>

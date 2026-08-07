@@ -7,9 +7,10 @@ type: preprint
 venue: arXiv:2506.17369
 authors: "<b>Zhiyuan Pan</b>, Xing Hu, Xin Xia, Xiaohu Yang"
 date: 2025-06-24 23:05:22
+pdf: "https://arxiv.org/pdf/2506.17369"
 ---
 
-### Abstract
+## Abstract
 
 In the era of large language models (LLMs), code benchmarks have become an important research area in software engineering and are widely used by practitioners. These benchmarks evaluate the performance of LLMs on specific code-related tasks, such as code understanding and generation. A critical step in constructing code benchmarks is the design of prompts. However, as existing code benchmarks typically rely on a single prompt template per task, they are prone to the issue of prompt sensitivity, where minor prompt variations could result in substantial performance variations, leading to unreliable evaluations of model capabilities.
 
@@ -29,5 +30,5 @@ While previous studies have explored prompt sensitivity, their experimental desi
 }
 ```
 
-### Links
+## Links
 [Full text (arXiv)](https://arxiv.org/abs/2506.17369)

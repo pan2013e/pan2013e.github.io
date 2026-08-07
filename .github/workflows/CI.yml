@@ -1,38 +1,49 @@
 name: Hexo Auto-Deploy
-on: [push]
+
+on:
+  push:
+    branches: [blog-source]
+  # Lets you re-run a deploy without an empty commit.
+  workflow_dispatch:
 
 jobs:
   build:
-    name: Hexo Auto-Deploy by GitHub Actions
+    name: Build and deploy
     runs-on: ubuntu-latest
 
     steps:
-    - name: 1. git checkout...
-      uses: actions/checkout@master
-      
-    - name: 2. setup nodejs...
-      uses: actions/setup-node@master
-    
-    - name: 3. install hexo...
-      run: |
-        sudo npm install hexo-cli -g
-        sudo npm install
-        
-    - name: 4. hexo generate public files...
-      run: |
-        hexo g  
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: 5. hexo deploy ...
-      run: |
-        mkdir -p ~/.ssh/
-        echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
-        
-        git config --global user.name "Zhiyuan Pan"
-        git config --global user.email "zy_pan@zju.edu.cn"
-        git config --global core.quotepath false
-        
-        hexo d
-        
-        
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      # npm ci installs exactly what package-lock.json pins, so a deploy can
+      # never pick up a different dependency version than the one tested.
+      - name: Install dependencies
+        run: npm ci
+
+      # Fails the build if a paper post and its bib entry have drifted apart.
+      - name: Check publication consistency
+        run: npm run check
+
+      - name: Generate site
+        run: npx hexo generate
+
+      - name: Deploy
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+          git config --global user.name "Zhiyuan Pan"
+          git config --global user.email "zy_pan@zju.edu.cn"
+          git config --global core.quotepath false
+
+          npx hexo deploy

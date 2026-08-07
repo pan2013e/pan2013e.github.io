@@ -1,0 +1,85 @@
+/* format-two-columns.js re-parents the rendered markdown into margin/body
+   pairs; the raw block is never shown. With JavaScript off the whole .page is
+   hidden and the <noscript> notice takes over, so this needs no fallback. */
+.rendered {
+    display: none;
+}
+
+.footnotes, .footnotes-sep {
+    display: none;
+}
+
+.footnote {
+    margin-top: 0.2rem;
+}
+
+.footnotes-side {
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    /* CSS3 */
+    white-space: -moz-pre-wrap;
+    /* Mozilla, since 1999 */
+    white-space: -pre-wrap;
+    /* Opera 4-6 */
+    white-space: -o-pre-wrap;
+    /* Opera 7 */
+    word-wrap: break-word;
+    /* Internet Explorer 5.5+ */
+
+    padding-top: 0.05rem;
+}
+
+.footnotes-bottom {
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.45;
+    margin-top: 2rem;
+}
+
+.post.header.left {
+    align-self: start;
+    justify-self: left;
+    text-align: left;
+    margin: 0 1.5rem 0 0;
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    letter-spacing: 0.03em;
+}
+
+.post.header.right {
+    margin-top: 2rem;
+}
+
+.post.header.right h1 {
+    margin-bottom: 0.5rem;
+}
+
+/* Margin headings produced by format-two-columns.js. The spacer heading it
+   inserts opposite a body heading must keep the same height, so styling is
+   applied to the tag, not a class. */
+.page > .left > h2 {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0.4rem 0 0 0;
+}
+
+@media only screen and (min-width: 800px) {
+    .post.header.left {
+        justify-self: right;
+        text-align: right;
+        margin-top: 0.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .post.header.right {
+        align-self: end;
+        margin-top: 0px;
+        margin-bottom: 3rem;
+    }
+}

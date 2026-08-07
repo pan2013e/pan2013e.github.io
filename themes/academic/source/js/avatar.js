@@ -92,36 +92,71 @@
         }
     }
 
-    var start = Math.floor(Math.random() * options.length);
-    var attempt = 0;
+    // Index 0 is the headshot from avatar_rotator.headshot; the rest are the
+    // gallery. The page always opens on the headshot — the travel photos are
+    // only reachable by clicking. Ordering is fixed in the template.
+    var current = -1;
 
-    function loadNext() {
-        if (attempt >= options.length) return;
-        var opt = options[(start + attempt) % options.length];
-        attempt += 1;
+    function show(index, direction) {
+        var attempts = 0;
 
-        var src = resolveSrc(opt.getAttribute('data-src'));
-        if (!src) return loadNext();
-        var caption = opt.getAttribute('data-caption') || '';
+        function attempt(idx) {
+            if (attempts >= options.length) return;
+            attempts += 1;
 
-        var img = new Image();
-        img.onload = function () {
-            if (img.naturalWidth > 0 && img.naturalHeight > 0) {
-                imgNaturalWidth = img.naturalWidth;
-                imgNaturalHeight = img.naturalHeight;
-                avatarEl.style.setProperty('--avatar-ar', img.naturalWidth + ' / ' + img.naturalHeight);
-            }
-            attachSizing();
-            scheduleSizing();
-            avatarEl.style.backgroundImage = 'url(' + src + ')';
-            if (captionEl) captionEl.textContent = caption;
-            avatarEl.setAttribute('aria-label', caption || 'Avatar');
-        };
-        img.onerror = function () {
-            loadNext();
-        };
-        img.src = src;
+            var opt = options[((idx % options.length) + options.length) % options.length];
+            var src = resolveSrc(opt.getAttribute('data-src'));
+            if (!src) return attempt(idx + direction);
+            var caption = opt.getAttribute('data-caption') || '';
+
+            var img = new Image();
+            img.onload = function () {
+                if (img.naturalWidth > 0 && img.naturalHeight > 0) {
+                    imgNaturalWidth = img.naturalWidth;
+                    imgNaturalHeight = img.naturalHeight;
+                    avatarEl.style.setProperty('--avatar-ar', img.naturalWidth + ' / ' + img.naturalHeight);
+                }
+                attachSizing();
+                scheduleSizing();
+                avatarEl.style.backgroundImage = 'url(' + src + ')';
+                if (captionEl) captionEl.textContent = caption;
+                avatarEl.setAttribute('aria-label', caption
+                    ? 'Photo: ' + caption
+                    : 'Portrait');
+                current = ((idx % options.length) + options.length) % options.length;
+            };
+            img.onerror = function () {
+                attempt(idx + direction);
+            };
+            img.src = src;
+        }
+
+        attempt(index);
     }
 
-    loadNext();
+    show(0, 1);
+
+    if (options.length > 1) {
+        avatarEl.classList.add('is-interactive');
+        avatarEl.setAttribute('tabindex', '0');
+        avatarEl.setAttribute('role', 'button');
+        avatarEl.setAttribute('title', 'Click to browse photos');
+
+        avatarEl.addEventListener('click', function () {
+            show(current + 1, 1);
+        });
+
+        avatarEl.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+                e.preventDefault();
+                show(current + 1, 1);
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                show(current + 1, 1);
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                show(current - 1, -1);
+            }
+        });
+    }
 })();
