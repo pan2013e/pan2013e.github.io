@@ -309,19 +309,21 @@ h2.left, .left > h2 {
     margin: 1.5rem 0 0.1rem 0;
 }
 
-/* Small navigation link under a margin heading. Set apart from the heading by
-   weight and colour rather than an underline, so it reads as a quiet
-   continuation of the label instead of competing with it. */
+/* Small navigation link under a margin heading. Styled as a link rather than
+   as quiet label text: in muted grey with no underline it read as a caption,
+   and visitors had no cue that it goes anywhere. */
 .left .section-sub {
     display: inline-block;
     margin-top: 0.4rem;
     font-family: var(--font-sans);
-    font-size: 0.72rem;
+    font-size: 0.74rem;
     letter-spacing: 0.02em;
     text-transform: none;
-    font-weight: 400;
-    color: var(--muted);
-    text-decoration: none;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
     white-space: nowrap;
 }
 
@@ -344,8 +346,8 @@ h2.left, .left > h2 {
 }
 
 .left .section-sub:hover {
-    color: var(--accent);
-    text-decoration: none;
+    color: var(--accent-strong);
+    text-decoration-thickness: 2px;
 }
 
 .left .section-sub:hover::after {
@@ -636,9 +638,29 @@ h2.left, .left > h2 {
     grid-template-columns: 0 auto 0;
 }
 
+/* Single column, but wide enough that the text no longer fills it. The middle
+   track is capped at the reading measure and the outer tracks are 1fr, so the
+   content block is centred.
+
+   Without this the track ran the full width while .right stayed capped at
+   --measure, leaving the text hard against the left with a large dead strip on
+   the right — and the centred portrait sat off to one side of the text block's
+   own centre. Most visible just under the two-column threshold, and reachable
+   at any window size by zooming in. */
 @media only screen and (min-width: 600px) {
     .page {
-        grid-template-columns: 1.5rem auto 1.5rem;
+        grid-template-columns:
+            minmax(1.5rem, 1fr)
+            minmax(0, var(--measure))
+            minmax(1.5rem, 1fr);
+    }
+
+    /* The publication list needs more room than a reading measure. */
+    .page.wide {
+        grid-template-columns:
+            minmax(1.5rem, 1fr)
+            minmax(0, 52rem)
+            minmax(1.5rem, 1fr);
     }
 }
 
