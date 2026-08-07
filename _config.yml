@@ -109,6 +109,13 @@ deploy:
   repo: git@github.com:pan2013e/pan2013e.github.io.git
   branch: master
 
+# HTML/CSS/JS minification (scripts/minify.js).
+# Applied to the generated output only — nothing under source/ or themes/ is
+# modified, so the repo keeps readable, commented assets. Skipped during
+# `hexo server` so local previews serve the sources you are editing.
+minify:
+  enable: true
+
 # Robots.txt
 robotstxt:
   useragent: "*"
