@@ -104,6 +104,17 @@
 
     show(0, 1);
 
+    // Suppress the context menu and drag-to-save gestures on the portrait.
+    // CSS covers selection and the iOS long-press sheet; these cover the two
+    // gestures CSS cannot. A deterrent only — the images remain plain URLs.
+    avatarEl.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+    });
+
+    avatarEl.addEventListener('dragstart', function (e) {
+        e.preventDefault();
+    });
+
     if (options.length > 1) {
         avatarEl.classList.add('is-interactive');
         avatarEl.setAttribute('tabindex', '0');

@@ -54,7 +54,7 @@
         <%# Only fetched when scripting is off — with JS the portrait is a CSS
             background applied by avatar.js, so this costs nothing. %>
         <noscript>
-            <img class="nojs-portrait" src="<%- url_for(headshot.src) %>"
+            <img class="nojs-portrait" draggable="false" src="<%- url_for(headshot.src) %>"
                  width="200" height="267" alt="<%= config.name %>">
         </noscript>
         <% } %>

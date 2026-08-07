@@ -42,6 +42,22 @@
     background-position: center;
     background-repeat: no-repeat;
     box-shadow: 0 1px 3px var(--shadow), 0 6px 18px var(--shadow);
+
+    /* Discourage casual saving and dragging of the photos. Note this is a
+       deterrent, not protection: the files are still ordinary URLs. Also stops
+       a click-drag from selecting the caption text while cycling photos. */
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;  /* iOS long-press "Save Image" sheet */
+}
+
+.nojs-portrait {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+    pointer-events: none;
 }
 
 .avatar-img.is-interactive {
