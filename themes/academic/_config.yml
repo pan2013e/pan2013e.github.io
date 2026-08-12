@@ -12,8 +12,11 @@ social:
       url: https://scholar.google.com/citations?user=oCyJ8lMAAAAJ
     - name: CV
       url: /assets/CV.pdf
+    # Same-origin but a different repo, and deliberately kept out of search:
+    # see the /photography disallow in the root _config.yml robotstxt block.
     - name: Albums
       url: /photography
+      nofollow: true
 analytics:
   gtag: G-79DB9R2CZC
 # Cache-busting for CSS/JS is derived from the file contents (see

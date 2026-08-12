@@ -126,6 +126,11 @@ robotstxt:
     - /css/
     - /fonts/
     - /styles/
+    # Served from the separate pan2013e/photography repo, but robots.txt is
+    # domain-wide and this repo owns the root, so the rule applies. No trailing
+    # slash: it is a prefix match, covering /photography, /photography/ and
+    # everything beneath.
+    - /photography
     # /assets/ is deliberately crawlable: it holds the paper PDFs that
     # citation_pdf_url points Google Scholar at, plus the CV.
   sitemap: https://pan2013e.github.io/sitemap.xml

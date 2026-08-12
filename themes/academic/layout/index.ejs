@@ -90,7 +90,12 @@
                     </span>
                 </li>
                 <% } else { %>
-                <li><a href="<%- item.url %>"><%= item.name %></a></li>
+                <%# `nofollow: true` marks a destination this site should not
+                    vouch for or advertise to crawlers. hexo-autonofollow only
+                    touches off-site links, and /photography is same-origin
+                    (a separate repo on the same domain), so it needs saying
+                    here. Pairs with the robots.txt disallow. %>
+                <li><a href="<%- item.url %>"<% if (item.nofollow) { %> rel="nofollow noopener"<% } %>><%= item.name %></a></li>
                 <% } %>
                 <% }); %>
             </ul>
