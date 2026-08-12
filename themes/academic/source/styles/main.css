@@ -139,8 +139,9 @@ a:focus-visible {
    its colour from the text and stays consistent in both themes. A text arrow
    (↗) was tried first and sat badly on the baseline at small sizes.
 
-   Excluded: mailto (the label already says E-mail), anything inside the
-   floating-window chrome, and anything opting out with data-no-icon. */
+   Excluded: mailto (kept as a guard — the address is a hover box now, not a
+   link), anything inside the floating-window chrome, and anything opting out
+   with data-no-icon. */
 a[target="_blank"]:not([href^="mailto:"]):not([data-no-icon])::after {
     content: "";
     display: inline-block;
@@ -432,6 +433,91 @@ h2.left, .left > h2 {
     content: "·";
     margin: 0 0.5em;
     color: var(--rule);
+}
+
+/* --- Email hover box ------------------------------------------------------
+   Not a mailto link: the address is spelled out and base64'd in the markup and
+   only revealed on hover, focus or tap. The dotted underline and help cursor
+   signal that this shows something rather than navigating somewhere. */
+
+.email-item {
+    position: relative;
+    display: inline-block;
+}
+
+.email-reveal {
+    font: inherit;
+    color: var(--accent);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: help;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 0.2em;
+}
+
+.email-reveal:hover {
+    color: var(--accent-strong);
+    text-decoration-style: solid;
+}
+
+.email-reveal:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.email-box {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 0.55rem);
+    transform: translateX(-50%);
+    z-index: 5;
+    white-space: nowrap;
+    padding: 0.35rem 0.6rem;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background: var(--surface);
+    color: var(--dark);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.01em;
+    box-shadow: 0 4px 14px var(--shadow);
+    opacity: 0;
+    visibility: hidden;
+    /* Selectable once shown, so it can still be copied by hand. */
+    user-select: text;
+}
+
+/* Caret pointing back at the label. */
+.email-box::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border: 5px solid transparent;
+    border-top-color: var(--rule);
+}
+
+.email-item:hover .email-box,
+.email-item:focus-within .email-box,
+.email-item.is-open .email-box {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* On a narrow screen the box would overflow the viewport when centred on a
+   label near the edge; pin it to the left instead. */
+@media only screen and (max-width: 600px) {
+    .email-box {
+        left: 0;
+        transform: none;
+    }
+
+    .email-box::after {
+        left: 1.5rem;
+    }
 }
 
 .site-bio {

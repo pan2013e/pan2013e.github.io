@@ -47,6 +47,29 @@
             display: none;
         }
 
+        /* The email box is revealed by script; without it, show the spelled-out
+           address inline (the <noscript> inside the box carries the text). */
+        .email-reveal {
+            display: none;
+        }
+
+        .email-box {
+            position: static;
+            transform: none;
+            opacity: 1;
+            visibility: visible;
+            padding: 0;
+            border: none;
+            background: none;
+            box-shadow: none;
+            font-family: inherit;
+            font-size: inherit;
+        }
+
+        .email-box::after {
+            display: none;
+        }
+
         /* The portrait is a CSS background applied by script; use a plain
            image instead. The slot's fixed height would otherwise leave a gap. */
         .avatar-slot {

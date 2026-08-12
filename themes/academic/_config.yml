@@ -1,8 +1,11 @@
 update_items:
   - news
 social:
+    # Rendered as a hover box, not a mailto link. The address is never emitted
+    # verbatim: index.ejs rewrites it to "name at host dot tld" and base64s
+    # that, so neither a regex harvester nor one that decodes finds a mailbox.
     - name: E-mail
-      url: mailto:zy_pan@zju.edu.cn
+      email: zy_pan@zju.edu.cn
     - name: Github
       url: https://github.com/pan2013e
     - name: Google Scholar

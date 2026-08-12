@@ -65,7 +65,33 @@
         <nav class="site-nav" aria-label="Profile links">
             <ul>
                 <% theme.social.forEach(function (item) { %>
+                <% if (item.email) { %>
+                <%
+                    // Two layers, so the page never carries a usable address:
+                    //   1. "@" and "." become " at " / " dot ", defeating the
+                    //      \S+@\S+ pattern harvesters scan for;
+                    //   2. that string is base64'd, so a harvester matching the
+                    //      spelled-out form finds nothing either.
+                    // Decoding the attribute still only yields the spelled-out
+                    // text. data-nosnippet keeps it out of search snippets.
+                    const spelled = item.email.replace(/@/g, ' at ').replace(/\./g, ' dot ');
+                    const packed = Buffer.from(spelled, 'utf8').toString('base64');
+                %>
+                <li class="email-item" data-nosnippet>
+                    <button type="button" class="email-reveal" aria-expanded="false"
+                            aria-describedby="email-address" data-e="<%= packed %>"><%= item.name %></button>
+                    <%# The <noscript> deliberately does NOT carry the address.
+                        A server cannot tell a scripting-less human from a
+                        scripting-less harvester, and most harvesters are the
+                        latter — putting the spelled-out form here would hand it
+                        to every one of them, undoing the encoding above. %>
+                    <span class="email-box" id="email-address" role="tooltip">
+                        <noscript>enable JavaScript, or see CV</noscript>
+                    </span>
+                </li>
+                <% } else { %>
                 <li><a href="<%- item.url %>"><%= item.name %></a></li>
+                <% } %>
                 <% }); %>
             </ul>
         </nav>
@@ -74,6 +100,10 @@
 
     <% if (avatarPool.length > 0) { %>
     <%- theme_js('js/avatar.js') %>
+    <% } %>
+
+    <% if (theme.social.some(s => s.email)) { %>
+    <%- theme_js('js/email.js') %>
     <% } %>
 
     <% if (news.length > 0) { %>
