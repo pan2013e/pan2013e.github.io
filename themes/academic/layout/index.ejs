@@ -23,8 +23,7 @@
             selected[p.type].push(p);
         }
     });
-    // Oldest-first within a group so [C1] is the earliest paper, as in a CV.
-    Object.keys(selected).forEach(k => selected[k].reverse());
+    // Keep each group newest-first, with the highest number on the latest paper.
 
     const pubGroups = [
         { key: 'C', items: selected.conference },
@@ -142,6 +141,30 @@
             <% }); %>
         </ul>
     </section>
+
+    <% const experience = theme.info.experience || []; %>
+    <% if (experience.length > 0) { %>
+    <h2 class="experience left">Experience</h2>
+    <section class="experience right" aria-label="Experience">
+        <ul class="info-enum">
+            <% experience.forEach(function (item, idx) { %>
+            <li item-tag="[W<%= experience.length - idx %>]">
+                <strong><%- item.role %></strong>, <em><%- item.institution %></em>
+                <span class="entry-meta">
+                    <%- item.duration %><% if (item.sub_institution) { %> &middot; <%- item.sub_institution %><% } %>
+                </span>
+                <% if (item.misc) { %>
+                <ul>
+                    <% item.misc.forEach(function (content) { %>
+                    <li><%- content %></li>
+                    <% }); %>
+                </ul>
+                <% } %>
+            </li>
+            <% }); %>
+        </ul>
+    </section>
+    <% } %>
 
     <h2 class="awards left">Awards</h2>
     <section class="awards right" aria-label="Awards">

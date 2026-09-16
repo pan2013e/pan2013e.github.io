@@ -23,13 +23,14 @@ analytics:
 # themes/academic/scripts/utils.js) — nothing to bump by hand. Set
 # assets_version here only to pin it while debugging.
 info:
-  education:
+  experience:
     - institution: National University of Singapore
       sub_institution: Trustworthy and Secure Software (TSS) Group
-      degree: Research Associate
+      role: Research Associate
       duration: September 2025 - September 2026
       misc:
         - 'Advisor: <a href="https://abhikrc.com">Abhik Roychoudhury</a>'
+  education:
     - institution: Zhejiang University
       sub_institution: The State Key Laboratory of Blockchain and Data Security
       degree: PhD in Computer Science and Technology
